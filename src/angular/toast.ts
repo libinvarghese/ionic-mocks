@@ -1,8 +1,8 @@
 import deprecated from 'deprecated-decorator';
-import { BaseMock } from '../base.mock';
+import { ViewControllerMock } from './view-controller';
 
 const METHODS = ['present', 'dismissAll', 'setContent', 'setSpinner'];
-export class ToastMock extends BaseMock {
+export class ToastMock extends ViewControllerMock {
     constructor() {
         super('Toast', METHODS);
         this.setReturn('present', Promise.resolve());

@@ -41,4 +41,10 @@ describe('Toast', () => {
             expect(classUnderTest.setSpinner).toBeDefined();
         });
     });
+
+    describe('onDidDismiss', () => {
+        it('should be defined', () => {
+            expect(classUnderTest.onDidDismiss).toBeDefined();
+        });
+    });
 });

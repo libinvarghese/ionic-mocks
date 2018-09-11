@@ -40,8 +40,11 @@ const METHODS = [
 ];
 
 export class ViewControllerMock extends BaseMock {
-    constructor() {
-        super('ViewController', METHODS);
+    constructor(baseName = 'ViewController', methods = METHODS) {
+        if (baseName !== 'ViewController') {
+            methods = METHODS.concat(methods);
+        }
+        super(baseName, methods);
 
         this.setReturn('willEnter', Observable.of({}));
         this.setReturn('didEnter', Observable.of({}));
