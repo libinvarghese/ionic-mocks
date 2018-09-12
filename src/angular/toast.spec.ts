@@ -42,6 +42,12 @@ describe('Toast', () => {
         });
     });
 
+    describe('setMessage', () => {
+        it('should be defined', () => {
+            expect(classUnderTest.setMessage).toBeDefined();
+        });
+    });
+
     describe('onDidDismiss', () => {
         it('should be defined', () => {
             expect(classUnderTest.onDidDismiss).toBeDefined();
