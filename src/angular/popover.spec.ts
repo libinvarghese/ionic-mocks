@@ -41,4 +41,16 @@ describe('Popover', () => {
             expect(classUnderTest.setSpinner).toBeDefined();
         });
     });
+
+    describe('onDidDismiss', () => {
+        it('should be defined', () => {
+            expect(classUnderTest.onDidDismiss).toBeDefined();
+        });
+    });
+
+    describe('onWillDismiss', () => {
+        it('should be defined', () => {
+            expect(classUnderTest.onWillDismiss).toBeDefined();
+        });
+    });
 });

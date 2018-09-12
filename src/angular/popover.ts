@@ -1,7 +1,7 @@
 import { BaseMock } from '../base.mock';
 import { deprecated } from 'deprecated-decorator';
 
-const METHODS = ['present', 'dismissAll', 'setContent', 'setSpinner'];
+const METHODS = ['present', 'dismissAll', 'setContent', 'setSpinner', 'onDidDismiss', 'onWillDismiss'];
 
 export class PopoverMock extends BaseMock {
     constructor() {
