@@ -1,4 +1,4 @@
-import { ArrayObservable } from 'rxjs/observable/ArrayObservable';
+import { of } from 'rxjs/observable/of';
 import { deprecated } from 'deprecated-decorator';
 import { BaseMock } from '../base.mock';
 
@@ -9,9 +9,9 @@ export class NetworkMock extends BaseMock {
         super('Network', METHODS);
         this.setReturn('type', networkType || 'wifi');
         this.setReturn('downlinkMax', '42');
-        this.setReturn('onchange', ArrayObservable.of(undefined));
-        this.setReturn('onDisconnect', ArrayObservable.of(undefined));
-        this.setReturn('onConnect', ArrayObservable.of(undefined));
+        this.setReturn('onchange', of(undefined));
+        this.setReturn('onDisconnect', of(undefined));
+        this.setReturn('onConnect', of(undefined));
     }
 
     @deprecated('new NetworkMock()')

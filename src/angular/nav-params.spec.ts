@@ -17,11 +17,11 @@ describe('NavParams', () => {
     });
 
     it('should return provided value', () => {
-        const expected = 'val';
+        const expected = { key: 'val' };
         classUnderTest = new NavParamsMock(expected);
 
         const result = classUnderTest.get('key');
 
-        expect(result).toBe(expected);
+        expect(result).toBe(expected.key);
     });
 });

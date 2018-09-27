@@ -1,6 +1,6 @@
 import { BaseMock } from './../base.mock';
 import { deprecated } from 'deprecated-decorator';
-import { ArrayObservable } from 'rxjs/observable/ArrayObservable';
+import { of } from 'rxjs/observable/of';
 
 const METHODS = [
     'dir',
@@ -64,7 +64,7 @@ export class PlatformMock extends BaseMock {
             paddingBottom: '10'
         });
         this.setReturn('timeout', (callback: any, timer: number) => setTimeout(callback, timer));
-        this.setReturn('resume', ArrayObservable.of(undefined));
+        this.setReturn('resume', of(undefined));
     }
 
     @deprecated('new PlatformMock()')

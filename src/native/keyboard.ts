@@ -1,4 +1,4 @@
-import { ArrayObservable } from 'rxjs/observable/ArrayObservable';
+import { of } from 'rxjs/observable/of';
 import { BaseMock } from '../base.mock';
 import deprecated from 'deprecated-decorator';
 
@@ -7,8 +7,8 @@ const METHODS = ['hideKeyboardAccessoryBar', 'show', 'close', 'disableScroll', '
 export class KeyboardMock extends BaseMock {
     constructor() {
         super('Keyboard', METHODS);
-        this.setReturn('onKeyboardShow', ArrayObservable.of(undefined));
-        this.setReturn('onKeyboardHide', ArrayObservable.of(undefined));
+        this.setReturn('onKeyboardShow', of(undefined));
+        this.setReturn('onKeyboardHide', of(undefined));
     }
 
     @deprecated('new KeyboardMock()')

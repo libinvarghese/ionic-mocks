@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-import { ArrayObservable } from 'rxjs/observable/ArrayObservable';
+import { of } from 'rxjs/observable/of';
 import { NavControllerMock } from './nav-controller';
 import { BaseMock } from '../base.mock';
 import deprecated from 'deprecated-decorator';
@@ -32,12 +32,12 @@ export class AppMock extends BaseMock {
         this.setReturn('getRootNavs', _navCtrl || [new NavControllerMock()]);
         this.setReturn('getRootNavById', _navCtrl || new NavControllerMock());
         this.setReturn('isScrolling', false);
-        this.setReturn('viewDidEnter', _viewObservable || ArrayObservable.of(undefined));
-        this.setReturn('viewDidLoad', _viewObservable || ArrayObservable.of(undefined));
-        this.setReturn('viewDidLeave', _viewObservable || ArrayObservable.of(undefined));
-        this.setReturn('viewWillEnter', _viewObservable || ArrayObservable.of(undefined));
-        this.setReturn('viewWillLeave', _viewObservable || ArrayObservable.of(undefined));
-        this.setReturn('viewWillUnload', _viewObservable || ArrayObservable.of(undefined));
+        this.setReturn('viewDidEnter', _viewObservable || of(undefined));
+        this.setReturn('viewDidLoad', _viewObservable || of(undefined));
+        this.setReturn('viewDidLeave', _viewObservable || of(undefined));
+        this.setReturn('viewWillEnter', _viewObservable || of(undefined));
+        this.setReturn('viewWillLeave', _viewObservable || of(undefined));
+        this.setReturn('viewWillUnload', _viewObservable || of(undefined));
     }
 
     @deprecated('new AppMock()')

@@ -1,6 +1,4 @@
 import { of } from 'rxjs/observable/of';
-import { Observable } from 'rxjs/Observable';
-import { ArrayObservable } from 'rxjs/observable/ArrayObservable';
 import { BaseMock } from '../base.mock';
 import { deprecated } from 'deprecated-decorator';
 
@@ -18,8 +16,8 @@ export class ThreeDeeTouchMock extends BaseMock {
         super('ThreeDeeTouch', METHODS);
 
         this.setReturn('isAvailable', Promise.resolve(true));
-        this.setReturn('watchForTouches', Observable.of<Object>({}));
-        this.setReturn('onHomeIconPressed', ArrayObservable.of(undefined));
+        this.setReturn('watchForTouches', of<Object>({}));
+        this.setReturn('onHomeIconPressed', of(undefined));
     }
 
     @deprecated('new ThreeDeeTouchMock()')

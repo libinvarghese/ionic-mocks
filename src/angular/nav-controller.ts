@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 import { ViewControllerMock } from './view-controller';
 import { BaseMock } from '../base.mock';
 import deprecated from 'deprecated-decorator';
@@ -81,12 +81,12 @@ export class NavControllerMock extends BaseMock {
         this.setReturn('indexOf', 0);
         this.setReturn('getViews', []);
         this.setReturn('isSwipeBackEnabled', true);
-        this.setReturn('viewDidEnter', Observable.of());
-        this.setReturn('viewDidLeave', Observable.of());
-        this.setReturn('viewDidLoad', Observable.of());
-        this.setReturn('viewWillEnter', Observable.of());
-        this.setReturn('viewWillLeave', Observable.of());
-        this.setReturn('viewWillUnload', Observable.of());
+        this.setReturn('viewDidEnter', of());
+        this.setReturn('viewDidLeave', of());
+        this.setReturn('viewDidLoad', of());
+        this.setReturn('viewWillEnter', of());
+        this.setReturn('viewWillLeave', of());
+        this.setReturn('viewWillUnload', of());
         this.setReturn('length', 0);
         this.setProperty('root', new ViewControllerMock());
         this.setProperty('rootParams', {});

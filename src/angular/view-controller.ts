@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { of } from 'rxjs/observable/of';
 import { NavParamsMock } from './nav-params';
 import { BaseMock } from '../base.mock';
 import deprecated from 'deprecated-decorator';
@@ -46,12 +46,12 @@ export class ViewControllerMock extends BaseMock {
         }
         super(baseName, methods);
 
-        this.setReturn('willEnter', Observable.of({}));
-        this.setReturn('didEnter', Observable.of({}));
-        this.setReturn('willLeave', Observable.of({}));
-        this.setReturn('didLeave', Observable.of({}));
-        this.setReturn('willUnload', Observable.of({}));
-        this.setReturn('didUnload', Observable.of({}));
+        this.setReturn('willEnter', of({}));
+        this.setReturn('didEnter', of({}));
+        this.setReturn('willLeave', of({}));
+        this.setReturn('didLeave', of({}));
+        this.setReturn('willUnload', of({}));
+        this.setReturn('didUnload', of({}));
         this.setReturn('dismiss', Promise.resolve());
         this.setReturn('onDidDismiss', Promise.resolve());
         this.setReturn('onWillDismiss', Promise.resolve());
@@ -63,7 +63,7 @@ export class ViewControllerMock extends BaseMock {
         this.setReturn('contentRef', Promise.resolve());
         this.setReturn('hasNavbar', true);
         this.setReturn('index', true);
-        this.setReturn('subscribe', Observable.of({}));
+        this.setReturn('subscribe', of({}));
         this.setReturn('getNav', {});
         this.setReturn('getIONContent', {});
 
