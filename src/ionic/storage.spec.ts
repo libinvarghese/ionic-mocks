@@ -57,22 +57,15 @@ describe('StorageMock', () => {
 
 
         it('should return spyable Promise with passed parameter', done => {
-            classUnderTest = new StorageMock('foo', 'bar');
-                classUnderTest.get('foo')
-                    .then(res => {
-                        expect(classUnderTest.get).toHaveBeenCalledWith('foo');
-                        expect(res).toEqual('bar');
-                        done();
-                    });
-        });
-
-        it('should return spyable Promise with default value if no arguments', done => {
-            classUnderTest.get()
-                .then(res => {
-                    expect(classUnderTest.get).toHaveBeenCalled();
-                    expect(res).toEqual('value1');
-                    done();
-                });
+            classUnderTest = new StorageMock();
+            classUnderTest.set('foo', 'bar')
+                .then(_ =>
+                    classUnderTest.get('foo')
+                        .then(res => {
+                            expect(classUnderTest.get).toHaveBeenCalledWith('foo');
+                            expect(res).toEqual('bar');
+                            done();
+                        }));
         });
 
     });
@@ -109,7 +102,7 @@ describe('StorageMock', () => {
             classUnderTest.length()
                 .then(res => {
                     expect(classUnderTest.length).toHaveBeenCalled();
-                    expect(res).toEqual(1);
+                    expect(res).toEqual(0);
                     done();
                 });
         });
@@ -122,7 +115,7 @@ describe('StorageMock', () => {
             classUnderTest.keys()
                 .then(res => {
                     expect(classUnderTest.keys).toHaveBeenCalled();
-                    expect(res).toEqual(['key1']);
+                    expect(res).toEqual([]);
                     done();
                 });
         });

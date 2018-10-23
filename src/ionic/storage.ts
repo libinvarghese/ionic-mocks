@@ -4,21 +4,40 @@ import deprecated from 'deprecated-decorator';
 const METHODS = ['driver', 'ready', 'get', 'set', 'remove', 'clear', 'length', 'keys', 'forEach'];
 
 export class StorageMock extends BaseMock {
-    constructor(key: any = 'key1', value: any = 'value1') {
+    private _internal = {};
+
+    constructor(initialObject = {}) {
         super('Storage', METHODS);
+
+        this._internal = initialObject;
         this.setProperty('driver', '');
         this.setReturn('ready', Promise.resolve({}));
-        this.setReturn('set', Promise.resolve());
-        this.setReturn('get', Promise.resolve(value));
-        this.setReturn('remove', Promise.resolve());
-        this.setReturn('clear', Promise.resolve());
-        this.setReturn('length', Promise.resolve(1));
-        this.setReturn('keys', Promise.resolve([key]));
-        this.setReturn('forEach', Promise.resolve());
+        this.spyObj['set'].and.callFake((key, value) => {
+            this._internal[key] = value;
+            return Promise.resolve();
+        });
+        this.spyObj['get'].and.callFake(key => {
+            let _value = this._internal[key] || null;
+            return Promise.resolve(JSON.parse(JSON.stringify(_value))); // Clone, to avoid direct update on storage
+        });
+        this.spyObj['remove'].and.callFake(key => {
+            delete this._internal[key];
+            return Promise.resolve();
+        });
+        this.spyObj['clear'].and.callFake(() => {
+            this._internal = {};
+            return Promise.resolve();
+        });
+        this.setReturn('length', Promise.resolve(Object.keys(this._internal).length));
+        this.setReturn('keys', Promise.resolve(Object.keys(this._internal)));
+        this.spyObj['forEach'].and.callFake(iterator => {
+            Object.keys(this._internal).forEach((key, index) => iterator(this._internal[key], key, index));
+            return Promise.resolve();
+        });
     }
 
     @deprecated('new StorageMock()')
-    public static instance(key: any = 'key1', value: any = 'value1'): any {
-        return new StorageMock(key, value);
+    public static instance(initialObject = {}): any {
+        return new StorageMock(initialObject);
     }
 }
