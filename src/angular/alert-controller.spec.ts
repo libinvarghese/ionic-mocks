@@ -19,18 +19,18 @@ describe('AlertControllerMock', () => {
             expect(classUnderTest.create).toBeDefined();
         });
 
-        it('should return an Alert', () => {
-            let result = classUnderTest.create();
+        it('should return an Alert', async () => {
+            let result = await classUnderTest.create();
 
             expect(result).toBeDefined();
             expect(result.present).toBeDefined();
         });
 
-       it('should return passed Alert', () => {
+       it('should return passed Alert', async () => {
            let actionSheet = new AlertMock();
            classUnderTest = new AlertControllerMock(actionSheet);
 
-           let result = classUnderTest.create();
+           let result = await classUnderTest.create();
 
            expect(result).toBe(actionSheet);
         });

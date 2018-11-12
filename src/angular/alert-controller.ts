@@ -7,7 +7,7 @@ const METHODS = ['create'];
 export class AlertControllerMock extends BaseMock {
     constructor(alertMock?: AlertMock) {
         super('AlertController', METHODS);
-        this.setReturn('create', alertMock || new AlertMock());
+        this.setReturn('create', Promise.resolve(alertMock || new AlertMock()));
     }
 
     @deprecated('new AlertControllerMock()')

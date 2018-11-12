@@ -10,7 +10,7 @@ export class ActionSheetControllerMock extends BaseMock {
 
     constructor(actionSheet?: ActionSheetMock) {
         super('ActionSheet', METHODS);
-        this.setReturn('create', actionSheet || new ActionSheetMock());
+        this.setReturn('create', Promise.resolve(actionSheet || new ActionSheetMock()));
     }
 
     @deprecated('new ActionSheetControllerMock()')
