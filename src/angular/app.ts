@@ -1,5 +1,4 @@
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { Observable, of } from 'rxjs';
 import { NavControllerMock } from './nav-controller';
 import { BaseMock } from '../base.mock';
 import deprecated from 'deprecated-decorator';

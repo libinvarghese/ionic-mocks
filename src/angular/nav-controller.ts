@@ -1,4 +1,4 @@
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs';
 import { ViewControllerMock } from './view-controller';
 import { BaseMock } from '../base.mock';
 import deprecated from 'deprecated-decorator';

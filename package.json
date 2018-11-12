@@ -43,7 +43,7 @@
     "karma-typescript": "^3.0.3",
     "rimraf": "^2.6.1",
     "rxjs": "^6.2.2",
-    "rxjs-compat": "^6.2.2",
+    "rxjs-tslint": "^0.1.5",
     "semantic-release": "^15.6.3",
     "tslint": "^5.5.0",
     "tslint-ionic-rules": "0.0.11",

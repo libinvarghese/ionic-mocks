@@ -1,4 +1,4 @@
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs';
 import { BaseMock } from '../base.mock';
 import { deprecated } from 'deprecated-decorator';
 
