@@ -1,42 +1,48 @@
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
+import deprecated from 'deprecated-decorator';
+import { BaseMock } from '../base.mock';
 
-export class NFCMock {
+const METHODS = [
+    'addNdefListener',
+    'addTagDiscoveredListener',
+    'addMimeTypeListener',
+    'addNdefFormatableListener',
+    'write',
+    'makeReadyOnly',
+    'share',
+    'unshare',
+    'erase',
+    'handover',
+    'stopHandover',
+    'showSettings',
+    'enabled',
+    'bytesToString',
+    'stringToBytes',
+    'bytesToHexString'
+];
+export class NFCMock extends BaseMock {
+    constructor() {
+        super('NFC', METHODS);
+        this.setReturn('addNdefListener', of(undefined));
+        this.setReturn('addTagDiscoveredListener', of(undefined));
+        this.setReturn('addMimeTypeListener', of(undefined));
+        this.setReturn('addNdefFormatableListener', of(undefined));
+        this.setReturn('write', of(undefined));
+        this.setReturn('makeReadyOnly', of(undefined));
+        this.setReturn('share', of(undefined));
+        this.setReturn('unshare', of(undefined));
+        this.setReturn('erase', of(undefined));
+        this.setReturn('handover', of(undefined));
+        this.setReturn('stopHandover', of(undefined));
+        this.setReturn('showSettings', of(undefined));
+        this.setReturn('enabled', of(undefined));
+        this.setReturn('bytesToString', '');
+        this.setReturn('stringToBytes', []);
+        this.setReturn('bytesToHexString', '');
+    }
+
+    @deprecated('new NFCMock()')
     public static instance(): any {
-        let instance = jasmine.createSpyObj('NFC', [
-            'addNdefListener',
-            'addTagDiscoveredListener',
-            'addMimeTypeListener',
-            'addNdefFormatableListener',
-            'write',
-            'makeReadyOnly',
-            'share',
-            'unshare',
-            'erase',
-            'handover',
-            'stopHandover',
-            'showSettings',
-            'enabled',
-            'bytesToString',
-            'stringToBytes',
-            'bytesToHexString'
-        ]);
-        instance.addNdefListener.and.returnValue(Observable.empty());
-        instance.addTagDiscoveredListener.and.returnValue(Observable.empty());
-        instance.addMimeTypeListener.and.returnValue(Observable.empty());
-        instance.addNdefFormatableListener.and.returnValue(Observable.empty());
-        instance.write.and.returnValue(Observable.empty());
-        instance.makeReadyOnly.and.returnValue(Observable.empty());
-        instance.share.and.returnValue(Observable.empty());
-        instance.unshare.and.returnValue(Observable.empty());
-        instance.erase.and.returnValue(Observable.empty());
-        instance.handover.and.returnValue(Observable.empty());
-        instance.stopHandover.and.returnValue(Observable.empty());
-        instance.showSettings.and.returnValue(Observable.empty());
-        instance.enabled.and.returnValue(Observable.empty());
-        instance.bytesToString.and.returnValue('');
-        instance.stringToBytes.and.returnValue([]);
-        instance.bytesToHexString.and.returnValue('');
-
-        return instance;
+        return new NFCMock();
     }
 }

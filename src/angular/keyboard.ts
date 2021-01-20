@@ -1,21 +1,26 @@
-import { Observable } from 'rxjs/Observable';
+import deprecated from 'deprecated-decorator';
+import { BaseMock } from '../base.mock';
 
-export class IonKeyboardMock {
+const METHODS = [
+    'close',
+    'didHide',
+    'didShow',
+    'eventsAvailable',
+    'hasFocusedTextInput',
+    'isOpen',
+    'onClose',
+    'willHide',
+    'willShow'
+];
+
+export class KeyboardMock extends BaseMock {
+    constructor() {
+        super('Keyboard', METHODS);
+        this.setReturn('isOpen', false);
+    }
+
+    @deprecated('new Keyboard()')
     public static instance(): any {
-        let instance = jasmine.createSpyObj('Keyboard', [
-            'close',
-            'didHide',
-            'didShow',
-            'eventsAvailable',
-            'hasFocusedTextInput',
-            'isOpen',
-            'onClose',
-            'willHide',
-            'willShow'
-        ]);
-
-        instance.isOpen.and.returnValue(false);
-
-        return instance;
+        return new KeyboardMock();
     }
 }

@@ -19,19 +19,18 @@ describe('ActionSheetControllerMock', () => {
             expect(classUnderTest.create).toBeDefined();
         });
 
-        it('should return an ActionSheet', () => {
-            let result = classUnderTest.create();
+        it('should return an ActionSheet', async () => {
+            let result = await classUnderTest.create();
 
             expect(result).toBeDefined();
             expect(result.present).toBeDefined();
         });
 
-       it('should return passed ActionSheet', () => {
+       it('should return passed ActionSheet', async () => {
            let actionSheet = new ActionSheetMock();
            classUnderTest = new ActionSheetControllerMock(actionSheet);
 
-           let result = classUnderTest.create();
-
+           let result = await classUnderTest.create();
            expect(result).toBe(actionSheet);
         });
     });

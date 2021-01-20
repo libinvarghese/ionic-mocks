@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 import { NavParamsMock } from './nav-params';
 import { BaseMock } from '../base.mock';
 import deprecated from 'deprecated-decorator';
@@ -40,29 +40,32 @@ const METHODS = [
 ];
 
 export class ViewControllerMock extends BaseMock {
-    constructor() {
-        super('ViewController', METHODS);
+    constructor(baseName = 'ViewController', methods = METHODS) {
+        if (baseName !== 'ViewController') {
+            methods = METHODS.concat(methods);
+        }
+        super(baseName, methods);
 
-        this.spyObj.willEnter.and.returnValue(Observable.of({}));
-        this.spyObj.didEnter.and.returnValue(Observable.of({}));
-        this.spyObj.willLeave.and.returnValue(Observable.of({}));
-        this.spyObj.didLeave.and.returnValue(Observable.of({}));
-        this.spyObj.willUnload.and.returnValue(Observable.of({}));
-        this.spyObj.didUnload.and.returnValue(Observable.of({}));
-        this.spyObj.dismiss.and.returnValue(Promise.resolve());
-        this.spyObj.onDidDismiss.and.returnValue(Promise.resolve());
-        this.spyObj.onWillDismiss.and.returnValue(Promise.resolve());
-        this.spyObj.enableBack.and.returnValue(true);
-        this.spyObj.isFirst.and.returnValue(false);
-        this.spyObj.isLast.and.returnValue(false);
-        this.spyObj.pageRef.and.returnValue({});
-        this.spyObj.getContent.and.returnValue({});
-        this.spyObj.contentRef.and.returnValue(Promise.resolve());
-        this.spyObj.hasNavbar.and.returnValue(true);
-        this.spyObj.index.and.returnValue(true);
-        this.spyObj.subscribe.and.returnValue(Observable.of({}));
-        this.spyObj.getNav.and.returnValue({});
-        this.spyObj.getIONContent.and.returnValue({});
+        this.setReturn('willEnter', of({}));
+        this.setReturn('didEnter', of({}));
+        this.setReturn('willLeave', of({}));
+        this.setReturn('didLeave', of({}));
+        this.setReturn('willUnload', of({}));
+        this.setReturn('didUnload', of({}));
+        this.setReturn('dismiss', Promise.resolve());
+        this.setReturn('onDidDismiss', Promise.resolve());
+        this.setReturn('onWillDismiss', Promise.resolve());
+        this.setReturn('enableBack', true);
+        this.setReturn('isFirst', false);
+        this.setReturn('isLast', false);
+        this.setReturn('pageRef', {});
+        this.setReturn('getContent', {});
+        this.setReturn('contentRef', Promise.resolve());
+        this.setReturn('hasNavbar', true);
+        this.setReturn('index', true);
+        this.setReturn('subscribe', of({}));
+        this.setReturn('getNav', {});
+        this.setReturn('getIONContent', {});
 
         this.spyObj['writeReady'] = {
             emit(): void {},
@@ -75,7 +78,7 @@ export class ViewControllerMock extends BaseMock {
         };
 
         this.spyObj['component'] = {};
-        this.spyObj['data'] = NavParamsMock.instance();
+        this.spyObj['data'] = new NavParamsMock();
         this.spyObj['instance'] = {};
         this.spyObj['id'] = '';
     }

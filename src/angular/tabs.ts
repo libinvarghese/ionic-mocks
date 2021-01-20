@@ -1,19 +1,19 @@
-import {TabMock} from './tab';
+import { TabMock } from './tab';
+import { BaseMock } from '../base.mock';
+import { deprecated } from 'deprecated-decorator';
 
-export class TabsMock {
+const METHODS = ['select', 'getSelected', 'ngOnDestroy', 'previousTab', 'viewCtrl'];
+
+export class TabsMock extends BaseMock {
+    constructor(defaultTab?: TabMock, selectedTab?: TabMock, previousTab?: TabMock) {
+        super('Tabs', METHODS);
+        this.setReturn('select', defaultTab || new TabMock());
+        this.setReturn('getSelected', selectedTab || new TabMock());
+        this.setReturn('previousTab', previousTab || new TabMock());
+    }
+
+    @deprecated('new TabsMock()')
     public static instance(defaultTab?: TabMock, selectedTab?: TabMock, previousTab?: TabMock): any {
-        let instance = jasmine.createSpyObj('Tabs', [
-            'select',
-            'getSelected',
-            'ngOnDestroy',
-            'previousTab',
-            'viewCtrl'
-        ]);
-
-        instance.select.and.returnValue(defaultTab || TabMock.instance());
-        instance.getSelected.and.returnValue(selectedTab || TabMock.instance());
-        instance.previousTab.and.returnValue(previousTab || TabMock.instance());
-
-        return instance;
+        return new TabsMock(defaultTab, selectedTab, previousTab);
     }
 }

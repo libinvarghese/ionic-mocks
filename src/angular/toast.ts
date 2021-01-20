@@ -1,8 +1,15 @@
-export class ToastMock {
-    public static instance(): any {
-        let instance = jasmine.createSpyObj('Toast', ['present', 'dismissAll', 'setContent', 'setSpinner']);
-        instance.present.and.returnValue(Promise.resolve());
+import deprecated from 'deprecated-decorator';
+import { ViewControllerMock } from './view-controller';
 
-        return instance;
+const METHODS = ['present', 'dismissAll', 'setContent', 'setSpinner', 'setMessage'];
+export class ToastMock extends ViewControllerMock {
+    constructor() {
+        super('Toast', METHODS);
+        this.setReturn('present', Promise.resolve());
+    }
+
+    @deprecated('new ToastMock()')
+    public static instance(): any {
+        return new ToastMock();
     }
 }

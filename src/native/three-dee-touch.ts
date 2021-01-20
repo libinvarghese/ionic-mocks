@@ -1,19 +1,27 @@
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
+import { BaseMock } from '../base.mock';
+import { deprecated } from 'deprecated-decorator';
 
-export class ThreeDeeTouchMock {
+const METHODS = [
+    'isAvailable',
+    'watchForTouches',
+    'configureQuickActions',
+    'onHomeIconPressed',
+    'enableLinkPreview',
+    'disableLinkPreview'
+];
+
+export class ThreeDeeTouchMock extends BaseMock {
+    constructor() {
+        super('ThreeDeeTouch', METHODS);
+
+        this.setReturn('isAvailable', Promise.resolve(true));
+        this.setReturn('watchForTouches', of<Object>({}));
+        this.setReturn('onHomeIconPressed', of(undefined));
+    }
+
+    @deprecated('new ThreeDeeTouchMock()')
     public static instance(): any {
-        let instance = jasmine.createSpyObj('ThreeDeeTouch', [
-            'isAvailable',
-            'watchForTouches',
-            'configureQuickActions',
-            'onHomeIconPressed',
-            'enableLinkPreview',
-            'disableLinkPreview'
-        ]);
-        instance.isAvailable.and.returnValue(Promise.resolve(true));
-        instance.watchForTouches.and.returnValue(Observable.of({}));
-        instance.onHomeIconPressed.and.returnValue(Observable.empty());
-
-        return instance;
+        return new ThreeDeeTouchMock();
     }
 }

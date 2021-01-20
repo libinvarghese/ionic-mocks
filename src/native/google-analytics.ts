@@ -1,41 +1,48 @@
-export class GoogleAnalyticsMock {
+import deprecated from 'deprecated-decorator';
+import { BaseMock } from '../base.mock';
 
-    public static instance(): any {
-        let instance = jasmine.createSpyObj('GoogleAnalytics', [
-            'startTrackerWithId',
-            'setAllowIDFACollection',
-            'setUserId',
-            'setAnonymizeIp',
-            'setAppVersion',
-            'setOptOut',
-            'debugMode',
-            'trackMetric',
-            'trackView',
-            'addCustomDimension',
-            'trackEvent',
-            'trackException',
-            'trackTiming',
-            'addTransaction',
-            'addTransactionItem',
-            'enableUncaughtExceptionReporting'
-        ]);
-        instance.startTrackerWithId.and.returnValue(Promise.resolve());
-        instance.setAllowIDFACollection.and.returnValue(Promise.resolve());
-        instance.setUserId.and.returnValue(Promise.resolve());
-        instance.setAnonymizeIp.and.returnValue(Promise.resolve());
-        instance.setAppVersion.and.returnValue(Promise.resolve());
-        instance.setOptOut.and.returnValue(Promise.resolve());
-        instance.debugMode.and.returnValue(Promise.resolve());
-        instance.trackMetric.and.returnValue(Promise.resolve());
-        instance.trackView.and.returnValue(Promise.resolve());
-        instance.addCustomDimension.and.returnValue(Promise.resolve());
-        instance.trackEvent.and.returnValue(Promise.resolve());
-        instance.trackException.and.returnValue(Promise.resolve());
-        instance.trackTiming.and.returnValue(Promise.resolve());
-        instance.addTransaction.and.returnValue(Promise.resolve());
-        instance.addTransactionItem.and.returnValue(Promise.resolve());
-        instance.enableUncaughtExceptionReporting.and.returnValue(Promise.resolve());
+const METHODS = [
+    'startTrackerWithId',
+    'setAllowIDFACollection',
+    'setUserId',
+    'setAnonymizeIp',
+    'setAppVersion',
+    'setOptOut',
+    'debugMode',
+    'trackMetric',
+    'trackView',
+    'addCustomDimension',
+    'trackEvent',
+    'trackException',
+    'trackTiming',
+    'addTransaction',
+    'addTransactionItem',
+    'enableUncaughtExceptionReporting'
+];
 
-        return instance;
+export class GoogleAnalyticsMock extends BaseMock {
+    constructor() {
+        super('GoogleAnalytics', METHODS);
+        this.setReturn('startTrackerWithId', Promise.resolve());
+        this.setReturn('setAllowIDFACollection', Promise.resolve());
+        this.setReturn('setUserId', Promise.resolve());
+        this.setReturn('setAnonymizeIp', Promise.resolve());
+        this.setReturn('setAppVersion', Promise.resolve());
+        this.setReturn('setOptOut', Promise.resolve());
+        this.setReturn('debugMode', Promise.resolve());
+        this.setReturn('trackMetric', Promise.resolve());
+        this.setReturn('trackView', Promise.resolve());
+        this.setReturn('addCustomDimension', Promise.resolve());
+        this.setReturn('trackEvent', Promise.resolve());
+        this.setReturn('trackException', Promise.resolve());
+        this.setReturn('trackTiming', Promise.resolve());
+        this.setReturn('addTransaction', Promise.resolve());
+        this.setReturn('addTransactionItem', Promise.resolve());
+        this.setReturn('enableUncaughtExceptionReporting', Promise.resolve());
+    }
+
+    @deprecated('new GoogleAnalyticsMock()')
+    static instance(): any {
+        new GoogleAnalyticsMock();
     }
 }

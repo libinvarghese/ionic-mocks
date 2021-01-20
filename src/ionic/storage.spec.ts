@@ -5,24 +5,26 @@ describe('StorageMock', () => {
     let classUnderTest;
 
     beforeEach(() => {
-       classUnderTest = StorageMock.instance();
+       classUnderTest = new StorageMock();
     });
 
     it('should initialize', () => {
-        expect(StorageMock.instance).toBeDefined();
+        expect(classUnderTest).toBeDefined();
     });
 
     describe('driver', () => {
 
-        it('should return string', () => {
+        it('should be defined', () => {
+            expect(classUnderTest.set).toBeDefined();
+        });
 
+        it('should return string', () => {
             expect(classUnderTest.driver).toEqual('');
         });
 
     });
 
     describe('ready', () => {
-
         it('should return spyable Promise', done => {
             classUnderTest.ready()
                 .then(res => {
@@ -35,6 +37,10 @@ describe('StorageMock', () => {
     });
 
     describe('set', () => {
+
+        it('should be defined', () => {
+            expect(classUnderTest.set).toBeDefined();
+        });
 
         it('should return spyable Promise', done => {
                 classUnderTest.set('foo')
@@ -51,22 +57,15 @@ describe('StorageMock', () => {
 
 
         it('should return spyable Promise with passed parameter', done => {
-            classUnderTest = StorageMock.instance('foo', 'bar');
-                classUnderTest.get('foo')
-                    .then(res => {
-                        expect(classUnderTest.get).toHaveBeenCalledWith('foo');
-                        expect(res).toEqual('bar');
-                        done();
-                    });
-        });
-
-        it('should return spyable Promise with default value if no arguments', done => {
-            classUnderTest.get()
-                .then(res => {
-                    expect(classUnderTest.get).toHaveBeenCalled();
-                    expect(res).toEqual('value1');
-                    done();
-                });
+            classUnderTest = new StorageMock();
+            classUnderTest.set('foo', 'bar')
+                .then(_ =>
+                    classUnderTest.get('foo')
+                        .then(res => {
+                            expect(classUnderTest.get).toHaveBeenCalledWith('foo');
+                            expect(res).toEqual('bar');
+                            done();
+                        }));
         });
 
     });
@@ -103,7 +102,7 @@ describe('StorageMock', () => {
             classUnderTest.length()
                 .then(res => {
                     expect(classUnderTest.length).toHaveBeenCalled();
-                    expect(res).toEqual(1);
+                    expect(res).toEqual(0);
                     done();
                 });
         });
@@ -116,7 +115,7 @@ describe('StorageMock', () => {
             classUnderTest.keys()
                 .then(res => {
                     expect(classUnderTest.keys).toHaveBeenCalled();
-                    expect(res).toEqual(['key1']);
+                    expect(res).toEqual([]);
                     done();
                 });
         });

@@ -1,3 +1,10 @@
 {
-    "extends": "tslint-ionic-rules"
+    "extends": "tslint-ionic-rules",
+    "rulesDirectory": ["node_modules/rxjs-tslint"],
+    "rules": {
+        "rxjs-collapse-imports": true,
+        "rxjs-pipeable-operators-only": true,
+        "rxjs-no-static-observable-methods": true,
+        "rxjs-proper-imports": true
+    }
 }

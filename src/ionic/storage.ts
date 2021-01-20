@@ -1,29 +1,43 @@
-export class StorageMock {
-    public static instance(key: any = 'key1', value: any = 'value1'): any {
+import { BaseMock } from '../base.mock';
+import deprecated from 'deprecated-decorator';
 
-        let instance = jasmine.createSpyObj('Storage', [
-            'driver',
-            'ready',
-            'get',
-            'set',
-            'remove',
-            'clear',
-            'length',
-            'keys',
-            'forEach'
-        ]);
+const METHODS = ['driver', 'ready', 'get', 'set', 'remove', 'clear', 'length', 'keys', 'forEach'];
 
-        instance['driver'] = '';
+export class StorageMock extends BaseMock {
+    private _internal = {};
 
-        instance.ready.and.returnValue(Promise.resolve({}));
-        instance.set.and.returnValue(Promise.resolve());
-        instance.get.and.returnValue(Promise.resolve(value));
-        instance.remove.and.returnValue(Promise.resolve());
-        instance.clear.and.returnValue(Promise.resolve());
-        instance.length.and.returnValue(Promise.resolve(1));
-        instance.keys.and.returnValue(Promise.resolve([key]));
-        instance.forEach.and.returnValue(Promise.resolve());
+    constructor(initialObject = {}) {
+        super('Storage', METHODS);
 
-        return instance;
+        this._internal = initialObject;
+        this.setProperty('driver', '');
+        this.setReturn('ready', Promise.resolve({}));
+        this.spyObj['set'].and.callFake((key, value) => {
+            this._internal[key] = value;
+            return Promise.resolve();
+        });
+        this.spyObj['get'].and.callFake(key => {
+            let _value = this._internal[key] || null;
+            return Promise.resolve(JSON.parse(JSON.stringify(_value))); // Clone, to avoid direct update on storage
+        });
+        this.spyObj['remove'].and.callFake(key => {
+            delete this._internal[key];
+            return Promise.resolve();
+        });
+        this.spyObj['clear'].and.callFake(() => {
+            this._internal = {};
+            return Promise.resolve();
+        });
+        this.setReturn('length', Promise.resolve(Object.keys(this._internal).length));
+        this.setReturn('keys', Promise.resolve(Object.keys(this._internal)));
+        this.spyObj['forEach'].and.callFake(iterator => {
+            Object.keys(this._internal).forEach((key, index) => iterator(this._internal[key], key, index));
+            return Promise.resolve();
+        });
+    }
+
+    @deprecated('new StorageMock()')
+    public static instance(initialObject = {}): any {
+        return new StorageMock(initialObject);
     }
 }

@@ -1,33 +1,39 @@
-export class SlidesMock {
+import { BaseMock } from '../base.mock';
+import { deprecated } from 'deprecated-decorator';
+
+const METHODS = [
+    'controlBy',
+    'controlInverse',
+    'enableKeyboardControl',
+    'getActiveIndex',
+    'getPreviousIndex',
+    'isBeginning',
+    'isEnd',
+    'length',
+    'lockSwipeToNext',
+    'lockSwipeToPrev',
+    'lockSwipes',
+    'resize',
+    'slideNext',
+    'slidePrev',
+    'slideTo',
+    'startAutoplay',
+    'stopAutoplay',
+    'update'
+];
+
+export class SlidesMock extends BaseMock {
+    constructor() {
+        super('Slides', METHODS);
+        this.setReturn('getActiveIndex', 0);
+        this.setReturn('getPreviousIndex', 0);
+        this.setReturn('isBeginning', true);
+        this.setReturn('isEnd', false);
+        this.setReturn('length', 1);
+    }
+
+    @deprecated('new SlidesMock()')
     public static instance(): any {
-
-        let instance = jasmine.createSpyObj('Slides', [
-            'controlBy',
-            'controlInverse',
-            'enableKeyboardControl',
-            'getActiveIndex',
-            'getPreviousIndex',
-            'isBeginning',
-            'isEnd',
-            'length',
-            'lockSwipeToNext',
-            'lockSwipeToPrev',
-            'lockSwipes',
-            'resize',
-            'slideNext',
-            'slidePrev',
-            'slideTo',
-            'startAutoplay',
-            'stopAutoplay',
-            'update'
-        ]);
-
-        instance.getActiveIndex.and.returnValue(0);
-        instance.getPreviousIndex.and.returnValue(0);
-        instance.isBeginning.and.returnValue(true);
-        instance.isEnd.and.returnValue(false);
-        instance.length.and.returnValue(3);
-
-        return instance;
+        return new SlidesMock();
     }
 }
