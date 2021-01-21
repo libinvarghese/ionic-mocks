@@ -1,7 +1,7 @@
 var path = require('path');
 
-module.exports = function(config) {
-	var cfg ={
+module.exports = function (config) {
+	var cfg = {
 		basePath: '',
 		frameworks: ['jasmine', 'karma-typescript'],
 		reporters: ['progress', 'karma-typescript', 'coverage', 'coveralls'],
@@ -9,12 +9,17 @@ module.exports = function(config) {
 		browsers: ['Chrome'],
 		singleRun: true,
 		colors: true,
-		preprocessors: {'src/**/*.ts' : ['karma-typescript']},
+		preprocessors: { 'src/**/*.ts': ['karma-typescript'] },
 		karmaTypescriptConfig: {
 			compilerOptions: {
 				rootDir: 'src',
 				lib: ["es2016", "dom"]
-			}
+			},
+			exclude: [
+				"node_modules",
+				"dist",
+				"scripts"
+			]
 		},
 		customLaunchers: {
 			Chrome_travis_ci: {

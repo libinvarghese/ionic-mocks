@@ -18,16 +18,33 @@
     "url": "https://github.com/stonelasley/ionic-mocks"
   },
   "license": "MIT",
+  "husky": {
+    "hooks": {
+      "post-checkout": "scripts/hooks/post-checkout/update-deps.sh",
+      "post-merge": "scripts/hooks/post-merge/update-deps.sh",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "npm run precommit"
+    }
+  },
   "scripts": {
     "test": "karma start",
     "build": "rimraf dist && tsc -d",
-    "lint": "tslint -c tslint.json -p ./tsconfig.json 'src/**/*.ts'",
+    "lint:scripts": "tslint -c tslint.json -p ./scripts/tsconfig.json 'scripts/**/*.ts'",
+    "lint:src": "tslint -c tslint.json -p ./tsconfig.json 'src/**/*.ts'",
+    "lint": "run-p lint:*",
     "version": "git add .",
     "prepublish": "npm run build",
     "postversion": "git push && git push --tags && npm publish",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "checkNotStaged": "ts-node -P scripts/tsconfig.json scripts/check-not-staged.ts",
+    "git-commit": "commit",
+    "precommit:parallel": "run-p build lint test",
+    "precommit": "run-s checkNotStaged precommit:parallel"
   },
   "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@commitlint/prompt-cli": "^11.0.0",
     "@semantic-release/changelog": "^2.1.1",
     "@semantic-release/git": "^6.0.1",
     "@semantic-release/github": "^4.2.18",
@@ -35,6 +52,7 @@
     "@types/node": "^8.0.14",
     "commitizen": "^3.0.4",
     "cz-conventional-changelog": "^2.0.0",
+    "husky": "^4.3.8",
     "jasmine": "^3.1.0",
     "jasmine-core": "^2.6.3",
     "karma": "^1.7.0",
@@ -42,10 +60,13 @@
     "karma-coveralls": "^1.2.1",
     "karma-jasmine": "^1.1.2",
     "karma-typescript": "^3.0.3",
+    "npm-run-all": "^4.1.5",
     "rimraf": "^2.6.1",
     "rxjs": "^6.2.2",
     "rxjs-tslint": "^0.1.5",
     "semantic-release": "^15.6.3",
+    "simple-git": "^2.31.0",
+    "ts-node": "^9.1.1",
     "tslint": "^5.5.0",
     "tslint-ionic-rules": "0.0.11",
     "typescript": "^2.0.9"
