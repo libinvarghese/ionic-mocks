@@ -30,12 +30,12 @@ export function mockObjectCustomMatchers(
             methodsDef = methods;
           }
 
-          await Bluebird.each(Object.keys(spyObjMemberDefStrategy), async (def) => {
+          await Bluebird.each(Object.keys(spyObjMemberDefStrategy), async def => {
             let methodKeys: string[];
             const methodArr = methodsDef[def];
             if (methodArr != null) {
               methodKeys = def === 'names' ? methodArr : Object.keys(methodArr);
-              await Bluebird.each(methodKeys, async (key) => {
+              await Bluebird.each(methodKeys, async key => {
                 const context = `${key}`;
                 const value = methodArr[key];
                 expect(classUnderTest[key]).toBeDefined(context);
@@ -84,12 +84,12 @@ export function mockObjectCustomMatchers(
               propertiesDef = properties;
             }
 
-            await Bluebird.each(Object.keys(spyObjMemberDefStrategy), async (def) => {
+            await Bluebird.each(Object.keys(spyObjMemberDefStrategy), async def => {
               let propertyKeys: string[];
               const propertyArr = propertiesDef[def];
               if (propertyArr != null) {
                 propertyKeys = def === 'names' ? propertyArr : Object.keys(propertyArr);
-                await Bluebird.each(propertyKeys, async (key) => {
+                await Bluebird.each(propertyKeys, async key => {
                   const context = `${key}`;
                   const value = propertyArr[key];
                   expect(classUnderTest[key]).toBeDefined(context);

@@ -11,20 +11,8 @@
     "rootDir": "./src",
     "outDir": "./dist",
     "declaration": true,
-    "lib": [
-      "es6",
-      "es2015",
-      "dom"
-    ],
-    "types": [
-      "jasmine",
-      "node"
-    ]
+    "lib": ["es6", "es2015", "dom"],
+    "types": ["jasmine", "node"]
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "scripts",
-    "spec"
-  ]
+  "exclude": ["node_modules", "dist", "scripts", "spec"]
 }

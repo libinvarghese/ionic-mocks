@@ -1,39 +1,38 @@
 import { ModalMock } from './modal';
 
 describe('Modal', () => {
+  let classUnderTest: any;
 
-    let classUnderTest: any;
+  beforeEach(() => {
+    classUnderTest = new ModalMock();
+  });
 
-    beforeEach(() => {
-        classUnderTest = new ModalMock();
-    });
+  it('should be defined', () => {
+    expect(classUnderTest).toBeDefined();
+  });
 
+  describe('present', () => {
     it('should be defined', () => {
-        expect(classUnderTest).toBeDefined();
+      expect(classUnderTest.present).toBeDefined();
     });
 
-    describe('present', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.present).toBeDefined();
-        });
-
-        it('should return empty Promise', done => {
-            classUnderTest.present().then(result => {
-                expect(result).toBeUndefined();
-                done();
-            });
-        });
+    it('should return empty Promise', done => {
+      classUnderTest.present().then(result => {
+        expect(result).toBeUndefined();
+        done();
+      });
     });
+  });
 
-    describe('dismiss', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.dismiss).toBeDefined();
-        });
+  describe('dismiss', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.dismiss).toBeDefined();
     });
+  });
 
-    describe('onDidDismiss', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.onDidDismiss).toBeDefined();
-        });
+  describe('onDidDismiss', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.onDidDismiss).toBeDefined();
     });
+  });
 });

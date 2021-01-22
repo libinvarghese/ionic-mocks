@@ -86,7 +86,7 @@ function addMembersToSpyObjViaDef(
     addMembersFn(obj, baseName, members.names);
   }
 
-  Object.keys(customSpyObjMemberDefStrategy).forEach((key) => {
+  Object.keys(customSpyObjMemberDefStrategy).forEach(key => {
     addMembersFn(obj, baseName, members[key], customSpyObjMemberDefStrategy[key]);
   });
 
@@ -101,7 +101,7 @@ function addMethodsToSpyObj<T>(
 ) {
   const obj = spyObj;
   const methodsArr = normalizeKeyValues(methods);
-  methodsArr.forEach((element) => {
+  methodsArr.forEach(element => {
     const spy = jasmine.createSpy(baseName + '.' + element[0]);
     if (element.length > 1) {
       if (spyStrategy === 'returnValues') {
@@ -123,7 +123,7 @@ function addPropertiesToSpyObj(
 ) {
   const obj = spyObj;
   const propertiesArr = normalizeKeyValues(properties);
-  propertiesArr.forEach((element) => {
+  propertiesArr.forEach(element => {
     const descriptor: SpyObjPropertyDescriptor = {
       enumerable: true,
       get: jasmine.createSpy(baseName + '.' + element[0] + '.get'),

@@ -20,11 +20,11 @@ export class StorageMock extends BaseMock {
     this.spyObj['set'].and.callFake(async (key, value) => {
       this._internal[key] = value;
     });
-    this.spyObj['get'].and.callFake(async (key) => {
+    this.spyObj['get'].and.callFake(async key => {
       const _value = this._internal[key] || null;
       return JSON.parse(JSON.stringify(_value)); // Clone, to avoid direct update on storage
     });
-    this.spyObj['remove'].and.callFake(async (key) => {
+    this.spyObj['remove'].and.callFake(async key => {
       delete this._internal[key];
     });
     this.spyObj['clear'].and.callFake(async () => {
@@ -32,7 +32,7 @@ export class StorageMock extends BaseMock {
     });
     this.spyObj['length'].and.callFake(async () => Object.keys(this._internal).length);
     this.spyObj['keys'].and.callFake(async () => Object.keys(this._internal));
-    this.spyObj['forEach'].and.callFake(async (iterator) => {
+    this.spyObj['forEach'].and.callFake(async iterator => {
       Object.keys(this._internal).forEach((key, index) => iterator(this._internal[key], key, index));
     });
   }

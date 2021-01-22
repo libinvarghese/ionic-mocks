@@ -1,266 +1,266 @@
 import { PlatformMock } from './platform';
 
 describe('PlatformMock', () => {
-    let classUnderTest;
+  let classUnderTest;
 
-    beforeEach(() => {
-        classUnderTest = new PlatformMock();
+  beforeEach(() => {
+    classUnderTest = new PlatformMock();
+  });
+
+  describe('dir', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.dir).toBeDefined();
     });
 
-    describe('dir', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.dir).toBeDefined();
-        });
+    it('should return empty string', () => {
+      expect(classUnderTest.dir()).toEqual('');
+    });
+  });
 
-        it('should return empty string', () => {
-            expect(classUnderTest.dir()).toEqual('');
-        });
+  describe('getQueryParam', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.getQueryParam).toBeDefined();
     });
 
-    describe('getQueryParam', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.getQueryParam).toBeDefined();
-        });
+    it('should return empty string', () => {
+      expect(classUnderTest.getQueryParam()).toEqual('');
+    });
+  });
 
-        it('should return empty string', () => {
-            expect(classUnderTest.getQueryParam()).toEqual('');
-        });
+  describe('height', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.height).toBeDefined();
     });
 
-    describe('height', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.height).toBeDefined();
-        });
+    it('should return 0', () => {
+      expect(classUnderTest.height()).toEqual(0);
+    });
+  });
 
-        it('should return 0', () => {
-            expect(classUnderTest.height()).toEqual(0);
-        });
+  describe('is', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.is).toBeDefined();
     });
 
-    describe('is', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.is).toBeDefined();
-        });
+    it('should return true', () => {
+      expect(classUnderTest.is()).toEqual(true);
+    });
+  });
 
-        it('should return true', () => {
-            expect(classUnderTest.is()).toEqual(true);
-        });
+  describe('isLandscape', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.isLandscape).toBeDefined();
     });
 
-    describe('isLandscape', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.isLandscape).toBeDefined();
-        });
+    it('should return false', () => {
+      expect(classUnderTest.isLandscape()).toEqual(false);
+    });
+  });
 
-        it('should return false', () => {
-            expect(classUnderTest.isLandscape()).toEqual(false);
-        });
+  describe('isPortrait', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.isPortrait).toBeDefined();
     });
 
-    describe('isPortrait', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.isPortrait).toBeDefined();
-        });
+    it('should return true', () => {
+      expect(classUnderTest.isPortrait()).toBe(true);
+    });
+  });
 
-        it('should return true', () => {
-            expect(classUnderTest.isPortrait()).toBe(true);
-        });
+  describe('isRTL', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.isRTL).toBeDefined();
     });
 
-    describe('isRTL', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.isRTL).toBeDefined();
-        });
+    it('should return false', () => {
+      expect(classUnderTest.isRTL()).toBe(false);
+    });
+  });
 
-        it('should return false', () => {
-            expect(classUnderTest.isRTL()).toBe(false);
-        });
+  describe('lang', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.lang).toBeDefined();
     });
 
-    describe('lang', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.lang).toBeDefined();
-        });
+    it('should return en', () => {
+      expect(classUnderTest.lang()).toEqual('en');
+    });
+  });
 
-        it('should return en', () => {
-            expect(classUnderTest.lang()).toEqual('en');
-        });
+  describe('pause', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.pause).toBeDefined();
+    });
+  });
+
+  describe('platforms', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.platforms).toBeDefined();
     });
 
-    describe('pause', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.pause).toBeDefined();
-        });
+    it('should be empty', () => {
+      expect(classUnderTest.platforms()).toEqual([]);
+    });
+  });
+
+  describe('ready', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.ready).toBeDefined();
     });
 
-    describe('platforms', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.platforms).toBeDefined();
-        });
+    it('should be empty', done => {
+      classUnderTest.ready().then(result => {
+        expect(result).toBeUndefined(result);
+        done();
+      });
+    });
+  });
 
-        it('should be empty', () => {
-            expect(classUnderTest.platforms()).toEqual([]);
-        });
+  describe('registerBackButtonAction', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.registerBackButtonAction).toBeDefined();
     });
 
-    describe('ready', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.ready).toBeDefined();
-        });
+    it('should return Function', () => {
+      expect(classUnderTest.registerBackButtonAction()).toEqual(jasmine.any(Function));
+    });
+  });
 
-        it('should be empty', done => {
-            classUnderTest.ready().then(result => {
-                expect(result).toBeUndefined(result);
-                done();
-            });
-        });
+  describe('registerListener', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.registerListener).toBeDefined();
     });
 
-    describe('registerBackButtonAction', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.registerBackButtonAction).toBeDefined();
-        });
+    it('should return function', () => {
+      expect(classUnderTest.registerListener()).toEqual(jasmine.any(Function));
+    });
+  });
 
-        it('should return Function', () => {
-            expect(classUnderTest.registerBackButtonAction()).toEqual(jasmine.any(Function));
-        });
+  describe('resize', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.resize).toBeDefined();
+    });
+  });
+
+  describe('resume', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.resume).toBeDefined();
     });
 
-    describe('registerListener', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.registerListener).toBeDefined();
-        });
+    it('should return empty Observable', done => {
+      classUnderTest.resume().subscribe(result => {
+        expect(result).toBeUndefined();
+        done();
+      });
+    });
+  });
 
-        it('should return function', () => {
-            expect(classUnderTest.registerListener()).toEqual(jasmine.any(Function));
-        });
+  describe('setDir', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.setDir).toBeDefined();
+    });
+  });
+
+  describe('setLang', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.setLang).toBeDefined();
+    });
+  });
+
+  describe('testUserAgent', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.testUserAgent).toBeDefined();
+    });
+  });
+
+  describe('url', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.url).toBeDefined();
     });
 
-    describe('resize', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.resize).toBeDefined();
-        });
+    it('should return empty string', () => {
+      expect(classUnderTest.url()).toEqual('');
+    });
+  });
+
+  describe('versions', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.versions).toBeDefined();
     });
 
-    describe('resume', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.resume).toBeDefined();
-        });
+    it('should return object', () => {
+      expect(classUnderTest.versions()).toEqual({});
+    });
+  });
 
-        it('should return empty Observable', done => {
-            classUnderTest.resume().subscribe(result => {
-                expect(result).toBeUndefined();
-                done();
-            });
-        });
+  describe('width', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.width).toBeDefined();
     });
 
-    describe('setDir', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.setDir).toBeDefined();
-        });
+    it('should return 0', () => {
+      expect(classUnderTest.width()).toEqual(0);
+    });
+  });
+
+  describe('doc', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.doc).toBeDefined();
+    });
+  });
+
+  describe('win', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.win).toBeDefined();
+    });
+  });
+
+  describe('getActiveElement', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.getActiveElement).toBeDefined();
+    });
+  });
+
+  describe('raf', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.raf).toBeDefined();
+    });
+  });
+
+  describe('hasFocus', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.hasFocus).toBeDefined();
     });
 
-    describe('setLang', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.setLang).toBeDefined();
-        });
+    it('should return true', () => {
+      expect(classUnderTest.hasFocus()).toBeTruthy();
+    });
+  });
+
+  describe('getElementComputedStyle', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.getElementComputedStyle).toBeDefined();
     });
 
-    describe('testUserAgent', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.testUserAgent).toBeDefined();
-        });
+    it('should return styles object', () => {
+      expect(classUnderTest.getElementComputedStyle()).toEqual(
+        jasmine.objectContaining({
+          paddingLeft: '10',
+          paddingTop: '10',
+          paddingRight: '10',
+          paddingBottom: '10',
+        })
+      );
+    });
+  });
+
+  describe('timeout', () => {
+    it('should be defined', () => {
+      expect(classUnderTest.timeout).toBeDefined();
     });
 
-    describe('url', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.url).toBeDefined();
-        });
-
-        it('should return empty string', () => {
-            expect(classUnderTest.url()).toEqual('');
-        });
+    it('should return function', () => {
+      expect(classUnderTest.timeout()).toEqual(jasmine.any(Function));
     });
-
-    describe('versions', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.versions).toBeDefined();
-        });
-
-        it('should return object', () => {
-            expect(classUnderTest.versions()).toEqual({});
-        });
-    });
-
-    describe('width', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.width).toBeDefined();
-        });
-
-        it('should return 0', () => {
-            expect(classUnderTest.width()).toEqual(0);
-        });
-    });
-
-    describe('doc', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.doc).toBeDefined();
-        });
-    });
-
-    describe('win', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.win).toBeDefined();
-        });
-    });
-
-    describe('getActiveElement', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.getActiveElement).toBeDefined();
-        });
-    });
-
-    describe('raf', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.raf).toBeDefined();
-        });
-    });
-
-    describe('hasFocus', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.hasFocus).toBeDefined();
-        });
-
-        it('should return true', () => {
-            expect(classUnderTest.hasFocus()).toBeTruthy();
-        });
-    });
-
-    describe('getElementComputedStyle', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.getElementComputedStyle).toBeDefined();
-        });
-
-        it('should return styles object', () => {
-            expect(classUnderTest.getElementComputedStyle()).toEqual(
-                jasmine.objectContaining({
-                    paddingLeft: '10',
-                    paddingTop: '10',
-                    paddingRight: '10',
-                    paddingBottom: '10'
-                })
-            );
-        });
-    });
-
-    describe('timeout', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.timeout).toBeDefined();
-        });
-
-        it('should return function', () => {
-            expect(classUnderTest.timeout()).toEqual(jasmine.any(Function));
-        });
-    });
+  });
 });
