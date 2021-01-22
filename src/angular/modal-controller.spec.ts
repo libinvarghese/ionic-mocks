@@ -19,17 +19,17 @@ describe('ModalController', () => {
         });
 
         it('should return a Modal', () => {
-            let result = classUnderTest.create();
+            const result = classUnderTest.create();
 
             expect(result).toBeDefined();
             expect(result.present).toBeDefined();
         });
 
         it('should return provided Modal', () => {
-            let modal = new ModalMock();
+            const modal = new ModalMock();
             classUnderTest = new ModalControllerMock(modal);
 
-            let result = classUnderTest.create();
+            const result = classUnderTest.create();
 
             expect(result).toBe(modal);
         });

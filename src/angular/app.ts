@@ -40,7 +40,7 @@ export class AppMock extends BaseMock {
     }
 
     @deprecated('new AppMock()')
-    public static instance(navCtrl?: NavControllerMock, viewObservable?: Observable<any>): any {
+    static instance(navCtrl?: NavControllerMock, viewObservable?: Observable<any>): any {
         return new AppMock(navCtrl, viewObservable);
     }
 }

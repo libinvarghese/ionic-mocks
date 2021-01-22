@@ -9,7 +9,7 @@ export class TabMock extends BaseMock {
     }
 
     @deprecated('new TabMock()')
-    public static instance(): any {
+    static instance(): any {
         return new TabMock();
     }
 }

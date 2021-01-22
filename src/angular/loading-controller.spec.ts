@@ -20,17 +20,17 @@ describe('LoadingController', () => {
         });
 
         it('should return a Loading', () => {
-            let result = classUnderTest.create();
+            const result = classUnderTest.create();
 
             expect(result).toBeDefined();
             expect(result.present).toBeDefined();
         });
 
         it('should return provided Loading', () => {
-            let loading = new LoadingMock();
+            const loading = new LoadingMock();
             classUnderTest = new LoadingControllerMock(loading);
 
-            let result = classUnderTest.create();
+            const result = classUnderTest.create();
 
             expect(result).toBe(loading);
         });

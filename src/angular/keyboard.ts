@@ -20,7 +20,7 @@ export class KeyboardMock extends BaseMock {
     }
 
     @deprecated('new Keyboard()')
-    public static instance(): any {
+    static instance(): any {
         return new KeyboardMock();
     }
 }

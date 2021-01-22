@@ -15,7 +15,7 @@ export class NetworkMock extends BaseMock {
     }
 
     @deprecated('new NetworkMock()')
-    public static instance(networkType?: string): any {
+    static instance(networkType?: string): any {
         return new NetworkMock(networkType);
     }
 }

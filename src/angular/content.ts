@@ -31,7 +31,7 @@ export class ContentMock extends BaseMock {
     }
 
     @deprecated('new ContentMock()')
-    public static instance(): any {
+    static instance(): any {
         return new ContentMock();
     }
 }

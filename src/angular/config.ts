@@ -21,7 +21,7 @@ export class ConfigMock extends BaseMock {
     }
 
     @deprecated('new ConfigMock()')
-    public static instance(): any {
+    static instance(): any {
         return new ConfigMock();
     }
 }

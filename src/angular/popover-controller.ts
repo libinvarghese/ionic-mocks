@@ -11,7 +11,7 @@ export class PopoverControllerMock extends BaseMock {
     }
 
     @deprecated('new PopoverControllerMock()')
-    public static instance(popOver?: PopoverMock): any {
+    static instance(popOver?: PopoverMock): any {
         return new PopoverControllerMock(popOver);
     }
 }

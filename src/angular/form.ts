@@ -10,7 +10,7 @@ export class FormMock extends BaseMock {
     }
 
     @deprecated('new FormMock()')
-    public static instance(): any {
+    static instance(): any {
         return new FormMock();
     }
 }

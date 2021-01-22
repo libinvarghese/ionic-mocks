@@ -9,7 +9,7 @@ export class ToastMock extends ViewControllerMock {
     }
 
     @deprecated('new ToastMock()')
-    public static instance(): any {
+    static instance(): any {
         return new ToastMock();
     }
 }

@@ -11,7 +11,7 @@ export class NavParamsMock extends BaseMock {
     }
 
     @deprecated('new NavParamsMock()')
-    public static instance(getReturn?: any): any {
+    static instance(getReturn?: any): any {
         return new NavParamsMock(getReturn);
     }
 }

@@ -13,7 +13,7 @@ export class TabsMock extends BaseMock {
     }
 
     @deprecated('new TabsMock()')
-    public static instance(defaultTab?: TabMock, selectedTab?: TabMock, previousTab?: TabMock): any {
+    static instance(defaultTab?: TabMock, selectedTab?: TabMock, previousTab?: TabMock): any {
         return new TabsMock(defaultTab, selectedTab, previousTab);
     }
 }

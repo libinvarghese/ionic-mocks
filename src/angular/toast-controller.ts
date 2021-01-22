@@ -11,7 +11,7 @@ export class ToastControllerMock extends BaseMock {
     }
 
     @deprecated('new ToastControllerMock()')
-    public static instance(toast?: ToastMock): any {
+    static instance(toast?: ToastMock): any {
         return new ToastControllerMock(toast);
     }
 }

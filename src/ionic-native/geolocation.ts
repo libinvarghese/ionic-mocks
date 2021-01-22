@@ -16,7 +16,7 @@ export class GeolocationMock extends BaseMock {
     }
 
     @deprecated('new GeolocationMock()')
-    public static instance(): any {
+    static instance(): any {
         return new GeolocationMock();
     }
 }

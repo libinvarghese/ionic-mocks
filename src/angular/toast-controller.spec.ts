@@ -18,17 +18,17 @@ describe('ToastController', () => {
         });
 
         it('should return a Toast', () => {
-            let result = classUnderTest.create();
+            const result = classUnderTest.create();
 
             expect(result).toBeDefined();
             expect(result.present).toBeDefined();
         });
 
         it('should return provided Toast', () => {
-            let toast = new ToastMock();
+            const toast = new ToastMock();
             classUnderTest = new ToastControllerMock(toast);
 
-            let result = classUnderTest.create();
+            const result = classUnderTest.create();
 
             expect(result).toBe(toast);
         });

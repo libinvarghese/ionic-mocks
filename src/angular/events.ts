@@ -9,7 +9,7 @@ export class EventsMock extends BaseMock {
     }
 
     @deprecated('new EventsMock()')
-    public static instance(): any {
+    static instance(): any {
         return new EventsMock();
     }
 }
