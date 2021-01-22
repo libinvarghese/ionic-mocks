@@ -20,7 +20,7 @@ export class StatusBarMock extends BaseMock {
     }
 
     @deprecated()
-    public static instance(): any {
+    static instance(): any {
         return new StatusBarMock();
     }
 }

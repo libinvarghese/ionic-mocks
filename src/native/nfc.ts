@@ -42,7 +42,7 @@ export class NFCMock extends BaseMock {
     }
 
     @deprecated('new NFCMock()')
-    public static instance(): any {
+    static instance(): any {
         return new NFCMock();
     }
 }

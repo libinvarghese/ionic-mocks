@@ -1,4 +1,4 @@
-import {StorageMock} from './storage';
+import { StorageMock } from './storage';
 
 describe('StorageMock', () => {
 

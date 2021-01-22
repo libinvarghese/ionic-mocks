@@ -17,7 +17,7 @@ export class StorageMock extends BaseMock {
             return Promise.resolve();
         });
         this.spyObj['get'].and.callFake(key => {
-            let _value = this._internal[key] || null;
+            const _value = this._internal[key] || null;
             return Promise.resolve(JSON.parse(JSON.stringify(_value))); // Clone, to avoid direct update on storage
         });
         this.spyObj['remove'].and.callFake(key => {
@@ -37,7 +37,7 @@ export class StorageMock extends BaseMock {
     }
 
     @deprecated('new StorageMock()')
-    public static instance(initialObject = {}): any {
+    static instance(initialObject = {}): any {
         return new StorageMock(initialObject);
     }
 }

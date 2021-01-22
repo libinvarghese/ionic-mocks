@@ -10,7 +10,7 @@ export class ModalMock extends BaseMock {
     }
 
     @deprecated('new ModalMock()')
-    public static instance(): any {
+    static instance(): any {
         return new ModalMock();
     }
 }

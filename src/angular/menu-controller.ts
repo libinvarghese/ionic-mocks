@@ -18,7 +18,7 @@ const METHODS = [
 export class MenuControllerMock extends BaseMock {
     constructor(menu?: MenuMock) {
         super('MenuController', METHODS);
-        let m = menu || new MenuMock();
+        const m = menu || new MenuMock();
         this.setReturn('close', Promise.resolve());
         this.setReturn('enable', m);
         this.setReturn('get', m);
@@ -32,7 +32,7 @@ export class MenuControllerMock extends BaseMock {
     }
 
     @deprecated('new MenuControllerMock()')
-    public static instance(menu?: MenuMock): any {
+    static instance(menu?: MenuMock): any {
         return new MenuControllerMock(menu);
     }
 }

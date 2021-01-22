@@ -10,7 +10,7 @@ export class InfiniteScrollMock extends BaseMock {
     }
 
     @deprecated('new InfiniteScrollMock')
-    public static instance(): any {
+    static instance(): any {
         return new InfiniteScrollMock();
     }
 }

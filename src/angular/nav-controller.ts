@@ -93,7 +93,7 @@ export class NavControllerMock extends BaseMock {
     }
 
     @deprecated('new NavControllerMock()')
-    public static instance(): any {
+    static instance(): any {
         return new NavControllerMock();
     }
 }

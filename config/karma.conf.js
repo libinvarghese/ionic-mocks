@@ -4,12 +4,15 @@ module.exports = function (config) {
 	var cfg = {
 		basePath: '',
 		frameworks: ['jasmine', 'karma-typescript'],
-		reporters: ['progress', 'karma-typescript', 'coverage', 'coveralls'],
+		reporters: ['progress', 'coverage', 'karma-typescript'],
 		files: ['src/**/*.ts'],
 		browsers: ['Chrome'],
 		singleRun: true,
 		colors: true,
-		preprocessors: { 'src/**/*.ts': ['karma-typescript'] },
+		preprocessors: {
+			'src/**/*.ts': ['karma-typescript'],
+			'src/**/*!(.spec).ts': ['coverage']
+		},
 		karmaTypescriptConfig: {
 			compilerOptions: {
 				rootDir: 'src',

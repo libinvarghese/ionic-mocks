@@ -47,7 +47,9 @@ export class PlatformMock extends BaseMock {
         this.setReturn('lang', 'en');
         this.setReturn('platforms', []);
         this.setReturn('ready', Promise.resolve());
+        // tslint:disable-next-line:no-empty
         this.setReturn('registerBackButtonAction', () => {});
+        // tslint:disable-next-line:no-empty
         this.setReturn('registerListener', () => {});
         this.setReturn('url', '');
         this.setReturn('versions', {});
@@ -68,7 +70,7 @@ export class PlatformMock extends BaseMock {
     }
 
     @deprecated('new PlatformMock()')
-    public static instance(): any {
+    static instance(): any {
         return new PlatformMock();
     }
 }

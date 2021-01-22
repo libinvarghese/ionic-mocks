@@ -10,7 +10,7 @@ export class PopoverMock extends BaseMock {
     }
 
     @deprecated('new PopoverMock()')
-    public static instance(): any {
+    static instance(): any {
         return new PopoverMock();
     }
 }

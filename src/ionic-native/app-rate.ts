@@ -16,7 +16,7 @@ export class AppRateMock extends BaseMock {
     }
 
     @deprecated('new AppRate()')
-    public static instance(): any {
+    static instance(): any {
         return new AppRateMock();
     }
 }

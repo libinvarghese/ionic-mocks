@@ -18,7 +18,7 @@ export class HapticMock extends BaseMock {
     }
 
     @deprecated('new HapticMock()')
-    public static instance(): any {
+    static instance(): any {
         return new HapticMock();
     }
 }

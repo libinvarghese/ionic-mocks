@@ -20,17 +20,17 @@ describe('AlertControllerMock', () => {
         });
 
         it('should return an Alert', async () => {
-            let result = await classUnderTest.create();
+            const result = await classUnderTest.create();
 
             expect(result).toBeDefined();
             expect(result.present).toBeDefined();
         });
 
-       it('should return passed Alert', async () => {
-           let actionSheet = new AlertMock();
+        it('should return passed Alert', async () => {
+           const actionSheet = new AlertMock();
            classUnderTest = new AlertControllerMock(actionSheet);
 
-           let result = await classUnderTest.create();
+           const result = await classUnderTest.create();
 
            expect(result).toBe(actionSheet);
         });

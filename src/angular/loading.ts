@@ -9,7 +9,7 @@ export class LoadingMock extends BaseMock {
     }
 
     @deprecated('new LoadingMock()')
-    public static instance(): any {
+    static instance(): any {
         return new LoadingMock();
     }
 }

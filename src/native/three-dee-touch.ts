@@ -16,12 +16,12 @@ export class ThreeDeeTouchMock extends BaseMock {
         super('ThreeDeeTouch', METHODS);
 
         this.setReturn('isAvailable', Promise.resolve(true));
-        this.setReturn('watchForTouches', of<Object>({}));
+        this.setReturn('watchForTouches', of({}));
         this.setReturn('onHomeIconPressed', of(undefined));
     }
 
     @deprecated('new ThreeDeeTouchMock()')
-    public static instance(): any {
+    static instance(): any {
         return new ThreeDeeTouchMock();
     }
 }

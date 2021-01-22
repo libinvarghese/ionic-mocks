@@ -12,7 +12,7 @@ export class ActionSheetMock extends BaseMock {
     }
 
     @deprecated('new ActionSheet()')
-    public static instance(): any {
+    static instance(): any {
         return new ActionSheetMock();
     }
 }

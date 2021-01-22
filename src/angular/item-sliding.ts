@@ -9,7 +9,7 @@ export class ItemSlidingMock extends BaseMock {
     }
 
     @deprecated('new ItemSlidingMock()')
-    public static instance(): any {
+    static instance(): any {
         return new ItemSlidingMock();
     }
 }

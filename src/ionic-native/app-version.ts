@@ -19,7 +19,7 @@ export class AppVersionMock extends BaseMock {
     }
 
     @deprecated('new AppVersionMock()')
-    public static instance(): any {
+    static instance(): any {
         return new AppVersionMock();
     }
 }

@@ -11,7 +11,7 @@ export class AlertMock extends BaseMock {
     }
 
     @deprecated('new AlertMock()')
-    public static instance(): any {
+    static instance(): any {
         return new AlertMock();
     }
 }

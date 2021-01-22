@@ -43,6 +43,6 @@ export class GoogleAnalyticsMock extends BaseMock {
 
     @deprecated('new GoogleAnalyticsMock()')
     static instance(): any {
-        new GoogleAnalyticsMock();
+        return new GoogleAnalyticsMock();
     }
 }

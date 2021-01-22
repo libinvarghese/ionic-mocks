@@ -11,7 +11,7 @@ export class AlertControllerMock extends BaseMock {
     }
 
     @deprecated('new AlertControllerMock()')
-    public static instance(alertMock?: AlertMock): any {
+    static instance(alertMock?: AlertMock): any {
         return new AlertControllerMock(alertMock);
     }
 }

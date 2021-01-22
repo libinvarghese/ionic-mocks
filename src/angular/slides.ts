@@ -33,7 +33,7 @@ export class SlidesMock extends BaseMock {
     }
 
     @deprecated('new SlidesMock()')
-    public static instance(): any {
+    static instance(): any {
         return new SlidesMock();
     }
 }

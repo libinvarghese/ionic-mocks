@@ -68,12 +68,16 @@ export class ViewControllerMock extends BaseMock {
         this.setReturn('getIONContent', {});
 
         this.spyObj['writeReady'] = {
+            // tslint:disable-next-line:no-empty
             emit(): void {},
+            // tslint:disable-next-line:no-empty
             subscribe(): any {}
         };
 
         this.spyObj['readReady'] = {
+            // tslint:disable-next-line:no-empty
             emit(): void {},
+            // tslint:disable-next-line:no-empty
             subscribe(): any {}
         };
 
@@ -84,7 +88,7 @@ export class ViewControllerMock extends BaseMock {
     }
 
     @deprecated('use new ViewControllerMock()')
-    public static instance(): any {
+    static instance(): any {
         return new ViewControllerMock();
     }
 }

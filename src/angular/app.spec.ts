@@ -18,16 +18,16 @@ describe('AppMock', () => {
         });
 
         it('should return a NavController', () => {
-            let result = classUnderTest.getActiveNav();
+            const result = classUnderTest.getActiveNav();
 
             expect(result).toBeDefined();
         });
 
         it('should return passed nav', () => {
-            let navCtrl = new NavControllerMock();
+            const navCtrl = new NavControllerMock();
             classUnderTest = new AppMock(navCtrl);
 
-            let result = classUnderTest.getActiveNav();
+            const result = classUnderTest.getActiveNav();
 
             expect(result).toBe(navCtrl);
         });
@@ -39,16 +39,16 @@ describe('AppMock', () => {
         });
 
         it('should return a NavController array', () => {
-            let result = classUnderTest.getActiveNavs();
+            const result = classUnderTest.getActiveNavs();
 
             expect(result).toBeDefined();
         });
 
         it('should return passed nav', () => {
-            let navCtrl = new NavControllerMock();
+            const navCtrl = new NavControllerMock();
             classUnderTest = new AppMock(navCtrl);
 
-            let result = classUnderTest.getActiveNav();
+            const result = classUnderTest.getActiveNav();
 
             expect(result).toContain(navCtrl);
         });
@@ -60,16 +60,16 @@ describe('AppMock', () => {
         });
 
         it('should return a nav', () => {
-            let result = classUnderTest.getNavByIdOrName(1);
+            const result = classUnderTest.getNavByIdOrName(1);
 
             expect(result).toBeDefined();
         });
 
         it('should return passed nav', () => {
-            let navCtrl = new NavControllerMock();
+            const navCtrl = new NavControllerMock();
             classUnderTest = new AppMock(navCtrl);
 
-            let result = classUnderTest.getNavByIdOrName(1);
+            const result = classUnderTest.getNavByIdOrName(1);
 
             expect(result).toBe(navCtrl);
         });
@@ -81,16 +81,16 @@ describe('AppMock', () => {
         });
 
         it('should return a nav', () => {
-            let result = classUnderTest.getRootNav();
+            const result = classUnderTest.getRootNav();
 
             expect(result).toBeDefined();
         });
 
         it('should return passed nav', () => {
-            let navCtrl = new NavControllerMock();
+            const navCtrl = new NavControllerMock();
             classUnderTest = new AppMock(navCtrl);
 
-            let result = classUnderTest.getRootNav();
+            const result = classUnderTest.getRootNav();
 
             expect(result).toBe(navCtrl);
         });
@@ -102,16 +102,16 @@ describe('AppMock', () => {
         });
 
         it('should return a NavController array', () => {
-            let result = classUnderTest.getRootNavs();
+            const result = classUnderTest.getRootNavs();
 
             expect(result).toBeDefined();
         });
 
         it('should return passed nav', () => {
-            let navCtrl = new NavControllerMock();
+            const navCtrl = new NavControllerMock();
             classUnderTest = new AppMock(navCtrl);
 
-            let result = classUnderTest.getRootNavs();
+            const result = classUnderTest.getRootNavs();
 
             expect(result).toContain(navCtrl);
         });
@@ -123,16 +123,16 @@ describe('AppMock', () => {
         });
 
         it('should return a nav', () => {
-            let result = classUnderTest.getRootNavById(1);
+            const result = classUnderTest.getRootNavById(1);
 
             expect(result).toBeDefined();
         });
 
         it('should return passed nav', () => {
-            let navCtrl = new NavControllerMock();
+            const navCtrl = new NavControllerMock();
             classUnderTest = new AppMock(navCtrl);
 
-            let result = classUnderTest.getRootNavById(1);
+            const result = classUnderTest.getRootNavById(1);
 
             expect(result).toBe(navCtrl);
         });

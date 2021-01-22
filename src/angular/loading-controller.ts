@@ -11,7 +11,7 @@ export class LoadingControllerMock extends BaseMock {
     }
 
     @deprecated('new LoadingControllerMock()')
-    public static instance(loading?: LoadingMock): any {
+    static instance(loading?: LoadingMock): any {
         return new LoadingControllerMock(loading);
     }
 }

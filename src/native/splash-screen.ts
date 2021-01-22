@@ -9,7 +9,7 @@ export class SplashScreenMock extends BaseMock {
     }
 
     @deprecated('new SplasyScreenMock()')
-    public static instance(): any {
+    static instance(): any {
         return new SplashScreenMock();
     }
 }

@@ -31,7 +31,7 @@ export class CodePushMock extends BaseMock {
     }
 
     @deprecated('new CodePushMock()')
-    public static instance(): any {
+    static instance(): any {
         return new CodePushMock();
     }
 }
