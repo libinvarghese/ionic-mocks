@@ -1,0 +1,12 @@
+{
+  "spec_dir": "./src",
+  "spec_files": [
+    "**/*[sS]pec.ts"
+  ],
+  "helpers": [
+    "../spec/helpers/typescript.js",
+    "../spec/helpers/**/*.{js,ts}"
+  ],
+  "stopSpecOnExpectationFailure": false,
+  "random": true
+}

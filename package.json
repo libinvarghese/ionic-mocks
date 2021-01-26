@@ -27,10 +27,11 @@
     }
   },
   "scripts": {
-    "test": "karma start",
+    "test": "jasmine",
     "clean": "rimraf dist",
     "prebuild": "npm run clean",
     "build": "tsc -d",
+    "lint:jasmine": "tslint -c tslint.json -p ./spec/tsconfig.json 'spec/**/*.ts'",
     "lint:scripts": "tslint -c tslint.json -p ./scripts/tsconfig.json 'scripts/**/*.ts'",
     "lint:src": "tslint -c tslint.json -p ./tsconfig.json 'src/**/*.ts'",
     "lint": "run-p lint:*",
@@ -55,6 +56,8 @@
     "husky": "^4.3.8",
     "jasmine": "^3.6.4",
     "jasmine-core": "^3.6.0",
+    "jasmine-spec-reporter": "^6.0.0",
+    "jsdom": "^16.4.0",
     "karma": "^5.2.3",
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage": "^2.0.3",
