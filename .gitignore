@@ -48,3 +48,7 @@ src/**/*.js.map
 dist
 
 .DS_Store
+
+# https://github.com/github/gitignore/raw/master/Global/Diff.gitignore
+*.patch
+*.diff
