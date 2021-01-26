@@ -1,5 +1,4 @@
 import { BaseMock } from '../base.mock';
-import deprecated from 'deprecated-decorator';
 import { of } from 'rxjs';
 
 const METHODS = [
@@ -13,10 +12,5 @@ export class GeolocationMock extends BaseMock {
 
         this.setReturn('getCurrentPosition', Promise.resolve());
         this.setReturn('watchPosition', of(undefined));
-    }
-
-    @deprecated('new GeolocationMock()')
-    static instance(): any {
-        return new GeolocationMock();
     }
 }

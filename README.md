@@ -75,8 +75,8 @@ describe('MyClass', () => {
 
     beforeEach(() => {
 
-        events = EventsMock.instance();
-        alertCtrl = AlertControllerMock.instance();
+        events = new EventsMock();
+        alertCtrl = new AlertControllerMock();
 
         classUnderTest = new MyClass(events, alertCtrl);
     });
@@ -110,9 +110,9 @@ describe('MyComponent', () => {
 
     beforeEach(() => {
 
-        events = EventsMock.instance();
-        alert = AlertMock.instance():
-        alertCtrl = AlertControllerMock.instance(alert);
+        events = new EventsMock();
+        alert = new AlertMock():
+        alertCtrl = new AlertControllerMock(alert);
 
         classUnderTest = new MyClass(events, alertCtrl);
     });
@@ -135,7 +135,7 @@ TestBed.configureTestingModule({
     imports: [IonicModule],
     declarations: [MyComponentUnderTest],
     providers: [
-            {provide: ViewController, useFactory: () => ViewControllerMock.instance()}
+            {provide: ViewController, useFactory: () => new ViewControllerMock()}
     ]
 });
 ```
@@ -166,12 +166,12 @@ Answer: This means you've done something wrong. Take a look at this example:
 ```ts
 // DO NOT DO THIS
 // USING useFactory WITHOUT THE FAT ARROW SYNTAX IS INCORRECT
-{ provide: App, useFactory: AppMock.instance() }
+{ provide: App, useFactory: new AppMock() }
 ```
 
 Make sure you are using the `useFactory` property name and using the fat arrow function as the value:
 
 ```ts
 // DO THIS
-{ provide: App, useFactory: () => AppMock.instance() }
+{ provide: App, useFactory: () => new AppMock() }
 ```

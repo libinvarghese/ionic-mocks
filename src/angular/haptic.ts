@@ -1,5 +1,4 @@
 import { BaseMock } from '../base.mock';
-import { deprecated } from 'deprecated-decorator';
 
 const METHODS = [
     'available',
@@ -15,10 +14,5 @@ export class HapticMock extends BaseMock {
     constructor() {
         super('Haptic', METHODS);
         this.setReturn('available', true);
-    }
-
-    @deprecated('new HapticMock()')
-    static instance(): any {
-        return new HapticMock();
     }
 }

@@ -96,7 +96,5 @@
       "@semantic-release/github"
     ]
   },
-  "dependencies": {
-    "deprecated-decorator": "^0.1.6"
-  }
+  "dependencies": {}
 }

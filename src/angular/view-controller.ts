@@ -1,7 +1,6 @@
 import { of } from 'rxjs';
 import { NavParamsMock } from './nav-params';
 import { BaseMock } from '../base.mock';
-import deprecated from 'deprecated-decorator';
 
 const METHODS = [
     'willEnter',
@@ -85,10 +84,5 @@ export class ViewControllerMock extends BaseMock {
         this.spyObj['data'] = new NavParamsMock();
         this.spyObj['instance'] = {};
         this.spyObj['id'] = '';
-    }
-
-    @deprecated('use new ViewControllerMock()')
-    static instance(): any {
-        return new ViewControllerMock();
     }
 }

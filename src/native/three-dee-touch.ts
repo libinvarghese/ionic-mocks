@@ -1,6 +1,5 @@
 import { of } from 'rxjs';
 import { BaseMock } from '../base.mock';
-import { deprecated } from 'deprecated-decorator';
 
 const METHODS = [
     'isAvailable',
@@ -18,10 +17,5 @@ export class ThreeDeeTouchMock extends BaseMock {
         this.setReturn('isAvailable', Promise.resolve(true));
         this.setReturn('watchForTouches', of({}));
         this.setReturn('onHomeIconPressed', of(undefined));
-    }
-
-    @deprecated('new ThreeDeeTouchMock()')
-    static instance(): any {
-        return new ThreeDeeTouchMock();
     }
 }

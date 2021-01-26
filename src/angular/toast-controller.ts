@@ -1,4 +1,3 @@
-import deprecated from 'deprecated-decorator';
 import { BaseMock } from '../base.mock';
 import { ToastMock } from './toast';
 
@@ -8,10 +7,5 @@ export class ToastControllerMock extends BaseMock {
     constructor(toast?: ToastMock) {
         super('ToastController', METHODS);
         this.setReturn('create', toast || new ToastMock());
-    }
-
-    @deprecated('new ToastControllerMock()')
-    static instance(toast?: ToastMock): any {
-        return new ToastControllerMock(toast);
     }
 }

@@ -1,5 +1,4 @@
 import { BaseMock } from './../base.mock';
-import { deprecated } from 'deprecated-decorator';
 import { of } from 'rxjs';
 
 const METHODS = [
@@ -67,10 +66,5 @@ export class PlatformMock extends BaseMock {
         });
         this.setReturn('timeout', (callback: any, timer: number) => setTimeout(callback, timer));
         this.setReturn('resume', of(undefined));
-    }
-
-    @deprecated('new PlatformMock()')
-    static instance(): any {
-        return new PlatformMock();
     }
 }

@@ -1,5 +1,4 @@
 import { of } from 'rxjs';
-import deprecated from 'deprecated-decorator';
 import { BaseMock } from '../base.mock';
 
 const METHODS = [
@@ -39,10 +38,5 @@ export class NFCMock extends BaseMock {
         this.setReturn('bytesToString', '');
         this.setReturn('stringToBytes', []);
         this.setReturn('bytesToHexString', '');
-    }
-
-    @deprecated('new NFCMock()')
-    static instance(): any {
-        return new NFCMock();
     }
 }

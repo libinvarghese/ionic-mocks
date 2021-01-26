@@ -1,5 +1,4 @@
 import { BaseMock } from '../base.mock';
-import { deprecated } from 'deprecated-decorator';
 
 const METHODS = [
     'controlBy',
@@ -30,10 +29,5 @@ export class SlidesMock extends BaseMock {
         this.setReturn('isBeginning', true);
         this.setReturn('isEnd', false);
         this.setReturn('length', 1);
-    }
-
-    @deprecated('new SlidesMock()')
-    static instance(): any {
-        return new SlidesMock();
     }
 }

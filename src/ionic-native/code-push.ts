@@ -1,6 +1,5 @@
 import { of } from 'rxjs';
 import { BaseMock } from '../base.mock';
-import deprecated from 'deprecated-decorator';
 
 const METHODS = [
     'getCurrentPackage',
@@ -28,10 +27,5 @@ export class CodePushMock extends BaseMock {
           storeAppURL: {},
           callbacks: {}
         };
-    }
-
-    @deprecated('new CodePushMock()')
-    static instance(): any {
-        return new CodePushMock();
     }
 }

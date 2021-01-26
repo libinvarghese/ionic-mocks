@@ -15,8 +15,4 @@ export class MenuMock extends BaseMock {
         this.setReturn('open', Promise.resolve(true));
         this.setReturn('close', Promise.resolve(true));
     }
-
-    static instance(): any {
-        return new MenuMock();
-    }
 }
