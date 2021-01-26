@@ -1,7 +1,6 @@
 import { of } from 'rxjs';
 import { ViewControllerMock } from './view-controller';
 import { BaseMock } from '../base.mock';
-import deprecated from 'deprecated-decorator';
 
 const METHODS = [
     'goToRoot',
@@ -90,10 +89,5 @@ export class NavControllerMock extends BaseMock {
         this.setReturn('length', 0);
         this.setProperty('root', new ViewControllerMock());
         this.setProperty('rootParams', {});
-    }
-
-    @deprecated('new NavControllerMock()')
-    static instance(): any {
-        return new NavControllerMock();
     }
 }

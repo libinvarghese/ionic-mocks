@@ -1,5 +1,4 @@
 import { BaseMock } from '../base.mock';
-import deprecated from 'deprecated-decorator';
 
 const METHODS = [
     'getAppName',
@@ -16,10 +15,5 @@ export class AppVersionMock extends BaseMock {
         this.setReturn('getPackageName', Promise.resolve());
         this.setReturn('getVersionCode', Promise.resolve());
         this.setReturn('getVersionNumber', Promise.resolve());
-    }
-
-    @deprecated('new AppVersionMock()')
-    static instance(): any {
-        return new AppVersionMock();
     }
 }

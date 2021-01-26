@@ -1,4 +1,3 @@
-import deprecated from 'deprecated-decorator';
 import { BaseMock } from '../base.mock';
 
 const METHODS = [
@@ -17,10 +16,5 @@ export class KeyboardMock extends BaseMock {
     constructor() {
         super('Keyboard', METHODS);
         this.setReturn('isOpen', false);
-    }
-
-    @deprecated('new Keyboard()')
-    static instance(): any {
-        return new KeyboardMock();
     }
 }

@@ -1,7 +1,6 @@
 import { Observable, of } from 'rxjs';
 import { NavControllerMock } from './nav-controller';
 import { BaseMock } from '../base.mock';
-import deprecated from 'deprecated-decorator';
 
 const METHODS: string[] = [
     'getActiveNav',
@@ -37,10 +36,5 @@ export class AppMock extends BaseMock {
         this.setReturn('viewWillEnter', _viewObservable || of(undefined));
         this.setReturn('viewWillLeave', _viewObservable || of(undefined));
         this.setReturn('viewWillUnload', _viewObservable || of(undefined));
-    }
-
-    @deprecated('new AppMock()')
-    static instance(navCtrl?: NavControllerMock, viewObservable?: Observable<any>): any {
-        return new AppMock(navCtrl, viewObservable);
     }
 }

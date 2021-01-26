@@ -1,4 +1,3 @@
-import deprecated from 'deprecated-decorator';
 import { BaseMock } from '../base.mock';
 
 const METHODS = [
@@ -18,10 +17,5 @@ export class ConfigMock extends BaseMock {
         this.setReturn('get', '');
         this.setReturn('getBoolean', true);
         this.setReturn('getNumber', 0);
-    }
-
-    @deprecated('new ConfigMock()')
-    static instance(): any {
-        return new ConfigMock();
     }
 }

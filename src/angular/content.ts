@@ -1,4 +1,3 @@
-import deprecated from 'deprecated-decorator';
 import { BaseMock } from '../base.mock';
 
 const METHODS = [
@@ -28,10 +27,5 @@ export class ContentMock extends BaseMock {
         this.setReturn('scrollTo', Promise.resolve());
         this.setReturn('scrollToBottom', Promise.resolve());
         this.setReturn('scrollToTop', Promise.resolve());
-    }
-
-    @deprecated('new ContentMock()')
-    static instance(): any {
-        return new ContentMock();
     }
 }

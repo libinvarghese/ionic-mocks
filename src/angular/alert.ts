@@ -1,5 +1,4 @@
 import { BaseMock } from '../base.mock';
-import deprecated from 'deprecated-decorator';
 
 const METHODS = ['present', 'dismiss', 'onDidDismiss'];
 
@@ -8,10 +7,5 @@ export class AlertMock extends BaseMock {
         super('Alert', METHODS);
 
         this.setReturn('present', Promise.resolve());
-    }
-
-    @deprecated('new AlertMock()')
-    static instance(): any {
-        return new AlertMock();
     }
 }

@@ -1,5 +1,4 @@
 import { BaseMock } from '../base.mock';
-import deprecated from 'deprecated-decorator';
 
 const METHODS = ['driver', 'ready', 'get', 'set', 'remove', 'clear', 'length', 'keys', 'forEach'];
 
@@ -34,10 +33,5 @@ export class StorageMock extends BaseMock {
             Object.keys(this._internal).forEach((key, index) => iterator(this._internal[key], key, index));
             return Promise.resolve();
         });
-    }
-
-    @deprecated('new StorageMock()')
-    static instance(initialObject = {}): any {
-        return new StorageMock(initialObject);
     }
 }

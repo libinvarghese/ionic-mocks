@@ -67,8 +67,4 @@ export class FileMock extends BaseMock {
         this.setReturn('getDirectory', Promise.resolve());
         this.setReturn('getFile', Promise.resolve());
     }
-
-    static instance(): any {
-        return new FileMock();
-    }
 }

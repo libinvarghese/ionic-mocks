@@ -2,7 +2,6 @@ import { ActionSheetControllerMock } from './action-sheet-controller';
 import { ActionSheetMock } from './action-sheet';
 
 describe('ActionSheetControllerMock', () => {
-
     let classUnderTest: any;
 
     beforeEach(() => {

@@ -1,5 +1,4 @@
 import { BaseMock } from '../base.mock';
-import deprecated from 'deprecated-decorator';
 
 const METHODS = ['promptForRating', 'navigateToAppStore'];
 
@@ -13,10 +12,5 @@ export class AppRateMock extends BaseMock {
           storeAppURL: {},
           callbacks: {}
         };
-    }
-
-    @deprecated('new AppRate()')
-    static instance(): any {
-        return new AppRateMock();
     }
 }

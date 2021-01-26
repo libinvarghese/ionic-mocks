@@ -1,4 +1,3 @@
-import deprecated from 'deprecated-decorator';
 import { BaseMock } from '../base.mock';
 
 const METHODS = [
@@ -39,10 +38,5 @@ export class GoogleAnalyticsMock extends BaseMock {
         this.setReturn('addTransaction', Promise.resolve());
         this.setReturn('addTransactionItem', Promise.resolve());
         this.setReturn('enableUncaughtExceptionReporting', Promise.resolve());
-    }
-
-    @deprecated('new GoogleAnalyticsMock()')
-    static instance(): any {
-        return new GoogleAnalyticsMock();
     }
 }
