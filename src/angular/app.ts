@@ -20,21 +20,24 @@ const METHODS: string[] = [
 ];
 
 export class AppMock extends BaseMock {
-    constructor(private _navCtrl?: NavControllerMock, private _viewObservable?: Observable<any>) {
+    constructor(navCtrl?: NavControllerMock, viewObservable?: Observable<any>) {
         super('App', METHODS);
 
-        this.setReturn('getActiveNav', _navCtrl || new NavControllerMock());
-        this.setReturn('getActiveNavs', _navCtrl || [new NavControllerMock()]);
-        this.setReturn('getNavByIdOrName', _navCtrl || new NavControllerMock());
-        this.setReturn('getRootNav', _navCtrl || new NavControllerMock());
-        this.setReturn('getRootNavs', _navCtrl || [new NavControllerMock()]);
-        this.setReturn('getRootNavById', _navCtrl || new NavControllerMock());
+        const navC = navCtrl || new NavControllerMock();
+        const vo = viewObservable || of(undefined);
+
+        this.setReturn('getActiveNav', navC);
+        this.setReturn('getActiveNavs', [navC]);
+        this.setReturn('getNavByIdOrName', navC);
+        this.setReturn('getRootNav', navC);
+        this.setReturn('getRootNavs', [navC]);
+        this.setReturn('getRootNavById', navC);
         this.setReturn('isScrolling', false);
-        this.setReturn('viewDidEnter', _viewObservable || of(undefined));
-        this.setReturn('viewDidLoad', _viewObservable || of(undefined));
-        this.setReturn('viewDidLeave', _viewObservable || of(undefined));
-        this.setReturn('viewWillEnter', _viewObservable || of(undefined));
-        this.setReturn('viewWillLeave', _viewObservable || of(undefined));
-        this.setReturn('viewWillUnload', _viewObservable || of(undefined));
+        this.setReturn('viewDidEnter', vo);
+        this.setReturn('viewDidLoad', vo);
+        this.setReturn('viewDidLeave', vo);
+        this.setReturn('viewWillEnter', vo);
+        this.setReturn('viewWillLeave', vo);
+        this.setReturn('viewWillUnload', vo);
     }
 }

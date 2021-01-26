@@ -3,7 +3,7 @@ import { BaseMock } from '../base.mock';
 const METHODS: string[] = ['present', 'dismiss'];
 
 export class ActionSheetMock extends BaseMock {
-  constructor(actionSheet?: ActionSheetMock) {
+  constructor() {
     super('ActionSheet', METHODS);
 
     this.setReturn('present', Promise.resolve());
