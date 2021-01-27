@@ -1,0 +1,18 @@
+{
+  "recommendations": [
+    "streetsidesoftware.code-spell-checker",
+    "npxms.hide-gitignored",
+    "jvitor83.types-autoinstaller",
+    "esbenp.prettier-vscode",
+    "quicktype.quicktype",
+    "eg2.vscode-npm-script",
+    "xabikos.javascriptsnippets",
+    "emeryao.async-switch",
+    "oouo-diogo-perdigao.docthis",
+    "hbenl.vscode-test-explorer",
+    "editorconfig.editorconfig",
+    "hbenl.vscode-jasmine-test-adapter",
+    "xabikos.jasminesnippets",
+    "ms-vscode.vscode-typescript-tslint-plugin"
+  ]
+}
