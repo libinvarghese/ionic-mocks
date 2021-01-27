@@ -1,6 +1,6 @@
-import { ActionSheetMock } from './action-sheet';
+import { ActionSheetMock, methods } from './action-sheet';
 
-describe('ActionSheetMock', () => {
+fdescribe('ActionSheetMock', () => {
     let classUnderTest: any;
 
     beforeEach(() => {
