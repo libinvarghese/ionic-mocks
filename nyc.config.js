@@ -11,7 +11,8 @@ module.exports = {
     '*.js',
     'scripts/*',
     'eslintrc/*',
-    'spec/helpers/*'
+    'spec/helpers/*',
+    '**/spec/*',
   ],
   statements: 95,
   branches: 95,
