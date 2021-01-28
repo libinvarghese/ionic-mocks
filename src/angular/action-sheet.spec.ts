@@ -1,39 +1,15 @@
-import { ActionSheetMock } from './action-sheet';
+import { ActionSheetMock, METHODS } from './action-sheet';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
 
 describe('ActionSheetMock', () => {
-    let classUnderTest: any;
+  let classUnderTest: any;
 
-    beforeEach(() => {
-        classUnderTest = new ActionSheetMock();
-    });
+  beforeEach(() => {
+    classUnderTest = new ActionSheetMock();
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
+  });
 
-    it('should initialize', () => {
-        expect(classUnderTest).toBeDefined();
-    });
-
-    describe('present', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.present).toBeDefined();
-        });
-
-        it('should return empty promise', done => {
-            classUnderTest.present().then(result => {
-                expect(result).toBeUndefined();
-                done();
-            });
-        });
-    });
-
-    describe('dismiss', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.dismiss).toBeDefined();
-        });
-
-        it('should return empty promise', done => {
-            classUnderTest.dismiss().then(result => {
-                expect(result).toBeUndefined();
-                done();
-            });
-        });
-    });
+  it('should setup mock', async () => {
+    await expectAsync(classUnderTest).toMatchMockObject();
+  });
 });

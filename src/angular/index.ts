@@ -1,5 +1,5 @@
-export * from './action-sheet';
-export * from './action-sheet-controller';
+export { ActionSheetMock } from './action-sheet';
+export { ActionSheetControllerMock } from './action-sheet-controller';
 export * from './alert';
 export * from './alert-controller';
 export * from './app';

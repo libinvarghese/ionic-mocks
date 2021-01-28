@@ -1,13 +1,15 @@
-import { BaseMock } from '../base.mock';
+import { BaseMock, SpyObjMemberDef } from '../base.mock';
 
-const METHODS: string[] = ['present', 'dismiss'];
+export const METHODS: SpyObjMemberDef = {
+  nameAndResolves:
+  ['present', 'dismiss'].reduce((prev, curr) => {
+  prev[curr] = undefined;
+
+  return prev;
+}, {})};
 
 export class ActionSheetMock extends BaseMock {
   constructor() {
     super('ActionSheet', METHODS);
-
-    this.setReturn('present', Promise.resolve());
-    this.setReturn('dismiss', Promise.resolve());
   }
-
 }

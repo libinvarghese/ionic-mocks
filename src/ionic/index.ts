@@ -1,1 +1,1 @@
-export * from './storage';
+export { StorageMock } from './storage';
