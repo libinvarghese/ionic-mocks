@@ -1,18 +1,19 @@
 {
   "recommendations": [
-    "streetsidesoftware.code-spell-checker",
-    "npxms.hide-gitignored",
-    "jvitor83.types-autoinstaller",
-    "esbenp.prettier-vscode",
-    "quicktype.quicktype",
-    "eg2.vscode-npm-script",
-    "xabikos.javascriptsnippets",
-    "emeryao.async-switch",
-    "oouo-diogo-perdigao.docthis",
-    "hbenl.vscode-test-explorer",
+    "dbaeumer.vscode-eslint",
     "editorconfig.editorconfig",
+    "eg2.vscode-npm-script",
+    "emeryao.async-switch",
+    "esbenp.prettier-vscode",
     "hbenl.vscode-jasmine-test-adapter",
+    "hbenl.vscode-test-explorer",
+    "jvitor83.types-autoinstaller",
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "npxms.hide-gitignored",
+    "oouo-diogo-perdigao.docthis",
+    "quicktype.quicktype",
+    "streetsidesoftware.code-spell-checker",
     "xabikos.jasminesnippets",
-    "ms-vscode.vscode-typescript-tslint-plugin"
+    "xabikos.javascriptsnippets"
   ]
 }
