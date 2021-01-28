@@ -1,37 +1,37 @@
-import { BaseMock } from '../base.mock';
+import { BaseMock, SpyObjMembers } from '../base.mock';
 
-const METHODS = ['driver', 'ready', 'get', 'set', 'remove', 'clear', 'length', 'keys', 'forEach'];
+export const METHODS = ['ready', 'get', 'set', 'remove', 'clear', 'length', 'keys', 'forEach'];
+export const PROPERTIES: SpyObjMembers<unknown> = { driver: '' };
 
 export class StorageMock extends BaseMock {
-    private _internal = {};
+  private _internal = {};
 
-    constructor(initialObject = {}) {
-        super('Storage', METHODS);
+  constructor(initialObject = {}) {
+    super('Storage', METHODS, { nameAndValues: PROPERTIES });
 
-        this._internal = initialObject;
-        this.setProperty('driver', '');
-        this.setReturn('ready', Promise.resolve({}));
-        this.spyObj['set'].and.callFake((key, value) => {
-            this._internal[key] = value;
-            return Promise.resolve();
-        });
-        this.spyObj['get'].and.callFake(key => {
-            const _value = this._internal[key] || null;
-            return Promise.resolve(JSON.parse(JSON.stringify(_value))); // Clone, to avoid direct update on storage
-        });
-        this.spyObj['remove'].and.callFake(key => {
-            delete this._internal[key];
-            return Promise.resolve();
-        });
-        this.spyObj['clear'].and.callFake(() => {
-            this._internal = {};
-            return Promise.resolve();
-        });
-        this.setReturn('length', Promise.resolve(Object.keys(this._internal).length));
-        this.setReturn('keys', Promise.resolve(Object.keys(this._internal)));
-        this.spyObj['forEach'].and.callFake(iterator => {
-            Object.keys(this._internal).forEach((key, index) => iterator(this._internal[key], key, index));
-            return Promise.resolve();
-        });
-    }
+    this._internal = initialObject;
+    this.setReturn('ready', Promise.resolve({}));
+    this.spyObj['set'].and.callFake((key, value) => {
+      this._internal[key] = value;
+      return Promise.resolve();
+    });
+    this.spyObj['get'].and.callFake((key) => {
+      const _value = this._internal[key] || null;
+      return Promise.resolve(JSON.parse(JSON.stringify(_value))); // Clone, to avoid direct update on storage
+    });
+    this.spyObj['remove'].and.callFake((key) => {
+      delete this._internal[key];
+      return Promise.resolve();
+    });
+    this.spyObj['clear'].and.callFake(() => {
+      this._internal = {};
+      return Promise.resolve();
+    });
+    this.setReturn('length', Promise.resolve(Object.keys(this._internal).length));
+    this.setReturn('keys', Promise.resolve(Object.keys(this._internal)));
+    this.spyObj['forEach'].and.callFake((iterator) => {
+      Object.keys(this._internal).forEach((key, index) => iterator(this._internal[key], key, index));
+      return Promise.resolve();
+    });
+  }
 }

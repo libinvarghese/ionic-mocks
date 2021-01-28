@@ -8,8 +8,8 @@ import CustomAsyncMatcher = jasmine.CustomAsyncMatcher;
 import CustomMatcherResult = jasmine.CustomMatcherResult;
 
 export function mockObjectCustomMatchers(
-  methods: SpyObjMembers | string[],
-  properties?: SpyObjMembers | string[],
+  methods: SpyObjMembers<unknown> | string[],
+  properties?: SpyObjMembers<unknown> | string[],
   ignore?: any
 ): CustomAsyncMatcherFactories {
   return {
@@ -34,7 +34,7 @@ export function mockObjectCustomMatchers(
           }
 
           await Bluebird.each(methodKeys, async (key) => {
-            expect(classUnderTest[key]).toBeDefined();
+            expect(classUnderTest[key]).withContext(`${key}`).toBeDefined();
 
             if (!checkMethodPresentOnly) {
               if (methods[key] instanceof Promise) {
@@ -53,7 +53,11 @@ export function mockObjectCustomMatchers(
             }
 
             propertyKeys.forEach((key) => {
-              expect(classUnderTest[key]).toBeDefined();
+              expect(classUnderTest[key]).withContext(`${key}`).toBeDefined();
+
+              if (!checkPropertyPresentOnly) {
+                expect(classUnderTest[key]).toEqual(properties[key], `${key}`);
+              }
             });
           }
 
