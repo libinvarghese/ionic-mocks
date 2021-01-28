@@ -1,6 +1,6 @@
 export type SpyObjMembers<T> = Record<string, T>;
 
-interface SpyObjMemberDef {
+export interface SpyObjMemberDef {
   names?: string[];
   nameAndValues?: SpyObjMembers<unknown>;
   nameAndCallFakes?: SpyObjMembers<<O>(...args: any) => O>;
@@ -10,13 +10,20 @@ interface SpyObjMemberDef {
   nameAndGenerators?: SpyObjMembers<unknown[]>;
 }
 
-const spyObjMemberDefStrategy = {
+const jasmineSpyObjMemberDefStrategy = {
+  names: null,
+  nameAndValues: 'returnValue',
+};
+
+const customSpyObjMemberDefStrategy = {
   nameAndCallFakes: 'callFake',
   nameAndRejects: 'rejectWith',
   nameAndResolves: 'resolveTo',
   nameAndThrows: 'throwError',
   nameAndGenerators: 'returnValues',
 };
+
+export const spyObjMemberDefStrategy = { ...jasmineSpyObjMemberDefStrategy, ...customSpyObjMemberDefStrategy };
 
 interface SpyObjPropertyDescriptor extends PropertyDescriptor {
   get?: jasmine.Spy;
@@ -63,7 +70,12 @@ function addMembersToSpyObjViaDef(
   spyObj: object,
   baseName: string,
   members: SpyObjMemberDef,
-  addMembersFn: <T>(spyObj: object, baseName: string, members: SpyObjMembers<T> | string[], spyStrategy?: string) => void
+  addMembersFn: <T>(
+    spyObj: object,
+    baseName: string,
+    members: SpyObjMembers<T> | string[],
+    spyStrategy?: string
+  ) => void
 ) {
   const obj = spyObj;
 
@@ -74,8 +86,8 @@ function addMembersToSpyObjViaDef(
     addMembersFn(obj, baseName, members.names);
   }
 
-  Object.keys(spyObjMemberDefStrategy).forEach((key) => {
-    addMembersFn(obj, baseName, members[key], spyObjMemberDefStrategy[key]);
+  Object.keys(customSpyObjMemberDefStrategy).forEach((key) => {
+    addMembersFn(obj, baseName, members[key], customSpyObjMemberDefStrategy[key]);
   });
 
   return obj;
