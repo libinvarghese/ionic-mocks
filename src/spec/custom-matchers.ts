@@ -93,24 +93,23 @@ export function mockObjectCustomMatchers(
                   const context = `${key}`;
                   const value = propertyArr[key];
                   expect(classUnderTest[key]).toBeDefined(context);
-                  expect(classUnderTest[key]).toBeInstanceOf(Function);
 
                   switch (def) {
                     case 'nameAndValues': {
-                      expect(classUnderTest[key]()).toEqual(value, context);
+                      expect(classUnderTest[key]).toEqual(value, context);
                       break;
                     }
                     case 'nameAndResolves': {
-                      expect(classUnderTest[key]()).withContext(context).toBeInstanceOf(Promise);
-                      await expectAsync(classUnderTest[key]())
+                      expect(classUnderTest[key]).withContext(context).toBeInstanceOf(Promise);
+                      await expectAsync(classUnderTest[key])
                         .withContext(context)
                         .toBeResolvedTo(await value);
 
                       break;
                     }
                     case 'nameAndRejects': {
-                      expect(classUnderTest[key]()).withContext(context).toBeInstanceOf(Promise);
-                      await expectAsync(classUnderTest[key]())
+                      expect(classUnderTest[key]).withContext(context).toBeInstanceOf(Promise);
+                      await expectAsync(classUnderTest[key])
                         .withContext(context)
                         .toBeRejectedWith(await value);
 
