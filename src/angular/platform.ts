@@ -18,6 +18,7 @@ export const METHODS: SpyObjMemberDef = {
     platforms: [],
     // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/explicit-module-boundary-types
     registerBackButtonAction: () => {},
+    // eslint-disable-next-line rxjs/finnish
     resume: of(undefined),
     url: '',
     versions: {},

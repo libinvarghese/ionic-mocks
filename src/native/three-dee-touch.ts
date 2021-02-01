@@ -7,7 +7,9 @@ export const METHODS: SpyObjMemberDef = {
     isAvailable: true,
   },
   nameAndValues: {
+    // eslint-disable-next-line rxjs/finnish
     watchForTouches: of({}),
+    // eslint-disable-next-line rxjs/finnish
     onHomeIconPressed: of(undefined),
   },
 };

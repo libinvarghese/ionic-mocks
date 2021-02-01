@@ -13,6 +13,7 @@ const booleanConst = {
 
 module.exports = {
   extends: [
+    './rxjs.js',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',

@@ -1,0 +1,23 @@
+module.exports = {
+  extends: ['plugin:rxjs/recommended'],
+  rules: {
+    'rxjs/ban-observables': 'error',
+    'rxjs/ban-operators': 'error',
+    'rxjs/finnish': 'error',
+    'rxjs/no-compat': 'error',
+    'rxjs/no-connectable': 'error',
+    'rxjs/no-cyclic-action': 'error',
+    'rxjs/no-explicit-generics': 'error',
+    'rxjs/no-exposed-subjects': 'error',
+    'rxjs/no-ignored-error': 'error',
+    'rxjs/no-ignored-observable': 'error',
+    'rxjs/no-ignored-subscription': 'error',
+    'rxjs/no-topromise': 'error',
+    'rxjs/no-unsafe-catch': 'error',
+    'rxjs/no-unsafe-first': 'error',
+    'rxjs/no-unsafe-switchmap': 'error',
+    'rxjs/prefer-observer': ['error', { allowNext: false }],
+    'rxjs/suffix-subjects': 'error',
+    'rxjs/throw-error': 'error',
+  },
+};
