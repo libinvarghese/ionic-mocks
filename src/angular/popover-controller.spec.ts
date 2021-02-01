@@ -21,6 +21,7 @@ describe('PopoverControllerMock', () => {
     it('should return an Popover', async () => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       const result = (await classUnderTest.create()) as PopoverMock;
+
       expect(result).toBeDefined();
       expect(result).toBeInstanceOf(PopoverMock);
     });
@@ -33,6 +34,7 @@ describe('PopoverControllerMock', () => {
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       const result = (await classUnderTest.create()) as PopoverMock;
+
       expect(result).toBe(popover);
     });
   });

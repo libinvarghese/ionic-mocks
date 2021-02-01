@@ -21,6 +21,7 @@ describe('AlertControllerMock', () => {
     it('should return an Alert', async () => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       const result = (await classUnderTest.create()) as AlertMock;
+
       expect(result).toBeDefined();
       expect(result).toBeInstanceOf(AlertMock);
     });
@@ -33,6 +34,7 @@ describe('AlertControllerMock', () => {
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       const result = (await classUnderTest.create()) as AlertMock;
+
       expect(result).toBe(alert);
     });
   });

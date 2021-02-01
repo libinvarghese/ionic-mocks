@@ -31,6 +31,7 @@ describe('MenuController', () => {
         expect(classUnderTest.get()).toEqual(jasmine.any(Object));
       });
     });
+
     describe('getMenus', () => {
       it('should return Menus', () => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access

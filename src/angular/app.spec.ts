@@ -22,6 +22,7 @@ describe('AppMock', () => {
       it('should return a NavController', () => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
         const result = classUnderTest.getActiveNav() as NavControllerMock;
+
         expect(result).toBeDefined();
       });
     });
@@ -134,6 +135,7 @@ describe('AppMock', () => {
       it('should return passed nav', () => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
         const result = classUnderTest.getActiveNav() as NavControllerMock;
+
         expect(result).toBe(navCtrl);
       });
     });

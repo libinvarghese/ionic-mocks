@@ -35,6 +35,7 @@ describe('StorageMock', () => {
         const spyIterator = jasmine.createSpy('spyIterator');
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
         await expectAsync(classUnderTest.forEach(spyIterator)).toBeResolvedTo(undefined);
+
         expect(spyIterator).toHaveBeenCalledTimes(0);
       });
     });
@@ -101,6 +102,7 @@ describe('StorageMock', () => {
           const spyIterator = jasmine.createSpy('spyIterator');
           // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
           await expectAsync(classUnderTest.forEach(spyIterator)).toBeResolvedTo(undefined);
+
           expect(spyIterator).toHaveBeenCalledOnceWith('bar', 'foo', 0);
         });
       });
@@ -135,6 +137,7 @@ describe('StorageMock', () => {
         const spyIterator = jasmine.createSpy('spyIterator');
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
         await expectAsync(classUnderTest.forEach(spyIterator)).toBeResolvedTo(undefined);
+
         expect(spyIterator).toHaveBeenCalledOnceWith('xyz', 'abc', 0);
       });
     });
@@ -226,6 +229,7 @@ describe('StorageMock', () => {
           const spyIterator = jasmine.createSpy('spyIterator');
           // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
           await expectAsync(classUnderTest.forEach(spyIterator)).toBeResolvedTo(undefined);
+
           expect(spyIterator).toHaveBeenCalledWith('xyz', 'abc', 0);
           expect(spyIterator).toHaveBeenCalledWith('bar', 'foo', 1);
         });

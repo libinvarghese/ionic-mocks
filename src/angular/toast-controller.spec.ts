@@ -21,6 +21,7 @@ describe('ToastControllerMock', () => {
     it('should return an Toast', async () => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       const result = (await classUnderTest.create()) as ToastMock;
+
       expect(result).toBeDefined();
       expect(result).toBeInstanceOf(ToastMock);
     });
@@ -33,6 +34,7 @@ describe('ToastControllerMock', () => {
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       const result = (await classUnderTest.create()) as ToastMock;
+
       expect(result).toBe(toast);
     });
   });

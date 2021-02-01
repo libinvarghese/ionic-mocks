@@ -42,6 +42,7 @@ function createSpyObjViaJasmine(baseName: string, methods: SpyObjMemberDef, prop
     // This has been fixed. Please watch for next release
     // this.spyObj = jasmine.createSpyObj(baseName, methods, properties);
     // Workaround for Bug - https://github.com/jasmine/jasmine/issues/1837 -> this.createSpyObj
+    // eslint-disable-next-line jasmine/no-unsafe-spy
     spyObj = jasmine.createSpyObj(baseName, jasmineMethods) as Record<string, unknown>;
   }
 
@@ -111,6 +112,7 @@ function addMethodsToSpyObj<T>(
   const obj = spyObj;
   const methodsArr = normalizeKeyValues(methods);
   methodsArr.forEach(element => {
+    // eslint-disable-next-line jasmine/no-unsafe-spy, jasmine/named-spy
     const spy = jasmine.createSpy(`${baseName}.${element[0]}`);
     if (element.length > 1) {
       if (spyStrategy === 'returnValues') {
@@ -136,7 +138,9 @@ function addPropertiesToSpyObj(
   propertiesArr.forEach(element => {
     const descriptor: SpyObjPropertyDescriptor = {
       enumerable: true,
+      // eslint-disable-next-line jasmine/no-unsafe-spy, jasmine/named-spy
       get: jasmine.createSpy(baseName + '.' + element[0] + '.get'),
+      // eslint-disable-next-line jasmine/no-unsafe-spy, jasmine/named-spy
       set: jasmine.createSpy(baseName + '.' + element[0] + '.set'),
     };
     if (element.length > 1) {

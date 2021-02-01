@@ -47,6 +47,7 @@ describe('Tabs', () => {
         classUnderTest = new TabsMock(tab);
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
         const result = classUnderTest.select() as TabMock;
+
         expect(result).toBe(tab);
       });
     });

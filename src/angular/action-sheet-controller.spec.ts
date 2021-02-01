@@ -21,6 +21,7 @@ describe('ActionSheetControllerMock', () => {
     it('should return an ActionSheet', async () => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       const result = (await classUnderTest.create()) as ActionSheetMock;
+
       expect(result).toBeDefined();
       expect(result).toBeInstanceOf(ActionSheetMock);
     });
@@ -33,6 +34,7 @@ describe('ActionSheetControllerMock', () => {
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       const result = (await classUnderTest.create()) as ActionSheetMock;
+
       expect(result).toBe(actionSheet);
     });
   });

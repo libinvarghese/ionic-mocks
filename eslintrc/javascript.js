@@ -7,6 +7,7 @@ module.exports = {
     './no-secrets.js',
     './optimize-regex.js',
     './promise.js',
+    './jasmine.js',
     'plugin:you-dont-need-lodash-underscore/compatible',
     'plugin:json/recommended-with-comments',
     'prettier',

@@ -30,6 +30,7 @@ describe('NavParams', () => {
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       const result = classUnderTest.get('key') as string;
+
       expect(result).toBe(expected.key);
     });
   });
