@@ -1,5 +1,5 @@
-import { BaseMock } from '../base.mock';
 import { of } from 'rxjs';
+import { BaseMock } from '../base.mock';
 
 const METHODS = ['getCurrentPosition', 'watchPosition'];
 

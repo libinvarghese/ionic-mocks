@@ -1,9 +1,9 @@
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
 import { ActionSheetControllerMock, METHODS } from './action-sheet-controller';
 import { ActionSheetMock } from './action-sheet';
-import { mockObjectCustomMatchers } from '../spec/custom-matchers';
 
 describe('ActionSheetControllerMock', () => {
-  let classUnderTest: any;
+  let classUnderTest;
 
   beforeEach(() => {
     jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
@@ -19,7 +19,8 @@ describe('ActionSheetControllerMock', () => {
     });
 
     it('should return an ActionSheet', async () => {
-      const result = await classUnderTest.create();
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      const result = (await classUnderTest.create()) as ActionSheetMock;
       expect(result).toBeDefined();
       expect(result).toBeInstanceOf(ActionSheetMock);
     });
@@ -30,7 +31,8 @@ describe('ActionSheetControllerMock', () => {
       const actionSheet = new ActionSheetMock();
       classUnderTest = new ActionSheetControllerMock(actionSheet);
 
-      const result = await classUnderTest.create();
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      const result = (await classUnderTest.create()) as ActionSheetMock;
       expect(result).toBe(actionSheet);
     });
   });

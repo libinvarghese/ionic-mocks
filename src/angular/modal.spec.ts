@@ -1,38 +1,15 @@
-import { ModalMock } from './modal';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { METHODS, ModalMock } from './modal';
 
 describe('Modal', () => {
-  let classUnderTest: any;
+  let classUnderTest;
 
   beforeEach(() => {
     classUnderTest = new ModalMock();
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
   });
 
-  it('should be defined', () => {
-    expect(classUnderTest).toBeDefined();
-  });
-
-  describe('present', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.present).toBeDefined();
-    });
-
-    it('should return empty Promise', done => {
-      classUnderTest.present().then(result => {
-        expect(result).toBeUndefined();
-        done();
-      });
-    });
-  });
-
-  describe('dismiss', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.dismiss).toBeDefined();
-    });
-  });
-
-  describe('onDidDismiss', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.onDidDismiss).toBeDefined();
-    });
+  it('should setup mock', async () => {
+    await expectAsync(classUnderTest).toMatchMockObject();
   });
 });

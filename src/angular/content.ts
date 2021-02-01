@@ -1,31 +1,34 @@
-import { BaseMock } from '../base.mock';
+import { BaseMock, SpyObjMemberDef } from '../base.mock';
 
-const METHODS = [
-  'addImg',
-  'getContentDimensions',
-  'getFixedElement',
-  'resize',
-  'scrollTo',
-  'scrollToBottom',
-  'scrollToTop',
-];
+export const METHODS: SpyObjMemberDef = {
+  nameAndValues: {
+    getContentDimensions: {},
+  },
+  nameAndResolves: {
+    scrollTo: undefined,
+    scrollToBottom: undefined,
+    scrollToTop: undefined,
+  },
+  names: ['addImg', 'getFixedElement', 'resize'],
+};
+
+export const PROPERTIES: SpyObjMemberDef = {
+  nameAndValues: {
+    contentBottom: 10,
+    contentHeight: 10,
+    contentTop: 10,
+    directionX: 'left',
+    directionY: 'up',
+    isScrolling: false,
+    scrollHeight: 10,
+    scrollLeft: 10,
+    scrollTop: 10,
+    scrollWidth: 10,
+  },
+};
 
 export class ContentMock extends BaseMock {
   constructor() {
-    super('Content', METHODS);
-    this.setProperty('contentBottom', 10);
-    this.setProperty('contentHeight', 10);
-    this.setProperty('contentTop', 10);
-    this.setProperty('directionX', 'left');
-    this.setProperty('directionY', 'up');
-    this.setProperty('isScrolling', false);
-    this.setProperty('scrollHeight', 10);
-    this.setProperty('scrollLeft', 10);
-    this.setProperty('scrollTop', 10);
-    this.setProperty('scrollWidth', 10);
-    this.setReturn('getContentDimensions', {});
-    this.setReturn('scrollTo', Promise.resolve());
-    this.setReturn('scrollToBottom', Promise.resolve());
-    this.setReturn('scrollToTop', Promise.resolve());
+    super('Content', METHODS, PROPERTIES);
   }
 }

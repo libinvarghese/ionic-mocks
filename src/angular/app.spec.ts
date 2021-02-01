@@ -1,220 +1,185 @@
-import { AppMock } from './app';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { AppMock, METHODS } from './app';
 import { NavControllerMock } from './nav-controller';
 
 describe('AppMock', () => {
-  let classUnderTest: any;
+  let classUnderTest;
 
   beforeEach(() => {
-    classUnderTest = new AppMock();
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
   });
 
-  it('should initialize', () => {
-    expect(classUnderTest).toBeDefined();
-  });
-
-  describe('getActiveNav', () => {
-    it('should exist', () => {
-      expect(classUnderTest.getActiveNav).toBeDefined();
+  describe('WHEN initialized with default args', () => {
+    beforeEach(() => {
+      classUnderTest = new AppMock();
     });
 
-    it('should return a NavController', () => {
-      const result = classUnderTest.getActiveNav();
-
-      expect(result).toBeDefined();
+    it('should setup mock', async () => {
+      await expectAsync(classUnderTest).toMatchMockObject();
     });
 
-    it('should return passed nav', () => {
-      const navCtrl = new NavControllerMock();
-      classUnderTest = new AppMock(navCtrl);
-
-      const result = classUnderTest.getActiveNav();
-
-      expect(result).toBe(navCtrl);
-    });
-  });
-
-  describe('getActiveNavs', () => {
-    it('should exist', () => {
-      expect(classUnderTest.getActiveNavs).toBeDefined();
+    describe('getActiveNav', () => {
+      it('should return a NavController', () => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        const result = classUnderTest.getActiveNav() as NavControllerMock;
+        expect(result).toBeDefined();
+      });
     });
 
-    it('should return a NavController array', () => {
-      const result = classUnderTest.getActiveNavs();
+    describe('getActiveNavs', () => {
+      it('should return a NavController array', () => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        const result = classUnderTest.getActiveNavs() as NavControllerMock;
 
-      expect(result).toBeDefined();
+        expect(result).toBeDefined();
+      });
     });
 
-    it('should return passed nav', () => {
-      const navCtrl = new NavControllerMock();
-      classUnderTest = new AppMock(navCtrl);
+    describe('getNavByIdOrName', () => {
+      it('should return a nav', () => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        const result = classUnderTest.getNavByIdOrName(1) as NavControllerMock;
 
-      const result = classUnderTest.getActiveNav();
-
-      expect(result).toContain(navCtrl);
-    });
-  });
-
-  describe('getNavByIdOrName', () => {
-    it('should exist', () => {
-      expect(classUnderTest.getNavByIdOrName).toBeDefined();
+        expect(result).toBeDefined();
+      });
     });
 
-    it('should return a nav', () => {
-      const result = classUnderTest.getNavByIdOrName(1);
+    describe('getRootNav', () => {
+      it('should return a nav', () => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        const result = classUnderTest.getRootNav() as NavControllerMock;
 
-      expect(result).toBeDefined();
+        expect(result).toBeDefined();
+      });
     });
 
-    it('should return passed nav', () => {
-      const navCtrl = new NavControllerMock();
-      classUnderTest = new AppMock(navCtrl);
+    describe('getRootNavs', () => {
+      it('should return a NavController array', () => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        const result = classUnderTest.getRootNavs() as NavControllerMock;
 
-      const result = classUnderTest.getNavByIdOrName(1);
-
-      expect(result).toBe(navCtrl);
-    });
-  });
-
-  describe('getRootNav', () => {
-    it('should exist', () => {
-      expect(classUnderTest.getRootNav).toBeDefined();
+        expect(result).toBeDefined();
+      });
     });
 
-    it('should return a nav', () => {
-      const result = classUnderTest.getRootNav();
+    describe('getRootNavById', () => {
+      it('should return a nav', () => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        const result = classUnderTest.getRootNavById(1) as NavControllerMock;
 
-      expect(result).toBeDefined();
+        expect(result).toBeDefined();
+      });
     });
 
-    it('should return passed nav', () => {
-      const navCtrl = new NavControllerMock();
-      classUnderTest = new AppMock(navCtrl);
-
-      const result = classUnderTest.getRootNav();
-
-      expect(result).toBe(navCtrl);
-    });
-  });
-
-  describe('getRootNavs', () => {
-    it('should exist', () => {
-      expect(classUnderTest.getRootNavs).toBeDefined();
+    describe('viewDidEnter', () => {
+      it('should return empty Observable', done => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        classUnderTest.viewDidEnter().subscribe(result => {
+          expect(result).toBeUndefined();
+          done();
+        });
+      });
     });
 
-    it('should return a NavController array', () => {
-      const result = classUnderTest.getRootNavs();
-
-      expect(result).toBeDefined();
+    describe('viewDidLeave', () => {
+      it('should return empty Observable', done => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        classUnderTest.viewDidLeave().subscribe(result => {
+          expect(result).toBeUndefined();
+          done();
+        });
+      });
     });
 
-    it('should return passed nav', () => {
-      const navCtrl = new NavControllerMock();
-      classUnderTest = new AppMock(navCtrl);
-
-      const result = classUnderTest.getRootNavs();
-
-      expect(result).toContain(navCtrl);
-    });
-  });
-
-  describe('getRootNavById', () => {
-    it('should exist', () => {
-      expect(classUnderTest.getRootNavById).toBeDefined();
+    describe('viewWillEnter', () => {
+      it('should return empty Observable', done => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        classUnderTest.viewWillEnter().subscribe(result => {
+          expect(result).toBeUndefined();
+          done();
+        });
+      });
     });
 
-    it('should return a nav', () => {
-      const result = classUnderTest.getRootNavById(1);
-
-      expect(result).toBeDefined();
+    describe('viewWillLeave', () => {
+      it('should return empty Observable', done => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        classUnderTest.viewDidLeave().subscribe(result => {
+          expect(result).toBeUndefined();
+          done();
+        });
+      });
     });
 
-    it('should return passed nav', () => {
-      const navCtrl = new NavControllerMock();
-      classUnderTest = new AppMock(navCtrl);
-
-      const result = classUnderTest.getRootNavById(1);
-
-      expect(result).toBe(navCtrl);
-    });
-  });
-
-  describe('isScrolling', () => {
-    it('should exist', () => {
-      expect(classUnderTest.isScrolling).toBeDefined();
-    });
-
-    it('should return false', () => {
-      expect(classUnderTest.isScrolling()).toEqual(false);
-    });
-  });
-
-  describe('setTitle', () => {
-    it('should exist', () => {
-      expect(classUnderTest.setTitle).toBeDefined();
-    });
-  });
-
-  describe('viewDidEnter', () => {
-    it('should exist', () => {
-      expect(classUnderTest.viewDidEnter).toBeDefined();
-    });
-
-    it('should return empty Observable', done => {
-      classUnderTest.viewDidEnter().subscribe(result => {
-        expect(result).toBeUndefined();
-        done();
+    describe('viewWillUnLoad', () => {
+      it('should return empty Observable', done => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        classUnderTest.viewWillUnload().subscribe(result => {
+          expect(result).toBeUndefined();
+          done();
+        });
       });
     });
   });
 
-  describe('viewDidLeave', () => {
-    it('should exist', () => {
-      expect(classUnderTest.viewDidLeave).toBeDefined();
+  describe('WHEN initialized with NavCtrl', () => {
+    let navCtrl;
+
+    beforeEach(() => {
+      navCtrl = new NavControllerMock();
+      classUnderTest = new AppMock(navCtrl);
     });
 
-    it('should return empty Observable', done => {
-      classUnderTest.viewDidLeave().subscribe(result => {
-        expect(result).toBeUndefined();
-        done();
+    describe('getActiveNav', () => {
+      it('should return passed nav', () => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        const result = classUnderTest.getActiveNav() as NavControllerMock;
+        expect(result).toBe(navCtrl);
       });
     });
-  });
 
-  describe('viewWillEnter', () => {
-    it('should exist', () => {
-      expect(classUnderTest.viewWillEnter).toBeDefined();
-    });
+    describe('getActiveNavs', () => {
+      it('should return passed nav', () => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        const result = classUnderTest.getActiveNav() as NavControllerMock;
 
-    it('should return empty Observable', done => {
-      classUnderTest.viewWillEnter().subscribe(result => {
-        expect(result).toBeUndefined();
-        done();
+        expect(result).toContain(navCtrl);
       });
     });
-  });
 
-  describe('viewWillLeave', () => {
-    it('should exist', () => {
-      expect(classUnderTest.viewWillLeave).toBeDefined();
-    });
+    describe('getNavByIdOrName', () => {
+      it('should return passed nav', () => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        const result = classUnderTest.getNavByIdOrName(1) as NavControllerMock;
 
-    it('should return empty Observable', done => {
-      classUnderTest.viewDidLeave().subscribe(result => {
-        expect(result).toBeUndefined();
-        done();
+        expect(result).toBe(navCtrl);
       });
     });
-  });
 
-  describe('viewWillUnLoad', () => {
-    it('should exist', () => {
-      expect(classUnderTest.viewWillUnload).toBeDefined();
+    describe('getRootNav', () => {
+      it('should return passed nav', () => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        const result = classUnderTest.getRootNav() as NavControllerMock;
+
+        expect(result).toBe(navCtrl);
+      });
     });
 
-    it('should return empty Observable', done => {
-      classUnderTest.viewWillUnload().subscribe(result => {
-        expect(result).toBeUndefined();
-        done();
+    describe('getRootNavs', () => {
+      it('should return passed nav', () => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        const result = classUnderTest.getRootNavs() as NavControllerMock;
+
+        expect(result).toContain(navCtrl);
+      });
+    });
+
+    describe('getRootNavById', () => {
+      it('should return passed nav', () => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        const result = classUnderTest.getRootNavById(1) as NavControllerMock;
+
+        expect(result).toBe(navCtrl);
       });
     });
   });

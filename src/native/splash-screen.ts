@@ -1,6 +1,6 @@
 import { BaseMock } from '../base.mock';
 
-const METHODS = ['show', 'hide'];
+export const METHODS = ['show', 'hide'];
 
 export class SplashScreenMock extends BaseMock {
   constructor() {

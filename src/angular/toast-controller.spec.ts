@@ -1,35 +1,38 @@
-import { ToastControllerMock } from './toast-controller';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { METHODS, ToastControllerMock } from './toast-controller';
 import { ToastMock } from './toast';
 
-describe('ToastController', () => {
-  let classUnderTest: any;
+describe('ToastControllerMock', () => {
+  let classUnderTest;
 
   beforeEach(() => {
-    classUnderTest = new ToastControllerMock();
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
   });
 
-  it('should be defined', () => {
-    expect(classUnderTest).toBeDefined();
-  });
-
-  describe('create', () => {
-    it('should exist', () => {
-      expect(classUnderTest.create).toBeDefined();
+  describe('WHEN initialized with default args', () => {
+    beforeEach(() => {
+      classUnderTest = new ToastControllerMock();
     });
 
-    it('should return a Toast', () => {
-      const result = classUnderTest.create();
+    it('should setup mock', async () => {
+      await expectAsync(classUnderTest).toMatchMockObject();
+    });
 
+    it('should return an Toast', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      const result = (await classUnderTest.create()) as ToastMock;
       expect(result).toBeDefined();
-      expect(result.present).toBeDefined();
+      expect(result).toBeInstanceOf(ToastMock);
     });
+  });
 
-    it('should return provided Toast', () => {
+  describe('WHEN initialized with Toast', () => {
+    it('should return passed Toast', async () => {
       const toast = new ToastMock();
       classUnderTest = new ToastControllerMock(toast);
 
-      const result = classUnderTest.create();
-
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      const result = (await classUnderTest.create()) as ToastMock;
       expect(result).toBe(toast);
     });
   });

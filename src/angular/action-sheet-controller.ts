@@ -1,5 +1,5 @@
-import { ActionSheetMock } from './action-sheet';
 import { BaseMock } from '../base.mock';
+import { ActionSheetMock } from './action-sheet';
 
 export const METHODS: string[] = ['create'];
 

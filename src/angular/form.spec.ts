@@ -1,49 +1,15 @@
-import { FormMock } from './form';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { FormMock, METHODS } from './form';
 
 describe('Form', () => {
-  let classUnderTest: any;
+  let classUnderTest;
 
   beforeEach(() => {
     classUnderTest = new FormMock();
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
   });
 
-  describe('register', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.register).toBeDefined();
-    });
-  });
-
-  describe('deregister', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.deregister).toBeDefined();
-    });
-  });
-
-  describe('setAsFocused', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.setAsFocused).toBeDefined();
-    });
-  });
-
-  describe('unsetAsFocused', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.unsetAsFocused).toBeDefined();
-    });
-  });
-
-  describe('tabFocus', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.tabFocus).toBeDefined();
-    });
-  });
-
-  describe('nextId', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.nextId).toBeDefined();
-    });
-
-    it('should return 0', () => {
-      expect(classUnderTest.nextId()).toEqual(0);
-    });
+  it('should setup mock', async () => {
+    await expectAsync(classUnderTest).toMatchMockObject();
   });
 });

@@ -1,27 +1,15 @@
-import { EventsMock } from './events';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { EventsMock, METHODS } from './events';
 
 describe('events', () => {
-  let classUnderTest: any;
+  let classUnderTest;
 
   beforeEach(() => {
     classUnderTest = new EventsMock();
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
   });
 
-  describe('subscribe', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.subscribe).toBeDefined();
-    });
-  });
-
-  describe('publish', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.publish).toBeDefined();
-    });
-  });
-
-  describe('unsubscribe', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.unsubscribe).toBeDefined();
-    });
+  it('should setup mock', async () => {
+    await expectAsync(classUnderTest).toMatchMockObject();
   });
 });

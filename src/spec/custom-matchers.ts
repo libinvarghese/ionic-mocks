@@ -1,6 +1,5 @@
-import { SpyObjMemberDef, spyObjMemberDefStrategy } from '../base.mock';
 import { Promise as Bluebird } from 'bluebird';
-
+import { normalizeMemberDef, SpyObjMemberDef, spyObjMemberDefStrategy } from '../base.mock';
 import MatchersUtil = jasmine.MatchersUtil;
 import CustomAsyncMatcherFactories = jasmine.CustomAsyncMatcherFactories;
 import CustomEqualityTester = jasmine.CustomEqualityTester;
@@ -9,45 +8,48 @@ import CustomMatcherResult = jasmine.CustomMatcherResult;
 
 export function mockObjectCustomMatchers(
   methods: SpyObjMemberDef | string[],
-  properties?: SpyObjMemberDef | string[],
-  ignore?: any
+  properties?: SpyObjMemberDef | string[]
 ): CustomAsyncMatcherFactories {
   return {
-    toMatchMockObject(util: MatchersUtil, customEqualityTester: CustomEqualityTester[]): CustomAsyncMatcher {
+    toMatchMockObject(_util: MatchersUtil, _customEqualityTester: CustomEqualityTester[]): CustomAsyncMatcher {
       return {
         async compare(actual): Promise<CustomMatcherResult> {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           const classUnderTest = actual;
-          const pass = true;
-          const message = `Expected ${classUnderTest} to match Mock Setup ${methods}, ${properties}`;
+          const didPass = true;
+          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+          const message = `Expected MockClass to match Mock Setup ${methods}, ${properties}`;
           let methodsDef: SpyObjMemberDef = {};
           let propertiesDef: SpyObjMemberDef = {};
 
           expect(classUnderTest).toBeDefined('mock instance');
 
-          if (Array.isArray(methods)) {
-            methodsDef.names = methods;
-          } else {
-            methodsDef = methods;
-          }
+          methodsDef = normalizeMemberDef(methods);
 
           await Bluebird.each(Object.keys(spyObjMemberDefStrategy), async def => {
             let methodKeys: string[];
-            const methodArr = methodsDef[def];
+            const methodArr = methodsDef[def] as SpyObjMemberDef | string[];
             if (methodArr != null) {
-              methodKeys = def === 'names' ? methodArr : Object.keys(methodArr);
+              methodKeys = def === 'names' ? (methodArr as string[]) : Object.keys(methodArr);
               await Bluebird.each(methodKeys, async key => {
                 const context = `${key}`;
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 const value = methodArr[key];
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                 expect(classUnderTest[key]).toBeDefined(context);
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                 expect(classUnderTest[key]).toBeInstanceOf(Function);
 
                 switch (def) {
                   case 'nameAndValues': {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
                     expect(classUnderTest[key]()).toEqual(value, context);
                     break;
                   }
                   case 'nameAndResolves': {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
                     expect(classUnderTest[key]()).withContext(context).toBeInstanceOf(Promise);
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
                     await expectAsync(classUnderTest[key]())
                       .withContext(context)
                       .toBeResolvedTo(await value);
@@ -55,7 +57,9 @@ export function mockObjectCustomMatchers(
                     break;
                   }
                   case 'nameAndRejects': {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
                     expect(classUnderTest[key]()).withContext(context).toBeInstanceOf(Promise);
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
                     await expectAsync(classUnderTest[key]())
                       .withContext(context)
                       .toBeRejectedWith(await value);
@@ -63,6 +67,7 @@ export function mockObjectCustomMatchers(
                     break;
                   }
                   case 'nameAndThrows': {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                     expect(classUnderTest[key]).withContext(context).toThrowError(value);
                     break;
                   }
@@ -78,29 +83,30 @@ export function mockObjectCustomMatchers(
           });
 
           if (properties != null) {
-            if (Array.isArray(properties)) {
-              propertiesDef.names = properties;
-            } else {
-              propertiesDef = properties;
-            }
+            propertiesDef = normalizeMemberDef(properties);
 
             await Bluebird.each(Object.keys(spyObjMemberDefStrategy), async def => {
               let propertyKeys: string[];
-              const propertyArr = propertiesDef[def];
+              const propertyArr = propertiesDef[def] as SpyObjMemberDef | string[];
               if (propertyArr != null) {
-                propertyKeys = def === 'names' ? propertyArr : Object.keys(propertyArr);
+                propertyKeys = def === 'names' ? (propertyArr as string[]) : Object.keys(propertyArr);
                 await Bluebird.each(propertyKeys, async key => {
                   const context = `${key}`;
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                   const value = propertyArr[key];
-                  expect(classUnderTest[key]).toBeDefined(context);
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                  expect(Object.keys(classUnderTest)).toContain(key);
 
                   switch (def) {
                     case 'nameAndValues': {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                       expect(classUnderTest[key]).toEqual(value, context);
                       break;
                     }
                     case 'nameAndResolves': {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                       expect(classUnderTest[key]).withContext(context).toBeInstanceOf(Promise);
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                       await expectAsync(classUnderTest[key])
                         .withContext(context)
                         .toBeResolvedTo(await value);
@@ -108,7 +114,9 @@ export function mockObjectCustomMatchers(
                       break;
                     }
                     case 'nameAndRejects': {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                       expect(classUnderTest[key]).withContext(context).toBeInstanceOf(Promise);
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                       await expectAsync(classUnderTest[key])
                         .withContext(context)
                         .toBeRejectedWith(await value);
@@ -116,6 +124,7 @@ export function mockObjectCustomMatchers(
                       break;
                     }
                     case 'nameAndThrows': {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                       expect(classUnderTest[key]).withContext(context).toThrowError(value);
                       break;
                     }
@@ -132,7 +141,7 @@ export function mockObjectCustomMatchers(
           }
 
           return {
-            pass,
+            pass: didPass,
             message,
           };
         },
@@ -142,9 +151,11 @@ export function mockObjectCustomMatchers(
 }
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace jasmine {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface AsyncMatchers<T, U> {
-      toMatchMockObject(expectationFailOutput?: any): Promise<void>;
+      toMatchMockObject(expectationFailOutput?: string): Promise<void>;
     }
   }
 }

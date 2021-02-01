@@ -30,11 +30,13 @@
     "test": "jasmine",
     "clean": "rimraf dist",
     "prebuild": "npm run clean",
-    "build": "tsc -d",
-    "lint:jasmine": "tslint -c tslint.json -p ./spec/tsconfig.json 'spec/**/*.ts'",
-    "lint:scripts": "tslint -c tslint.json -p ./scripts/tsconfig.json 'scripts/**/*.ts'",
-    "lint:src": "tslint -c tslint.json -p ./tsconfig.json 'src/**/*.ts'",
-    "eslint": "eslint --ext .js,.ts,.json --format=unix .",
+    "build": "tsc -p tsconfig.mock.json -d",
+    "format:fix": "prettier --write './**/*.{js,ts,json,css,scss,html}'",
+    "lint:format": "prettier -c './**/*.{js,ts,json,css,scss,html}'",
+    "tslint:jasmine": "tslint -c tslint.json -p ./spec/tsconfig.json 'spec/**/*.ts'",
+    "tslint:scripts": "tslint -c tslint.json -p ./scripts/tsconfig.json 'scripts/**/*.ts'",
+    "tslint:src": "tslint -c tslint.json -p ./tsconfig.json 'src/**/*.ts'",
+    "lint:src": "eslint --ext .js,.ts,.json --format=unix .",
     "lint": "run-p lint:*",
     "version": "git add .",
     "prepublish": "npm run build",
@@ -44,8 +46,6 @@
     "git-commit": "commit",
     "precommit:parallel": "run-p build lint cover",
     "precommit": "run-s checkNotStaged precommit:parallel",
-    "format:fix": "prettier --write './**/*.{js,ts,json,css,scss,html}'",
-    "lint:format": "prettier -c './**/*.{js,ts,json,css,scss,html}'",
     "cover:check": "nyc --silent npm run test",
     "cover:report": "nyc --check-coverage ${CHECK_COVERAGE:=false} report",
     "cover": "run-s cover:*"
@@ -60,6 +60,8 @@
     "@semantic-release/github": "^7.2.0",
     "@types/bluebird": "^3.5.33",
     "@types/jasmine": "^3.6.3",
+    "@types/jsdom": "^16.2.6",
+    "@types/lodash": "^4.14.168",
     "@types/node": "^14.14.22",
     "@typescript-eslint/eslint-plugin": "^4.14.0",
     "@typescript-eslint/parser": "^4.14.0",
@@ -78,6 +80,7 @@
     "jasmine-core": "^3.6.0",
     "jasmine-spec-reporter": "^6.0.0",
     "jsdom": "^16.4.0",
+    "lodash": "^4.17.20",
     "npm-run-all": "^4.1.5",
     "nyc": "^15.1.0",
     "prettier": "^2.2.1",
@@ -111,5 +114,10 @@
       "@semantic-release/github"
     ]
   },
-  "dependencies": {}
+  "dependencies": {},
+  "peerDependencies": {
+    "rxjs": "6.x",
+    "lodash": "4.x",
+    "jasmine-core": "3.x"
+  }
 }

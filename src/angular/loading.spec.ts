@@ -1,26 +1,15 @@
-import { LoadingMock } from './loading';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { LoadingMock, METHODS } from './loading';
 
 describe('LoadingMock', () => {
-  let classUnderTest: any;
+  let classUnderTest;
 
   beforeEach(() => {
     classUnderTest = new LoadingMock();
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
   });
 
-  it('should initialize', () => {
-    expect(classUnderTest).toBeDefined();
-  });
-
-  describe('present', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.present).toBeDefined();
-    });
-
-    it('should return empty promise', done => {
-      classUnderTest.present().then(result => {
-        expect(result).toBeUndefined();
-        done();
-      });
-    });
+  it('should setup mock', async () => {
+    await expectAsync(classUnderTest).toMatchMockObject();
   });
 });

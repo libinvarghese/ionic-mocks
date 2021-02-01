@@ -21,5 +21,6 @@
   "docthis.includeMemberOfOnInterfaceMembers": false,
   "docthis.includeTypes": false,
   "docthis.inferTypesFromNames": true,
-  "eslint.onIgnoredFiles": "warn"
+  "eslint.onIgnoredFiles": "warn",
+  "cSpell.words": ["Popover", "spyable", "vars"]
 }

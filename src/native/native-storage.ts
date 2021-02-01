@@ -3,7 +3,7 @@ import { BaseMock } from '../base.mock';
 const METHODS = ['setItem', 'getItem', 'keys', 'remove', 'clear'];
 
 export class NativeStorage extends BaseMock {
-  constructor(item?: any, keys?: any) {
+  constructor(item?: unknown, keys?: unknown) {
     super('NativeStorage', METHODS);
     this.setReturn('setItem', Promise.resolve(item));
     this.setReturn('getItem', Promise.resolve(item));

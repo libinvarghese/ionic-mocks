@@ -1,19 +1,15 @@
-import { TabMock } from './tab';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { METHODS, TabMock } from './tab';
 
 describe('Tab', () => {
-  let classUnderTest: any;
+  let classUnderTest;
 
   beforeEach(() => {
     classUnderTest = new TabMock();
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
   });
 
-  it('should be defined', () => {
-    expect(classUnderTest).toBeDefined();
-  });
-
-  describe('linker', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.linker).toBeDefined();
-    });
+  it('should setup mock', async () => {
+    await expectAsync(classUnderTest).toMatchMockObject();
   });
 });

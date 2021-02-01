@@ -1,10 +1,14 @@
-import { BaseMock } from '../base.mock';
+import { BaseMock, SpyObjMemberDef } from '../base.mock';
 
-const METHODS = ['present', 'dismissAll', 'setContent', 'setSpinner', 'onDidDismiss', 'onWillDismiss'];
+export const METHODS: SpyObjMemberDef = {
+  names: ['dismissAll', 'setContent', 'setSpinner', 'onDidDismiss', 'onWillDismiss'],
+  nameAndResolves: {
+    present: undefined,
+  },
+};
 
 export class PopoverMock extends BaseMock {
   constructor() {
     super('Popover', METHODS);
-    this.setReturn('present', Promise.resolve());
   }
 }

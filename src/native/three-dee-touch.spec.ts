@@ -1,35 +1,21 @@
-import { ThreeDeeTouchMock } from './three-dee-touch';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { METHODS, ThreeDeeTouchMock } from './three-dee-touch';
 
 describe('ThreeDeeTouch', () => {
-  let classUnderTest: any;
+  let classUnderTest;
 
   beforeEach(() => {
     classUnderTest = new ThreeDeeTouchMock();
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
   });
 
-  it('should be defined', () => {
-    expect(classUnderTest).toBeDefined();
-  });
-
-  describe('isAvailable', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.isAvailable).toBeDefined();
-    });
-
-    it('should return true', done => {
-      classUnderTest.isAvailable().then(result => {
-        expect(result).toBe(true);
-        done();
-      });
-    });
+  it('should setup mock', async () => {
+    await expectAsync(classUnderTest).toMatchMockObject();
   });
 
   describe('watchForTouches', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.watchForTouches).toBeDefined();
-    });
-
     it('should return Observable Object', done => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       classUnderTest.watchForTouches().subscribe(result => {
         expect(result).toEqual({});
         done();
@@ -37,34 +23,13 @@ describe('ThreeDeeTouch', () => {
     });
   });
 
-  describe('configureQuickActions', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.configureQuickActions).toBeDefined();
-    });
-  });
-
   describe('onHomeIconPressed', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.onHomeIconPressed).toBeDefined();
-    });
-
     it('should return empty observable', done => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       classUnderTest.onHomeIconPressed().subscribe(result => {
         expect(result).toBeUndefined();
         done();
       });
-    });
-  });
-
-  describe('enableLinkPreview', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.enableLinkPreview).toBeDefined();
-    });
-  });
-
-  describe('disableLinkPreview', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.disableLinkPreview).toBeDefined();
     });
   });
 });

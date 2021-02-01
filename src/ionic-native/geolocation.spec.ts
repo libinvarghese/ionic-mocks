@@ -1,7 +1,7 @@
 import { GeolocationMock } from './geolocation';
 
 describe('GeolocationMock', () => {
-  let classUnderTest: any;
+  let classUnderTest;
 
   beforeEach(() => {
     classUnderTest = new GeolocationMock();
@@ -13,12 +13,14 @@ describe('GeolocationMock', () => {
 
   describe('getCurrentPosition', () => {
     it('should be defined', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       expect(classUnderTest.getCurrentPosition).toBeDefined();
     });
   });
 
   describe('watchPosition', () => {
     it('should be defined', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       expect(classUnderTest.watchPosition).toBeDefined();
     });
   });

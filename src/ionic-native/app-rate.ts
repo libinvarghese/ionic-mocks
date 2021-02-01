@@ -7,7 +7,7 @@ export class AppRateMock extends BaseMock {
     super('AppRate', METHODS);
   }
 
-  get preferences() {
+  get preferences(): Record<string, Record<string, unknown>> {
     return {
       storeAppURL: {},
       callbacks: {},

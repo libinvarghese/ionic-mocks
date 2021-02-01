@@ -1,7 +1,7 @@
 import { NativeStorage } from './native-storage';
 
 describe('NativeStorage', () => {
-  let classUnderTest: any;
+  let classUnderTest;
 
   beforeEach(() => {
     classUnderTest = new NativeStorage();
@@ -13,96 +13,85 @@ describe('NativeStorage', () => {
 
   describe('setItem', () => {
     it('should be defined', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       expect(classUnderTest.setItem).toBeDefined();
     });
 
-    it('should return empty Promise', done => {
-      classUnderTest.setItem().then(result => {
-        expect(result).toBeUndefined();
-        done();
-      });
+    it('should return empty Promise', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      await expectAsync(classUnderTest.setItem()).toBeResolvedTo(undefined);
     });
 
-    it('should return provided item', done => {
+    it('should return provided item', async () => {
       const item = { val: 'random' };
       classUnderTest = new NativeStorage(item);
 
-      classUnderTest.setItem().then(result => {
-        expect(result).toBe(item);
-        done();
-      });
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      await expectAsync(classUnderTest.setItem()).toBeResolvedTo(item);
     });
   });
 
   describe('getItem', () => {
     it('should be defined', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       expect(classUnderTest.getItem).toBeDefined();
     });
 
-    it('should return Promise', done => {
-      classUnderTest.getItem().then(result => {
-        expect(result).toBeUndefined();
-        done();
-      });
+    it('should return Promise', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      await expectAsync(classUnderTest.getItem()).toBeResolvedTo(undefined);
     });
 
-    it('should return provided item', done => {
+    it('should return provided item', async () => {
       const item = { val: 'random' };
       classUnderTest = new NativeStorage(item);
 
-      classUnderTest.getItem().then(result => {
-        expect(result).toBe(item);
-        done();
-      });
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      await expectAsync(classUnderTest.getItem()).toBeResolvedTo(item);
     });
   });
 
   describe('keys', () => {
     it('should be defined', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       expect(classUnderTest.keys).toBeDefined();
     });
 
-    it('should return Promise', done => {
-      classUnderTest.keys().then(result => {
-        expect(result).toBeUndefined();
-        done();
-      });
+    it('should return Promise', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      await expectAsync(classUnderTest.getItem()).toBeResolvedTo(undefined);
     });
 
-    it('should return provided keys', done => {
+    it('should return provided keys', async () => {
       const keys = ['one', 'two'];
       classUnderTest = new NativeStorage(null, keys);
 
-      classUnderTest.keys().then(result => {
-        expect(result).toBe(keys);
-        done();
-      });
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      await expectAsync(classUnderTest.keys()).toBeResolvedTo(keys);
     });
   });
 
   describe('remove', () => {
     it('should be defined', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       expect(classUnderTest.remove).toBeDefined();
     });
 
-    it('should return empty Promise', done => {
-      classUnderTest.remove().then(result => {
-        expect(result).toBeUndefined();
-        done();
-      });
+    it('should return empty Promise', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      await expectAsync(classUnderTest.remove()).toBeResolvedTo(undefined);
     });
   });
 
   describe('clear', () => {
     it('should be defined', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       expect(classUnderTest.clear).toBeDefined();
     });
 
-    it('should return empty Promise', done => {
-      classUnderTest.clear().then(result => {
-        expect(result).toBeUndefined();
-        done();
-      });
+    it('should return empty Promise', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      await expectAsync(classUnderTest.clear()).toBeResolvedTo(undefined);
     });
   });
 });

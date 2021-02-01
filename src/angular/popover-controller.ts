@@ -1,7 +1,7 @@
-import { PopoverMock } from './popover';
 import { BaseMock } from '../base.mock';
+import { PopoverMock } from './popover';
 
-const METHODS = ['create'];
+export const METHODS = ['create'];
 
 export class PopoverControllerMock extends BaseMock {
   constructor(popOver?: PopoverMock) {

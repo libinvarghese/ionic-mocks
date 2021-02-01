@@ -1,26 +1,36 @@
-import { NavParamsMock } from './nav-params';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { METHODS, NavParamsMock } from './nav-params';
 
 describe('NavParams', () => {
-  let classUnderTest: any;
+  let classUnderTest;
 
   beforeEach(() => {
-    classUnderTest = new NavParamsMock();
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
   });
 
-  it('should be defined', () => {
-    expect(classUnderTest).toBeDefined();
+  describe('WHEN initialized with default args', () => {
+    beforeEach(() => {
+      classUnderTest = new NavParamsMock();
+    });
+
+    it('should setup mock', async () => {
+      await expectAsync(classUnderTest).toMatchMockObject();
+    });
+
+    it('should return undefined', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      expect(classUnderTest.get()).toBeUndefined();
+    });
   });
 
-  it('should return undefined', () => {
-    expect(classUnderTest.get()).toBeUndefined();
-  });
+  describe('WHEN initialized with Modal', () => {
+    it('should return provided value', () => {
+      const expected = { key: 'val' };
+      classUnderTest = new NavParamsMock(expected);
 
-  it('should return provided value', () => {
-    const expected = { key: 'val' };
-    classUnderTest = new NavParamsMock(expected);
-
-    const result = classUnderTest.get('key');
-
-    expect(result).toBe(expected.key);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      const result = classUnderTest.get('key') as string;
+      expect(result).toBe(expected.key);
+    });
   });
 });

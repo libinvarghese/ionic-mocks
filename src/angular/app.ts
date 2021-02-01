@@ -1,26 +1,30 @@
 import { Observable, of } from 'rxjs';
+import { BaseMock, SpyObjMemberDef } from '../base.mock';
 import { NavControllerMock } from './nav-controller';
-import { BaseMock } from '../base.mock';
 
-const METHODS: string[] = [
-  'getActiveNav',
-  'getActiveNavs',
-  'getNavByIdOrName',
-  'getRootNav',
-  'getRootNavs',
-  'getRootNavById',
-  'isScrolling',
-  'setTitle',
-  'viewDidEnter',
-  'viewDidLeave',
-  'viewDidLoad',
-  'viewWillEnter',
-  'viewWillLeave',
-  'viewWillUnload',
-];
+export const METHODS: SpyObjMemberDef = {
+  nameAndValues: {
+    isScrolling: false,
+  },
+  names: [
+    'getActiveNav',
+    'getActiveNavs',
+    'getNavByIdOrName',
+    'getRootNav',
+    'getRootNavs',
+    'getRootNavById',
+    'setTitle',
+    'viewDidEnter',
+    'viewDidLeave',
+    'viewDidLoad',
+    'viewWillEnter',
+    'viewWillLeave',
+    'viewWillUnload',
+  ],
+};
 
 export class AppMock extends BaseMock {
-  constructor(navCtrl?: NavControllerMock, viewObservable?: Observable<any>) {
+  constructor(navCtrl?: NavControllerMock, viewObservable?: Observable<unknown>) {
     super('App', METHODS);
 
     const navC = navCtrl || new NavControllerMock();
@@ -32,7 +36,6 @@ export class AppMock extends BaseMock {
     this.setReturn('getRootNav', navC);
     this.setReturn('getRootNavs', [navC]);
     this.setReturn('getRootNavById', navC);
-    this.setReturn('isScrolling', false);
     this.setReturn('viewDidEnter', vo);
     this.setReturn('viewDidLoad', vo);
     this.setReturn('viewDidLeave', vo);

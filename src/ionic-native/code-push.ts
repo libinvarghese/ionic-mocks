@@ -22,7 +22,7 @@ export class CodePushMock extends BaseMock {
     this.setReturn('sync', of({}));
   }
 
-  get preferences() {
+  get preferences(): Record<string, Record<string, unknown>> {
     return {
       storeAppURL: {},
       callbacks: {},

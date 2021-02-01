@@ -22,7 +22,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
-    project: ['scripts/tsconfig.json', 'tsconfig.json'],
+    project: ['scripts/tsconfig.json', 'spec/tsconfig.json', 'tsconfig.json'],
   },
   rules: {
     '@typescript-eslint/no-unused-vars': ['error', { args: 'all', argsIgnorePattern: '^_' }],
@@ -37,13 +37,7 @@ module.exports = {
       {
         selector: 'variable',
         modifiers: ['const'],
-        format: ['camelCase'],
-      },
-      {
-        selector: 'variable',
-        modifiers: ['const'],
-        format: ['camelCase'],
-        ...booleanConst,
+        format: ['camelCase', 'UPPER_CASE'],
       },
       {
         selector: 'variable',
@@ -63,6 +57,7 @@ module.exports = {
         selector: 'memberLike',
         modifiers: ['private'],
         format: ['camelCase'],
+        leadingUnderscore: 'require',
       },
       {
         selector: 'memberLike',

@@ -1,7 +1,7 @@
-import { TabMock } from './tab';
 import { BaseMock } from '../base.mock';
+import { TabMock } from './tab';
 
-const METHODS = ['select', 'getSelected', 'ngOnDestroy', 'previousTab', 'viewCtrl'];
+export const METHODS = ['select', 'getSelected', 'ngOnDestroy', 'previousTab', 'viewCtrl'];
 
 export class TabsMock extends BaseMock {
   constructor(defaultTab?: TabMock, selectedTab?: TabMock, previousTab?: TabMock) {

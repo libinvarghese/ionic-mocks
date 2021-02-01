@@ -1,38 +1,15 @@
-import { AlertMock } from './alert';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { AlertMock, METHODS } from './alert';
 
 describe('AlertMock', () => {
-  let classUnderTest: any;
+  let classUnderTest;
 
   beforeEach(() => {
     classUnderTest = new AlertMock();
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
   });
 
-  it('should initialize', () => {
-    expect(classUnderTest).toBeDefined();
-  });
-
-  describe('present', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.present).toBeDefined();
-    });
-
-    it('should return empty promise', done => {
-      classUnderTest.present().then(result => {
-        expect(result).toBeUndefined();
-        done();
-      });
-    });
-  });
-
-  describe('dismiss', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.dismiss).toBeDefined();
-    });
-  });
-
-  describe('onDidDismiss', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.onDidDismiss).toBeDefined();
-    });
+  it('should setup mock', async () => {
+    await expectAsync(classUnderTest).toMatchMockObject();
   });
 });

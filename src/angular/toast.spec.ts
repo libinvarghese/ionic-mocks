@@ -1,56 +1,15 @@
-import { ToastMock } from './toast';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { METHODS, ToastMock } from './toast';
 
 describe('Toast', () => {
-  let classUnderTest: any;
+  let classUnderTest;
 
   beforeEach(() => {
     classUnderTest = new ToastMock();
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
   });
 
-  it('should be defined', () => {
-    expect(classUnderTest).toBeDefined();
-  });
-
-  describe('present', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.present).toBeDefined();
-    });
-
-    it('should return empty Promise', done => {
-      classUnderTest.present().then(result => {
-        expect(result).toBeUndefined();
-        done();
-      });
-    });
-  });
-
-  describe('dismissAll', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.dismissAll).toBeDefined();
-    });
-  });
-
-  describe('setContent', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.setContent).toBeDefined();
-    });
-  });
-
-  describe('setSpinner', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.setSpinner).toBeDefined();
-    });
-  });
-
-  describe('setMessage', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.setMessage).toBeDefined();
-    });
-  });
-
-  describe('onDidDismiss', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.onDidDismiss).toBeDefined();
-    });
+  it('should setup mock', async () => {
+    await expectAsync(classUnderTest).toMatchMockObject();
   });
 });

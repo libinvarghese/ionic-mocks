@@ -1,10 +1,14 @@
-import { BaseMock } from '../base.mock';
+import { BaseMock, SpyObjMemberDef } from '../base.mock';
 
-const METHODS = ['register', 'nextId', 'deregister', 'setAsFocused', 'unsetAsFocused', 'tabFocus'];
+export const METHODS: SpyObjMemberDef = {
+  names: ['register', 'deregister', 'setAsFocused', 'unsetAsFocused', 'tabFocus'],
+  nameAndValues: {
+    nextId: 0,
+  },
+};
 
 export class FormMock extends BaseMock {
   constructor() {
     super('Form', METHODS);
-    this.setReturn('nextId', 0);
   }
 }

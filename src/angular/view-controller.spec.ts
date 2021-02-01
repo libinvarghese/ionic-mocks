@@ -1,22 +1,21 @@
-import { ViewControllerMock } from './view-controller';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { METHODS, PROPERTIES, ViewControllerMock } from './view-controller';
 
 describe('ViewControllerMock', () => {
-  let classUnderTest: any;
+  let classUnderTest;
 
   beforeEach(() => {
     classUnderTest = new ViewControllerMock();
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS, PROPERTIES));
   });
 
-  it('should initialize', () => {
-    expect(classUnderTest).toBeDefined();
+  it('should setup mock', async () => {
+    await expectAsync(classUnderTest).toMatchMockObject();
   });
 
   describe('willEnter', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.willEnter).toBeDefined();
-    });
-
     it('should return empty Observable', done => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       classUnderTest.willEnter().subscribe(result => {
         expect(result).toEqual({});
         done();
@@ -25,11 +24,8 @@ describe('ViewControllerMock', () => {
   });
 
   describe('didEnter', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.didEnter).toBeDefined();
-    });
-
     it('should return empty Observable', done => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       classUnderTest.didEnter().subscribe(result => {
         expect(result).toEqual({});
         done();
@@ -38,11 +34,8 @@ describe('ViewControllerMock', () => {
   });
 
   describe('willLeave', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.willLeave).toBeDefined();
-    });
-
     it('should return empty Observable', done => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       classUnderTest.willLeave().subscribe(result => {
         expect(result).toEqual({});
         done();
@@ -51,11 +44,8 @@ describe('ViewControllerMock', () => {
   });
 
   describe('didLeave', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.didLeave).toBeDefined();
-    });
-
     it('should return empty Observable', done => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       classUnderTest.didLeave().subscribe(result => {
         expect(result).toEqual({});
         done();
@@ -64,11 +54,8 @@ describe('ViewControllerMock', () => {
   });
 
   describe('willUnload', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.willUnload).toBeDefined();
-    });
-
     it('should return empty Observable', done => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       classUnderTest.willUnload().subscribe(result => {
         expect(result).toEqual({});
         done();
@@ -77,11 +64,8 @@ describe('ViewControllerMock', () => {
   });
 
   describe('didUnload', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.didUnload).toBeDefined();
-    });
-
     it('should return empty Observable', done => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       classUnderTest.didUnload().subscribe(result => {
         expect(result).toEqual({});
         done();
@@ -90,65 +74,10 @@ describe('ViewControllerMock', () => {
   });
 
   describe('subscribe', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.subscribe).toBeDefined();
-    });
-
     it('should return empty Observable', done => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       classUnderTest.subscribe().subscribe(result => {
         expect(result).toEqual({});
-        done();
-      });
-    });
-  });
-
-  describe('dismiss', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.dismiss).toBeDefined();
-    });
-
-    it('should return empty promise', done => {
-      classUnderTest.dismiss().then(result => {
-        expect(result).toBeUndefined();
-        done();
-      });
-    });
-  });
-
-  describe('onDidDismiss', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.onDidDismiss).toBeDefined();
-    });
-
-    it('should return empty promise', done => {
-      classUnderTest.onDidDismiss().then(result => {
-        expect(result).toBeUndefined();
-        done();
-      });
-    });
-  });
-
-  describe('onWillDismiss', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.onWillDismiss).toBeDefined();
-    });
-
-    it('should return empty promise', done => {
-      classUnderTest.onWillDismiss().then(result => {
-        expect(result).toBeUndefined();
-        done();
-      });
-    });
-  });
-
-  describe('contentRef', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.contentRef).toBeDefined();
-    });
-
-    it('should return empty promise', done => {
-      classUnderTest.contentRef().then(result => {
-        expect(result).toBeUndefined();
         done();
       });
     });

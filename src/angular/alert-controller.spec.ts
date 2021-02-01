@@ -1,36 +1,39 @@
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { AlertControllerMock, METHODS } from './alert-controller';
 import { AlertMock } from './alert';
-import { AlertControllerMock } from './alert-controller';
 
 describe('AlertControllerMock', () => {
-  let classUnderTest: any;
+  let classUnderTest;
 
   beforeEach(() => {
-    classUnderTest = new AlertControllerMock();
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
   });
 
-  it('should initialize', () => {
-    expect(classUnderTest).toBeDefined();
-  });
+  describe('WHEN initialized with default args', () => {
+    beforeEach(() => {
+      classUnderTest = new AlertControllerMock();
+    });
 
-  describe('create', () => {
-    it('should exist', () => {
-      expect(classUnderTest.create).toBeDefined();
+    it('should setup mock', async () => {
+      await expectAsync(classUnderTest).toMatchMockObject();
     });
 
     it('should return an Alert', async () => {
-      const result = await classUnderTest.create();
-
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      const result = (await classUnderTest.create()) as AlertMock;
       expect(result).toBeDefined();
-      expect(result.present).toBeDefined();
+      expect(result).toBeInstanceOf(AlertMock);
     });
+  });
 
+  describe('WHEN initialized with Alert', () => {
     it('should return passed Alert', async () => {
-      const actionSheet = new AlertMock();
-      classUnderTest = new AlertControllerMock(actionSheet);
+      const alert = new AlertMock();
+      classUnderTest = new AlertControllerMock(alert);
 
-      const result = await classUnderTest.create();
-
-      expect(result).toBe(actionSheet);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      const result = (await classUnderTest.create()) as AlertMock;
+      expect(result).toBe(alert);
     });
   });
 });

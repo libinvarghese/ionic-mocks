@@ -1,83 +1,78 @@
-import { TabsMock } from './tabs';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { METHODS, TabsMock } from './tabs';
 import { TabMock } from './tab';
 
 describe('Tabs', () => {
-  let classUnderTest: any;
+  let classUnderTest;
 
   beforeEach(() => {
-    classUnderTest = new TabsMock();
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
   });
 
-  it('should be defined', () => {
-    expect(classUnderTest).toBeDefined();
-  });
-
-  describe('select', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.select).toBeDefined();
+  describe('WHEN initialized with default args', () => {
+    beforeEach(() => {
+      classUnderTest = new TabsMock();
     });
 
-    it('should return Tab', () => {
-      expect(classUnderTest.select()).toEqual(jasmine.any(Object));
+    it('should setup mock', async () => {
+      await expectAsync(classUnderTest).toMatchMockObject();
     });
 
-    it('should return provided Tab', () => {
-      const tab = new TabMock();
-      classUnderTest = new TabsMock(tab);
-
-      const result = classUnderTest.select();
-
-      expect(result).toBe(tab);
-    });
-  });
-
-  describe('getSelected', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.getSelected).toBeDefined();
+    describe('select', () => {
+      it('should return Tab', () => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        expect(classUnderTest.select()).toBeInstanceOf(TabMock);
+      });
     });
 
-    it('should return Tab', () => {
-      expect(classUnderTest.getSelected()).toEqual(jasmine.any(Object));
+    describe('getSelected', () => {
+      it('should return Tab', () => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        expect(classUnderTest.getSelected()).toBeInstanceOf(TabMock);
+      });
     });
 
-    it('should return provided Tab', () => {
-      const tab = new TabMock();
-      classUnderTest = new TabsMock(null, tab);
-
-      const result = classUnderTest.getSelected();
-
-      expect(result).toBe(tab);
+    describe('previousTab', () => {
+      it('should return Tab', () => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        expect(classUnderTest.previousTab()).toBeInstanceOf(TabMock);
+      });
     });
   });
 
-  describe('previousTab', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.previousTab).toBeDefined();
+  describe('WHEN constructor is initialized', () => {
+    describe('select', () => {
+      it('should return provided Tab', () => {
+        const tab = new TabMock();
+        classUnderTest = new TabsMock(tab);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        const result = classUnderTest.select() as TabMock;
+        expect(result).toBe(tab);
+      });
     });
 
-    it('should return Tab', () => {
-      expect(classUnderTest.previousTab()).toEqual(jasmine.any(Object));
+    describe('getSelected', () => {
+      it('should return provided Tab', () => {
+        const tab = new TabMock();
+        classUnderTest = new TabsMock(null, tab);
+
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        const result = classUnderTest.getSelected() as TabMock;
+
+        expect(result).toBe(tab);
+      });
     });
 
-    it('should return provided Tab', () => {
-      const tab = new TabMock();
-      classUnderTest = new TabsMock(null, null, tab);
+    describe('previousTab', () => {
+      it('should return provided Tab', () => {
+        const tab = new TabMock();
+        classUnderTest = new TabsMock(null, null, tab);
 
-      const result = classUnderTest.previousTab();
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        const result = classUnderTest.previousTab() as TabMock;
 
-      expect(result).toBe(tab);
-    });
-  });
-
-  describe('viewCtrl', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.viewCtrl).toBeDefined();
-    });
-  });
-
-  describe('ngOnDestroy', () => {
-    it('should be defined', () => {
-      expect(classUnderTest.ngOnDestroy).toBeDefined();
+        expect(result).toBe(tab);
+      });
     });
   });
 });

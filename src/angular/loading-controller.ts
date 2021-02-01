@@ -1,7 +1,7 @@
 import { BaseMock } from '../base.mock';
 import { LoadingMock } from './loading';
 
-const METHODS = ['create'];
+export const METHODS = ['create'];
 
 export class LoadingControllerMock extends BaseMock {
   constructor(loading?: LoadingMock) {

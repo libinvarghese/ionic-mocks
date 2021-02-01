@@ -1,7 +1,7 @@
-import { AlertMock } from './alert';
 import { BaseMock } from '../base.mock';
+import { AlertMock } from './alert';
 
-const METHODS = ['create'];
+export const METHODS = ['create'];
 
 export class AlertControllerMock extends BaseMock {
   constructor(alertMock?: AlertMock) {

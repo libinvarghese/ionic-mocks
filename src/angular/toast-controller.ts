@@ -1,7 +1,7 @@
 import { BaseMock } from '../base.mock';
 import { ToastMock } from './toast';
 
-const METHODS = ['create'];
+export const METHODS = ['create'];
 
 export class ToastControllerMock extends BaseMock {
   constructor(toast?: ToastMock) {
