@@ -1,11 +1,11 @@
-import { BaseMock, SpyObjMemberDef } from '../base.mock';
+import { BaseMock, SpyObjDef } from '../base.mock';
 
-export const METHODS: SpyObjMemberDef = {
+export const METHODS: SpyObjDef = {
   names: ['get', 'set', 'remove', 'clear', 'length', 'keys', 'forEach'],
   nameAndResolves: { ready: {} },
 };
 
-export const PROPERTIES: SpyObjMemberDef = {
+export const PROPERTIES: SpyObjDef = {
   nameAndValues: { driver: '' },
 };
 

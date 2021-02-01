@@ -1,6 +1,6 @@
-import { BaseMock, SpyObjMemberDef } from '../base.mock';
+import { BaseMock, SpyObjDef } from '../base.mock';
 
-export const METHODS: SpyObjMemberDef = {
+export const METHODS: SpyObjDef = {
   nameAndResolves: ['present', 'dismiss'].reduce((prev, curr) => {
     prev[curr] = undefined;
 

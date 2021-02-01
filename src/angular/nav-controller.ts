@@ -1,8 +1,8 @@
 import { of } from 'rxjs';
-import { BaseMock, SpyObjMemberDef } from '../base.mock';
+import { BaseMock, SpyObjDef } from '../base.mock';
 import { ViewControllerMock } from './view-controller';
 
-export const METHODS: SpyObjMemberDef = {
+export const METHODS: SpyObjDef = {
   nameAndResolves: [
     'goToRoot',
     'push',
@@ -64,7 +64,7 @@ export const METHODS: SpyObjMemberDef = {
   ],
 };
 
-export const PROPERTIES: SpyObjMemberDef = {
+export const PROPERTIES: SpyObjDef = {
   nameAndValues: {
     root: new ViewControllerMock(),
     rootParams: {},

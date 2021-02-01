@@ -1,6 +1,6 @@
-import { BaseMock, SpyObjMemberDef } from '../base.mock';
+import { BaseMock, SpyObjDef } from '../base.mock';
 
-export const METHODS: SpyObjMemberDef = {
+export const METHODS: SpyObjDef = {
   nameAndValues: {
     getContentDimensions: {},
   },
@@ -12,7 +12,7 @@ export const METHODS: SpyObjMemberDef = {
   names: ['addImg', 'getFixedElement', 'resize'],
 };
 
-export const PROPERTIES: SpyObjMemberDef = {
+export const PROPERTIES: SpyObjDef = {
   nameAndValues: {
     contentBottom: 10,
     contentHeight: 10,

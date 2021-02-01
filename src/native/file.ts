@@ -1,6 +1,6 @@
-import { BaseMock, SpyObjMemberDef } from '../base.mock';
+import { BaseMock, SpyObjDef } from '../base.mock';
 
-export const METHODS: SpyObjMemberDef = {
+export const METHODS: SpyObjDef = {
   nameAndResolves: {
     ...{
       getFreeDiskSpace: 64,
@@ -36,7 +36,7 @@ export const METHODS: SpyObjMemberDef = {
   },
 };
 
-export const PROPERTIES: SpyObjMemberDef = {
+export const PROPERTIES: SpyObjDef = {
   nameAndValues: {
     applicationDirectory: 'a-directory',
     applicationStorageDirectory: 'a-directory',

@@ -1,7 +1,7 @@
 import { of } from 'rxjs';
-import { BaseMock, SpyObjMemberDef } from '../base.mock';
+import { BaseMock, SpyObjDef } from '../base.mock';
 
-export const METHODS: SpyObjMemberDef = {
+export const METHODS: SpyObjDef = {
   names: ['configureQuickActions', 'enableLinkPreview', 'disableLinkPreview'],
   nameAndResolves: {
     isAvailable: true,

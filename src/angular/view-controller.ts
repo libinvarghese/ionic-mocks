@@ -1,9 +1,9 @@
 import { of } from 'rxjs';
 import { mergeWith, union } from 'lodash';
-import { BaseMock, normalizeMemberDef, SpyObjMemberDef } from '../base.mock';
+import { BaseMock, normalizeMemberDef, SpyObjDef } from '../base.mock';
 import { NavParamsMock } from './nav-params';
 
-export const METHODS: SpyObjMemberDef = {
+export const METHODS: SpyObjDef = {
   nameAndValues: {
     ...['willEnter', 'didEnter', 'willLeave', 'didLeave', 'willUnload', 'didUnload', 'subscribe'].reduce(
       (prev, curr) => {
@@ -45,7 +45,7 @@ export const METHODS: SpyObjMemberDef = {
   ],
 };
 
-export const PROPERTIES: SpyObjMemberDef = {
+export const PROPERTIES: SpyObjDef = {
   nameAndValues: {
     writeReady: {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -75,8 +75,8 @@ function mergeArrays(objArray, srcArray) {
 
 export class ViewControllerMock extends BaseMock {
   constructor(baseName = 'ViewController', methods = METHODS, properties = PROPERTIES) {
-    let methodsDef: SpyObjMemberDef = {};
-    let propertiesDef: SpyObjMemberDef = {};
+    let methodsDef: SpyObjDef = {};
+    let propertiesDef: SpyObjDef = {};
 
     methodsDef = normalizeMemberDef(methods);
     propertiesDef = normalizeMemberDef(properties);

@@ -1,14 +1,14 @@
-export type SpyObjMembers<T> = Record<string, T>;
+export type SpyObjMemberDef<T> = Record<string, T>;
 
-export interface SpyObjMemberDef {
+export interface SpyObjDef {
   names?: string[];
-  nameAndValues?: SpyObjMembers<unknown>;
+  nameAndValues?: SpyObjMemberDef<unknown>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  nameAndCallFakes?: SpyObjMembers<<O>(...args: any[]) => O>;
-  nameAndRejects?: SpyObjMembers<unknown>;
-  nameAndResolves?: SpyObjMembers<unknown>;
-  nameAndThrows?: SpyObjMembers<Error | Record<string, unknown> | string>;
-  nameAndGenerators?: SpyObjMembers<unknown[]>;
+  nameAndCallFakes?: SpyObjMemberDef<<O>(...args: any[]) => O>;
+  nameAndRejects?: SpyObjMemberDef<unknown>;
+  nameAndResolves?: SpyObjMemberDef<unknown>;
+  nameAndThrows?: SpyObjMemberDef<Error | Record<string, unknown> | string>;
+  nameAndGenerators?: SpyObjMemberDef<unknown[]>;
 }
 
 const jasmineSpyObjMemberDefStrategy = {
@@ -33,7 +33,7 @@ interface SpyObjPropertyDescriptor extends PropertyDescriptor {
 
 // Since jasmine.createSpyObj does the majority of work for callReturn (nameValues), then for names
 // Creates spyObj only if (methods.nameAndValues || methods.names) != null
-function createSpyObjViaJasmine(baseName: string, methods: SpyObjMemberDef, properties?: SpyObjMemberDef) {
+function createSpyObjViaJasmine(baseName: string, methods: SpyObjDef, properties?: SpyObjDef) {
   let spyObj: Record<string, unknown>;
   const jasmineMethods = methods.nameAndValues || methods.names;
 
@@ -58,8 +58,8 @@ function createSpyObjViaJasmine(baseName: string, methods: SpyObjMemberDef, prop
 function createSpyObjViaDef(
   spyObj: Record<string, unknown>,
   baseName: string,
-  methods: SpyObjMemberDef,
-  properties?: SpyObjMemberDef
+  methods: SpyObjDef,
+  properties?: SpyObjDef
 ) {
   const obj = spyObj || {}; // Create Spy Obj if createSpyObjViaJasmine failed
 
@@ -79,11 +79,11 @@ function createSpyObjViaDef(
 function addMembersToSpyObjViaDef(
   spyObj: Record<string, unknown>,
   baseName: string,
-  members: SpyObjMemberDef,
+  members: SpyObjDef,
   addMembersFn: <T>(
     spyObj: Record<string, unknown>,
     baseName: string,
-    members: SpyObjMembers<T> | string[],
+    members: SpyObjMemberDef<T> | string[],
     spyStrategy?: string
   ) => void
 ) {
@@ -106,7 +106,7 @@ function addMembersToSpyObjViaDef(
 function addMethodsToSpyObj<T>(
   spyObj: Record<string, unknown>,
   baseName: string,
-  methods: SpyObjMembers<T> | string[],
+  methods: SpyObjMemberDef<T> | string[],
   spyStrategy = 'returnValue'
 ) {
   const obj = spyObj;
@@ -130,7 +130,7 @@ function addMethodsToSpyObj<T>(
 function addPropertiesToSpyObj(
   spyObj: Record<string, unknown>,
   baseName: string,
-  properties?: SpyObjMembers<unknown> | string[],
+  properties?: SpyObjMemberDef<unknown> | string[],
   spyStrategy = 'returnValue'
 ) {
   const obj = spyObj;
@@ -159,7 +159,7 @@ function addPropertiesToSpyObj(
 }
 
 type SpyObjMemberTuple = [string, unknown?];
-function normalizeKeyValues(object: SpyObjMembers<unknown> | string[]) {
+function normalizeKeyValues(object: SpyObjMemberDef<unknown> | string[]) {
   const result: SpyObjMemberTuple[] = [];
   if (Array.isArray(object)) {
     object.forEach(i => result.push([i]));
@@ -173,8 +173,8 @@ function normalizeKeyValues(object: SpyObjMembers<unknown> | string[]) {
   return result;
 }
 
-export function normalizeMemberDef(def: SpyObjMemberDef | string[]): SpyObjMemberDef {
-  let retDef: SpyObjMemberDef = {};
+export function normalizeMemberDef(def: SpyObjDef | string[]): SpyObjDef {
+  let retDef: SpyObjDef = {};
 
   if (Array.isArray(def)) {
     retDef.names = def;
@@ -188,18 +188,14 @@ export function normalizeMemberDef(def: SpyObjMemberDef | string[]): SpyObjMembe
 export abstract class BaseMock {
   protected spyObj: unknown;
 
-  constructor(baseName: string, methods: SpyObjMemberDef | string[], properties?: SpyObjMemberDef | string[]) {
+  constructor(baseName: string, methods: SpyObjDef | string[], properties?: SpyObjDef | string[]) {
     this.createSpyObj(baseName, methods, properties);
     Object.assign(this, this.spyObj);
   }
 
-  protected createSpyObj(
-    baseName: string,
-    methods: SpyObjMemberDef | string[],
-    properties?: SpyObjMemberDef | string[]
-  ): void {
-    let methodsDef: SpyObjMemberDef = {};
-    let propertiesDef: SpyObjMemberDef = {};
+  protected createSpyObj(baseName: string, methods: SpyObjDef | string[], properties?: SpyObjDef | string[]): void {
+    let methodsDef: SpyObjDef = {};
+    let propertiesDef: SpyObjDef = {};
     let spyObj;
 
     methodsDef = normalizeMemberDef(methods);

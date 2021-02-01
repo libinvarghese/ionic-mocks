@@ -1,8 +1,8 @@
 import { Observable, of } from 'rxjs';
-import { BaseMock, SpyObjMemberDef } from '../base.mock';
+import { BaseMock, SpyObjDef } from '../base.mock';
 import { NavControllerMock } from './nav-controller';
 
-export const METHODS: SpyObjMemberDef = {
+export const METHODS: SpyObjDef = {
   nameAndValues: {
     isScrolling: false,
   },

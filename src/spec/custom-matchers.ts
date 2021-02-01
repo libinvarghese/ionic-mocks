@@ -1,5 +1,5 @@
 import { Promise as Bluebird } from 'bluebird';
-import { normalizeMemberDef, SpyObjMemberDef, spyObjMemberDefStrategy } from '../base.mock';
+import { normalizeMemberDef, SpyObjDef, spyObjMemberDefStrategy } from '../base.mock';
 import MatchersUtil = jasmine.MatchersUtil;
 import CustomAsyncMatcherFactories = jasmine.CustomAsyncMatcherFactories;
 import CustomEqualityTester = jasmine.CustomEqualityTester;
@@ -7,8 +7,8 @@ import CustomAsyncMatcher = jasmine.CustomAsyncMatcher;
 import CustomMatcherResult = jasmine.CustomMatcherResult;
 
 export function mockObjectCustomMatchers(
-  methods: SpyObjMemberDef | string[],
-  properties?: SpyObjMemberDef | string[]
+  methods: SpyObjDef | string[],
+  properties?: SpyObjDef | string[]
 ): CustomAsyncMatcherFactories {
   return {
     toMatchMockObject(_util: MatchersUtil, _customEqualityTester: CustomEqualityTester[]): CustomAsyncMatcher {
@@ -19,8 +19,8 @@ export function mockObjectCustomMatchers(
           const didPass = true;
           // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
           const message = `Expected MockClass to match Mock Setup ${methods}, ${properties}`;
-          let methodsDef: SpyObjMemberDef = {};
-          let propertiesDef: SpyObjMemberDef = {};
+          let methodsDef: SpyObjDef = {};
+          let propertiesDef: SpyObjDef = {};
 
           expect(classUnderTest).toBeDefined('mock instance');
 
@@ -28,7 +28,7 @@ export function mockObjectCustomMatchers(
 
           await Bluebird.each(Object.keys(spyObjMemberDefStrategy), async def => {
             let methodKeys: string[];
-            const methodArr = methodsDef[def] as SpyObjMemberDef | string[];
+            const methodArr = methodsDef[def] as SpyObjDef | string[];
             if (methodArr != null) {
               methodKeys = def === 'names' ? (methodArr as string[]) : Object.keys(methodArr);
               await Bluebird.each(methodKeys, async key => {
@@ -87,7 +87,7 @@ export function mockObjectCustomMatchers(
 
             await Bluebird.each(Object.keys(spyObjMemberDefStrategy), async def => {
               let propertyKeys: string[];
-              const propertyArr = propertiesDef[def] as SpyObjMemberDef | string[];
+              const propertyArr = propertiesDef[def] as SpyObjDef | string[];
               if (propertyArr != null) {
                 propertyKeys = def === 'names' ? (propertyArr as string[]) : Object.keys(propertyArr);
                 await Bluebird.each(propertyKeys, async key => {

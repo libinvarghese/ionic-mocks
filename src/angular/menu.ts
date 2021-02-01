@@ -1,6 +1,6 @@
-import { BaseMock, SpyObjMemberDef } from '../base.mock';
+import { BaseMock, SpyObjDef } from '../base.mock';
 
-export const METHODS: SpyObjMemberDef = {
+export const METHODS: SpyObjDef = {
   names: ['blank'],
   nameAndResolves: {
     open: true,
@@ -8,7 +8,7 @@ export const METHODS: SpyObjMemberDef = {
   },
 };
 
-export const PROPERTIES: SpyObjMemberDef = {
+export const PROPERTIES: SpyObjDef = {
   nameAndResolves: {
     content: 'menu content',
     enabled: true,
