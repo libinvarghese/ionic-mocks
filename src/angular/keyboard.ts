@@ -1,20 +1,14 @@
-import { BaseMock } from '../base.mock';
+import { BaseMock, SpyObjDef } from '../base.mock';
 
-const METHODS = [
-    'close',
-    'didHide',
-    'didShow',
-    'eventsAvailable',
-    'hasFocusedTextInput',
-    'isOpen',
-    'onClose',
-    'willHide',
-    'willShow'
-];
+export const METHODS: SpyObjDef = {
+  names: ['close', 'didHide', 'didShow', 'eventsAvailable', 'hasFocusedTextInput', 'onClose', 'willHide', 'willShow'],
+  nameAndValues: {
+    isOpen: false,
+  },
+};
 
 export class KeyboardMock extends BaseMock {
-    constructor() {
-        super('Keyboard', METHODS);
-        this.setReturn('isOpen', false);
-    }
+  constructor() {
+    super('Keyboard', METHODS);
+  }
 }

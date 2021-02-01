@@ -1,39 +1,41 @@
-import { LoadingControllerMock } from './loading-controller';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { LoadingControllerMock, METHODS } from './loading-controller';
 import { LoadingMock } from './loading';
 
-describe('LoadingController', () => {
-    let classUnderTest: any;
+describe('LoadingControllerMock', () => {
+  let classUnderTest;
 
+  beforeEach(() => {
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
+  });
+
+  describe('WHEN initialized with default args', () => {
     beforeEach(() => {
-        classUnderTest = new LoadingControllerMock();
+      classUnderTest = new LoadingControllerMock();
     });
 
-    it('should be defined', () => {
-        expect(classUnderTest).toBeDefined();
+    it('should setup mock', async () => {
+      await expectAsync(classUnderTest).toMatchMockObject();
     });
 
+    it('should return an Loading', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      const result = (await classUnderTest.create()) as LoadingMock;
 
-    describe('create', () => {
-
-        it('should exist', () => {
-            expect(classUnderTest.create).toBeDefined();
-        });
-
-        it('should return a Loading', () => {
-            const result = classUnderTest.create();
-
-            expect(result).toBeDefined();
-            expect(result.present).toBeDefined();
-        });
-
-        it('should return provided Loading', () => {
-            const loading = new LoadingMock();
-            classUnderTest = new LoadingControllerMock(loading);
-
-            const result = classUnderTest.create();
-
-            expect(result).toBe(loading);
-        });
+      expect(result).toBeDefined();
+      expect(result).toBeInstanceOf(LoadingMock);
     });
+  });
 
+  describe('WHEN initialized with Loading', () => {
+    it('should return passed Loading', async () => {
+      const loading = new LoadingMock();
+      classUnderTest = new LoadingControllerMock(loading);
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      const result = (await classUnderTest.create()) as LoadingMock;
+
+      expect(result).toBe(loading);
+    });
+  });
 });

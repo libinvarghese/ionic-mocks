@@ -1,19 +1,15 @@
-import { ItemSlidingMock } from './item-sliding';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { ItemSlidingMock, METHODS } from './item-sliding';
 
 describe('ItemSliding', () => {
-    let classUnderTest: any;
+  let classUnderTest;
 
-    beforeEach(() => {
-        classUnderTest = new ItemSlidingMock();
-    });
+  beforeEach(() => {
+    classUnderTest = new ItemSlidingMock();
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
+  });
 
-    it('should be defined', () => {
-        expect(classUnderTest).toBeDefined();
-    });
-
-    describe('close', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.close).toBeDefined();
-        });
-    });
+  it('should setup mock', async () => {
+    await expectAsync(classUnderTest).toMatchMockObject();
+  });
 });

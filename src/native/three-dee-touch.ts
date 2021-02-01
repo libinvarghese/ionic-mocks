@@ -1,21 +1,21 @@
 import { of } from 'rxjs';
-import { BaseMock } from '../base.mock';
+import { BaseMock, SpyObjDef } from '../base.mock';
 
-const METHODS = [
-    'isAvailable',
-    'watchForTouches',
-    'configureQuickActions',
-    'onHomeIconPressed',
-    'enableLinkPreview',
-    'disableLinkPreview'
-];
+export const METHODS: SpyObjDef = {
+  names: ['configureQuickActions', 'enableLinkPreview', 'disableLinkPreview'],
+  nameAndResolves: {
+    isAvailable: true,
+  },
+  nameAndValues: {
+    // eslint-disable-next-line rxjs/finnish
+    watchForTouches: of({}),
+    // eslint-disable-next-line rxjs/finnish
+    onHomeIconPressed: of(undefined),
+  },
+};
 
 export class ThreeDeeTouchMock extends BaseMock {
-    constructor() {
-        super('ThreeDeeTouch', METHODS);
-
-        this.setReturn('isAvailable', Promise.resolve(true));
-        this.setReturn('watchForTouches', of({}));
-        this.setReturn('onHomeIconPressed', of(undefined));
-    }
+  constructor() {
+    super('ThreeDeeTouch', METHODS);
+  }
 }

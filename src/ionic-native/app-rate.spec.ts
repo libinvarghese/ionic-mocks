@@ -1,31 +1,36 @@
 import { AppRateMock } from './app-rate';
 
 describe('AppRateMock', () => {
-    let classUnderTest: any;
+  let classUnderTest;
 
-    beforeEach(() => {
-        classUnderTest = new AppRateMock();
-    });
+  beforeEach(() => {
+    classUnderTest = new AppRateMock();
+  });
 
-    it('should initialize', () => {
-        expect(classUnderTest).toBeDefined();
-    });
+  it('should initialize', () => {
+    expect(classUnderTest).toBeDefined();
+  });
 
-    it('should contain preferences', () => {
-        expect(classUnderTest.preferences).toBeDefined();
-        expect(classUnderTest.preferences.storeAppURL).toBeDefined();
-        expect(classUnderTest.preferences.callbacks).toBeDefined();
-    });
+  it('should contain preferences', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    expect(classUnderTest.preferences).toBeDefined();
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    expect(classUnderTest.preferences.storeAppURL).toBeDefined();
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    expect(classUnderTest.preferences.callbacks).toBeDefined();
+  });
 
-    describe('promptForRating', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.promptForRating).toBeDefined();
-        });
+  describe('promptForRating', () => {
+    it('should be defined', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      expect(classUnderTest.promptForRating).toBeDefined();
     });
+  });
 
-    describe('navigateToAppStore', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.navigateToAppStore).toBeDefined();
-        });
+  describe('navigateToAppStore', () => {
+    it('should be defined', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      expect(classUnderTest.navigateToAppStore).toBeDefined();
     });
+  });
 });

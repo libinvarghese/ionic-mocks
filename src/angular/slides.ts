@@ -1,14 +1,17 @@
-import { BaseMock } from '../base.mock';
+import { BaseMock, SpyObjDef } from '../base.mock';
 
-const METHODS = [
+export const METHODS: SpyObjDef = {
+  nameAndValues: {
+    getActiveIndex: 0,
+    getPreviousIndex: 0,
+    isBeginning: true,
+    isEnd: false,
+    length: 1,
+  },
+  names: [
     'controlBy',
     'controlInverse',
     'enableKeyboardControl',
-    'getActiveIndex',
-    'getPreviousIndex',
-    'isBeginning',
-    'isEnd',
-    'length',
     'lockSwipeToNext',
     'lockSwipeToPrev',
     'lockSwipes',
@@ -18,16 +21,12 @@ const METHODS = [
     'slideTo',
     'startAutoplay',
     'stopAutoplay',
-    'update'
-];
+    'update',
+  ],
+};
 
 export class SlidesMock extends BaseMock {
-    constructor() {
-        super('Slides', METHODS);
-        this.setReturn('getActiveIndex', 0);
-        this.setReturn('getPreviousIndex', 0);
-        this.setReturn('isBeginning', true);
-        this.setReturn('isEnd', false);
-        this.setReturn('length', 1);
-    }
+  constructor() {
+    super('Slides', METHODS);
+  }
 }

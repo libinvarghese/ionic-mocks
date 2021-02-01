@@ -1,33 +1,41 @@
-import { PopoverControllerMock } from './popover-controller';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { METHODS, PopoverControllerMock } from './popover-controller';
 import { PopoverMock } from './popover';
 
-describe('PopoverController', () => {
-    let classUnderTest: any;
+describe('PopoverControllerMock', () => {
+  let classUnderTest;
 
+  beforeEach(() => {
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
+  });
+
+  describe('WHEN initialized with default args', () => {
     beforeEach(() => {
-        classUnderTest = new PopoverControllerMock();
+      classUnderTest = new PopoverControllerMock();
     });
 
-    it('should be defined', () => {
-        expect(classUnderTest).toBeDefined();
+    it('should setup mock', async () => {
+      await expectAsync(classUnderTest).toMatchMockObject();
     });
 
-    describe('create', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.create).toBeDefined();
-        });
+    it('should return an Popover', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      const result = (await classUnderTest.create()) as PopoverMock;
 
-        it('should return Popover', () => {
-            expect(classUnderTest.create()).toEqual(jasmine.any(Object));
-        });
-
-        it('should return provided Popover', () => {
-            const popover = new PopoverMock();
-            classUnderTest = new PopoverControllerMock(popover);
-
-            const result = classUnderTest.create();
-
-            expect(result).toBe(popover);
-        });
+      expect(result).toBeDefined();
+      expect(result).toBeInstanceOf(PopoverMock);
     });
+  });
+
+  describe('WHEN initialized with Popover', () => {
+    it('should return passed Popover', async () => {
+      const popover = new PopoverMock();
+      classUnderTest = new PopoverControllerMock(popover);
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      const result = (await classUnderTest.create()) as PopoverMock;
+
+      expect(result).toBe(popover);
+    });
+  });
 });

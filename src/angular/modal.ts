@@ -1,10 +1,14 @@
-import { BaseMock } from '../base.mock';
+import { BaseMock, SpyObjDef } from '../base.mock';
 
-const METHODS = ['present', 'dismiss', 'onDidDismiss'];
+export const METHODS: SpyObjDef = {
+  names: ['dismiss', 'onDidDismiss'],
+  nameAndResolves: {
+    present: undefined,
+  },
+};
 
 export class ModalMock extends BaseMock {
-    constructor() {
-        super('Modal', METHODS);
-        this.setReturn('present', Promise.resolve());
-    }
+  constructor() {
+    super('Modal', METHODS);
+  }
 }

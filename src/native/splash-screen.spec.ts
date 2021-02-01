@@ -1,27 +1,15 @@
-import { SplashScreenMock } from './splash-screen';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { METHODS, SplashScreenMock } from './splash-screen';
 
 describe('SplashScreen', () => {
-    let classUnderTest: any;
+  let classUnderTest;
 
-    beforeEach(() => {
-        classUnderTest = new SplashScreenMock();
-    });
+  beforeEach(() => {
+    classUnderTest = new SplashScreenMock();
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
+  });
 
-    it('should be defined', () => {
-        expect(classUnderTest).toBeDefined();
-    });
-
-    describe('show', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.show).toBeDefined();
-        });
-    });
-
-    describe('hide', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.hide).toBeDefined();
-        });
-    });
+  it('should setup mock', async () => {
+    await expectAsync(classUnderTest).toMatchMockObject();
+  });
 });
-
-

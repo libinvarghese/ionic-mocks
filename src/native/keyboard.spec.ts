@@ -1,57 +1,35 @@
-import { KeyboardMock } from './keyboard';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { KeyboardMock, METHODS } from './keyboard';
 
 describe('Keyboard', () => {
-    let classUnderTest: any;
+  let classUnderTest;
 
-    beforeEach(() => {
-        classUnderTest = new KeyboardMock();
+  beforeEach(() => {
+    classUnderTest = new KeyboardMock();
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
+  });
+
+  it('should setup mock', async () => {
+    await expectAsync(classUnderTest).toMatchMockObject();
+  });
+
+  describe('onKeyboardShow', () => {
+    it('should return empty Observable', done => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      classUnderTest.onKeyboardShow().subscribe(result => {
+        expect(result).toBeUndefined();
+        done();
+      });
     });
+  });
 
-    it('should be defined', () => {
-        expect(classUnderTest).toBeDefined();
+  describe('onKeyboardHide', () => {
+    it('should return empty Observable', done => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      classUnderTest.onKeyboardHide().subscribe(result => {
+        expect(result).toBeUndefined();
+        done();
+      });
     });
-
-    describe('show', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.show).toBeDefined();
-        });
-    });
-
-    describe('close', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.close).toBeDefined();
-        });
-    });
-
-    describe('disableScroll', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.disableScroll).toBeDefined();
-        });
-    });
-
-    describe('onKeyboardShow', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.onKeyboardShow).toBeDefined();
-        });
-
-        it('should return empty Observable', done => {
-            classUnderTest.onKeyboardShow().subscribe(result => {
-                expect(result).toBeUndefined();
-                done();
-            });
-        });
-    });
-
-    describe('onKeyboardHide', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.onKeyboardHide).toBeDefined();
-        });
-
-        it('should return empty Observable', done => {
-            classUnderTest.onKeyboardHide().subscribe(result => {
-                expect(result).toBeUndefined();
-                done();
-            });
-        });
-    });
+  });
 });

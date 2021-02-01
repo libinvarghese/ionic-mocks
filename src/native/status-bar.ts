@@ -1,20 +1,28 @@
-import { BaseMock } from '../base.mock';
+import { BaseMock, SpyObjDef } from '../base.mock';
 
-const METHODS = [
+export const METHODS: SpyObjDef = {
+  names: [
     'overlaysWebView',
     'styleDefault',
     'styleLightContent',
     'styleBlackTranslucent',
     'styleBlackOpaque',
     'backgroundColorByName',
+    // eslint-disable-next-line no-secrets/no-secrets
     'backgroundColorByHexString',
     'hide',
-    'show'
-];
+    'show',
+  ],
+};
+
+export const PROPERTIES: SpyObjDef = {
+  nameAndValues: {
+    isVisible: true,
+  },
+};
 
 export class StatusBarMock extends BaseMock {
-    constructor() {
-        super('StatusBar', METHODS);
-        this.setProperty('isVisible', true);
-    }
+  constructor() {
+    super('StatusBar', METHODS, PROPERTIES);
+  }
 }

@@ -13,8 +13,10 @@ describe('VibrationMock', () => {
 
   describe('vibrate', () => {
     it('should have been called', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       vibration.vibrate();
-      expect(vibration.vibrate).toHaveBeenCalled();
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      expect(vibration.vibrate).toHaveBeenCalledWith();
     });
   });
 });

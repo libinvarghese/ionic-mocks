@@ -1,56 +1,15 @@
-import { PopoverMock } from './popover';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { METHODS, PopoverMock } from './popover';
 
 describe('Popover', () => {
-    let classUnderTest: any;
+  let classUnderTest;
 
-    beforeEach(() => {
-        classUnderTest = new PopoverMock();
-    });
+  beforeEach(() => {
+    classUnderTest = new PopoverMock();
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
+  });
 
-    it('should be defined', () => {
-        expect(classUnderTest).toBeDefined();
-    });
-
-    describe('present', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.present).toBeDefined();
-        });
-
-        it('should return empty Promise', done => {
-            classUnderTest.present().then(result => {
-                expect(result).toBeUndefined();
-                done();
-            });
-        });
-    });
-
-    describe('dismissAll', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.dismissAll).toBeDefined();
-        });
-    });
-
-    describe('setContent', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.setContent).toBeDefined();
-        });
-    });
-
-    describe('setSpinner', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.setSpinner).toBeDefined();
-        });
-    });
-
-    describe('onDidDismiss', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.onDidDismiss).toBeDefined();
-        });
-    });
-
-    describe('onWillDismiss', () => {
-        it('should be defined', () => {
-            expect(classUnderTest.onWillDismiss).toBeDefined();
-        });
-    });
+  it('should setup mock', async () => {
+    await expectAsync(classUnderTest).toMatchMockObject();
+  });
 });

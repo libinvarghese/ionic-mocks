@@ -1,36 +1,41 @@
-import { ToastControllerMock } from './toast-controller';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { METHODS, ToastControllerMock } from './toast-controller';
 import { ToastMock } from './toast';
 
-describe('ToastController', () => {
-    let classUnderTest: any;
+describe('ToastControllerMock', () => {
+  let classUnderTest;
 
+  beforeEach(() => {
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
+  });
+
+  describe('WHEN initialized with default args', () => {
     beforeEach(() => {
-        classUnderTest = new ToastControllerMock();
+      classUnderTest = new ToastControllerMock();
     });
 
-    it('should be defined', () => {
-        expect(classUnderTest).toBeDefined();
+    it('should setup mock', async () => {
+      await expectAsync(classUnderTest).toMatchMockObject();
     });
 
-    describe('create', () => {
-        it('should exist', () => {
-            expect(classUnderTest.create).toBeDefined();
-        });
+    it('should return an Toast', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      const result = (await classUnderTest.create()) as ToastMock;
 
-        it('should return a Toast', () => {
-            const result = classUnderTest.create();
-
-            expect(result).toBeDefined();
-            expect(result.present).toBeDefined();
-        });
-
-        it('should return provided Toast', () => {
-            const toast = new ToastMock();
-            classUnderTest = new ToastControllerMock(toast);
-
-            const result = classUnderTest.create();
-
-            expect(result).toBe(toast);
-        });
+      expect(result).toBeDefined();
+      expect(result).toBeInstanceOf(ToastMock);
     });
+  });
+
+  describe('WHEN initialized with Toast', () => {
+    it('should return passed Toast', async () => {
+      const toast = new ToastMock();
+      classUnderTest = new ToastControllerMock(toast);
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      const result = (await classUnderTest.create()) as ToastMock;
+
+      expect(result).toBe(toast);
+    });
+  });
 });

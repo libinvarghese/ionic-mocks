@@ -1,9 +1,14 @@
-import { BaseMock } from '../base.mock';
+import { BaseMock, SpyObjDef } from '../base.mock';
 
-const METHODS = ['present', 'dismiss', 'setContent', 'setSpinner'];
+export const METHODS: SpyObjDef = {
+  names: ['dismiss', 'setContent', 'setSpinner'],
+  nameAndResolves: {
+    present: undefined,
+  },
+};
+
 export class LoadingMock extends BaseMock {
-    constructor() {
-        super('Loading', METHODS);
-        this.setReturn('present', Promise.resolve());
-    }
+  constructor() {
+    super('Loading', METHODS);
+  }
 }

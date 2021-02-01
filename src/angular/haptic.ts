@@ -1,18 +1,21 @@
-import { BaseMock } from '../base.mock';
+import { BaseMock, SpyObjDef } from '../base.mock';
 
-const METHODS = [
-    'available',
+export const METHODS: SpyObjDef = {
+  nameAndValues: {
+    available: true,
+  },
+  names: [
     'gestureSelectionChanged',
     'gestureSelectionEnd',
     'gestureSelectionStart',
     'impact',
     'notification',
-    'selection'
-];
+    'selection',
+  ],
+};
 
 export class HapticMock extends BaseMock {
-    constructor() {
-        super('Haptic', METHODS);
-        this.setReturn('available', true);
-    }
+  constructor() {
+    super('Haptic', METHODS);
+  }
 }

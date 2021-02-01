@@ -1,38 +1,41 @@
-import { ModalControllerMock } from './modal-controller';
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { ModalControllerMock, METHODS } from './modal-controller';
 import { ModalMock } from './modal';
 
-describe('ModalController', () => {
-    let classUnderTest: any;
+describe('ModalControllerMock', () => {
+  let classUnderTest;
 
+  beforeEach(() => {
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
+  });
+
+  describe('WHEN initialized with default args', () => {
     beforeEach(() => {
-        classUnderTest = new ModalControllerMock();
+      classUnderTest = new ModalControllerMock();
     });
 
-    it('should be defined', () => {
-        expect(classUnderTest).toBeDefined();
+    it('should setup mock', async () => {
+      await expectAsync(classUnderTest).toMatchMockObject();
     });
 
-    describe('create', () => {
+    it('should return an Modal', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      const result = (await classUnderTest.create()) as ModalMock;
 
-        it('should exist', () => {
-            expect(classUnderTest.create).toBeDefined();
-        });
-
-        it('should return a Modal', () => {
-            const result = classUnderTest.create();
-
-            expect(result).toBeDefined();
-            expect(result.present).toBeDefined();
-        });
-
-        it('should return provided Modal', () => {
-            const modal = new ModalMock();
-            classUnderTest = new ModalControllerMock(modal);
-
-            const result = classUnderTest.create();
-
-            expect(result).toBe(modal);
-        });
+      expect(result).toBeDefined();
+      expect(result).toBeInstanceOf(ModalMock);
     });
+  });
 
+  describe('WHEN initialized with Modal', () => {
+    it('should return passed Modal', async () => {
+      const modal = new ModalMock();
+      classUnderTest = new ModalControllerMock(modal);
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      const result = (await classUnderTest.create()) as ModalMock;
+
+      expect(result).toBe(modal);
+    });
+  });
 });

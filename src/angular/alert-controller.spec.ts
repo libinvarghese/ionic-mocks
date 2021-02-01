@@ -1,38 +1,41 @@
+import { mockObjectCustomMatchers } from '../spec/custom-matchers';
+import { AlertControllerMock, METHODS } from './alert-controller';
 import { AlertMock } from './alert';
-import { AlertControllerMock } from './alert-controller';
 
 describe('AlertControllerMock', () => {
+  let classUnderTest;
 
-    let classUnderTest: any;
+  beforeEach(() => {
+    jasmine.addAsyncMatchers(mockObjectCustomMatchers(METHODS));
+  });
 
+  describe('WHEN initialized with default args', () => {
     beforeEach(() => {
-        classUnderTest = new AlertControllerMock();
+      classUnderTest = new AlertControllerMock();
     });
 
-    it('should initialize', () => {
-        expect(classUnderTest).toBeDefined();
+    it('should setup mock', async () => {
+      await expectAsync(classUnderTest).toMatchMockObject();
     });
 
-    describe('create', () => {
+    it('should return an Alert', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      const result = (await classUnderTest.create()) as AlertMock;
 
-        it('should exist', () => {
-            expect(classUnderTest.create).toBeDefined();
-        });
-
-        it('should return an Alert', async () => {
-            const result = await classUnderTest.create();
-
-            expect(result).toBeDefined();
-            expect(result.present).toBeDefined();
-        });
-
-        it('should return passed Alert', async () => {
-           const actionSheet = new AlertMock();
-           classUnderTest = new AlertControllerMock(actionSheet);
-
-           const result = await classUnderTest.create();
-
-           expect(result).toBe(actionSheet);
-        });
+      expect(result).toBeDefined();
+      expect(result).toBeInstanceOf(AlertMock);
     });
+  });
+
+  describe('WHEN initialized with Alert', () => {
+    it('should return passed Alert', async () => {
+      const alert = new AlertMock();
+      classUnderTest = new AlertControllerMock(alert);
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      const result = (await classUnderTest.create()) as AlertMock;
+
+      expect(result).toBe(alert);
+    });
+  });
 });

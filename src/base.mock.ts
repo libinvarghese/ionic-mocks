@@ -1,13 +1,14 @@
-export type SpyObjMembers<T> = Record<string, T>;
+export type SpyObjMemberDef<T> = Record<string, T>;
 
-export interface SpyObjMemberDef {
+export interface SpyObjDef {
   names?: string[];
-  nameAndValues?: SpyObjMembers<unknown>;
-  nameAndCallFakes?: SpyObjMembers<<O>(...args: any) => O>;
-  nameAndRejects?: SpyObjMembers<unknown>;
-  nameAndResolves?: SpyObjMembers<unknown>;
-  nameAndThrows?: SpyObjMembers<Error | object | string>;
-  nameAndGenerators?: SpyObjMembers<unknown[]>;
+  nameAndValues?: SpyObjMemberDef<unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  nameAndCallFakes?: SpyObjMemberDef<<O>(...args: any[]) => O>;
+  nameAndRejects?: SpyObjMemberDef<unknown>;
+  nameAndResolves?: SpyObjMemberDef<unknown>;
+  nameAndThrows?: SpyObjMemberDef<Error | Record<string, unknown> | string>;
+  nameAndGenerators?: SpyObjMemberDef<unknown[]>;
 }
 
 const jasmineSpyObjMemberDefStrategy = {
@@ -32,8 +33,8 @@ interface SpyObjPropertyDescriptor extends PropertyDescriptor {
 
 // Since jasmine.createSpyObj does the majority of work for callReturn (nameValues), then for names
 // Creates spyObj only if (methods.nameAndValues || methods.names) != null
-function createSpyObjViaJasmine(baseName: string, methods: SpyObjMemberDef, properties?: SpyObjMemberDef) {
-  let spyObj;
+function createSpyObjViaJasmine(baseName: string, methods: SpyObjDef, properties?: SpyObjDef) {
+  let spyObj: Record<string, unknown>;
   const jasmineMethods = methods.nameAndValues || methods.names;
 
   if (jasmineMethods != null) {
@@ -41,16 +42,25 @@ function createSpyObjViaJasmine(baseName: string, methods: SpyObjMemberDef, prop
     // This has been fixed. Please watch for next release
     // this.spyObj = jasmine.createSpyObj(baseName, methods, properties);
     // Workaround for Bug - https://github.com/jasmine/jasmine/issues/1837 -> this.createSpyObj
-    spyObj = jasmine.createSpyObj(baseName, jasmineMethods);
+    // eslint-disable-next-line jasmine/no-unsafe-spy
+    spyObj = jasmine.createSpyObj(baseName, jasmineMethods) as Record<string, unknown>;
+  }
 
-    const jasmineProperties = properties?.nameAndValues || properties?.names;
+  const jasmineProperties = properties?.nameAndValues || properties?.names;
+  if (jasmineProperties != null) {
+    spyObj = spyObj || {};
     addPropertiesToSpyObj(spyObj, baseName, jasmineProperties);
   }
 
   return spyObj;
 }
 
-function createSpyObjViaDef(spyObj: object, baseName: string, methods: SpyObjMemberDef, properties?: SpyObjMemberDef) {
+function createSpyObjViaDef(
+  spyObj: Record<string, unknown>,
+  baseName: string,
+  methods: SpyObjDef,
+  properties?: SpyObjDef
+) {
   const obj = spyObj || {}; // Create Spy Obj if createSpyObjViaJasmine failed
 
   addMembersToSpyObjViaDef(obj, baseName, methods, addMethodsToSpyObj);
@@ -67,13 +77,13 @@ function createSpyObjViaDef(spyObj: object, baseName: string, methods: SpyObjMem
 }
 
 function addMembersToSpyObjViaDef(
-  spyObj: object,
+  spyObj: Record<string, unknown>,
   baseName: string,
-  members: SpyObjMemberDef,
+  members: SpyObjDef,
   addMembersFn: <T>(
-    spyObj: object,
+    spyObj: Record<string, unknown>,
     baseName: string,
-    members: SpyObjMembers<T> | string[],
+    members: SpyObjMemberDef<T> | string[],
     spyStrategy?: string
   ) => void
 ) {
@@ -86,7 +96,7 @@ function addMembersToSpyObjViaDef(
     addMembersFn(obj, baseName, members.names);
   }
 
-  Object.keys(customSpyObjMemberDefStrategy).forEach((key) => {
+  Object.keys(customSpyObjMemberDefStrategy).forEach(key => {
     addMembersFn(obj, baseName, members[key], customSpyObjMemberDefStrategy[key]);
   });
 
@@ -94,19 +104,21 @@ function addMembersToSpyObjViaDef(
 }
 
 function addMethodsToSpyObj<T>(
-  spyObj: object,
+  spyObj: Record<string, unknown>,
   baseName: string,
-  methods: SpyObjMembers<T> | string[],
+  methods: SpyObjMemberDef<T> | string[],
   spyStrategy = 'returnValue'
 ) {
   const obj = spyObj;
   const methodsArr = normalizeKeyValues(methods);
-  methodsArr.forEach((element) => {
-    const spy = jasmine.createSpy(baseName + '.' + element[0]);
+  methodsArr.forEach(element => {
+    // eslint-disable-next-line jasmine/no-unsafe-spy, jasmine/named-spy
+    const spy = jasmine.createSpy(`${baseName}.${element[0]}`);
     if (element.length > 1) {
       if (spyStrategy === 'returnValues') {
-        spy.and.returnValues(...element[1]);
+        spy.and.returnValues(...(element[1] as []));
       } else {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         spy.and[spyStrategy](element[1]);
       }
     }
@@ -116,25 +128,29 @@ function addMethodsToSpyObj<T>(
 }
 
 function addPropertiesToSpyObj(
-  spyObj: object,
+  spyObj: Record<string, unknown>,
   baseName: string,
-  properties?: SpyObjMembers<unknown> | string[],
+  properties?: SpyObjMemberDef<unknown> | string[],
   spyStrategy = 'returnValue'
 ) {
   const obj = spyObj;
   const propertiesArr = normalizeKeyValues(properties);
-  propertiesArr.forEach((element) => {
+  propertiesArr.forEach(element => {
     const descriptor: SpyObjPropertyDescriptor = {
       enumerable: true,
+      // eslint-disable-next-line jasmine/no-unsafe-spy, jasmine/named-spy
       get: jasmine.createSpy(baseName + '.' + element[0] + '.get'),
+      // eslint-disable-next-line jasmine/no-unsafe-spy, jasmine/named-spy
       set: jasmine.createSpy(baseName + '.' + element[0] + '.set'),
     };
     if (element.length > 1) {
       if (spyStrategy === 'returnValues') {
-        descriptor.get.and.returnValues(...element[1]);
-        descriptor.set.and.returnValues(...element[1]);
+        descriptor.get.and.returnValues(...(element[1] as []));
+        descriptor.set.and.returnValues(...(element[1] as []));
       } else {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         descriptor.get.and[spyStrategy](element[1]);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         descriptor.set.and[spyStrategy](element[1]);
       }
     }
@@ -142,15 +158,14 @@ function addPropertiesToSpyObj(
   });
 }
 
-function normalizeKeyValues(object) {
-  const result = [];
+type SpyObjMemberTuple = [string, unknown?];
+function normalizeKeyValues(object: SpyObjMemberDef<unknown> | string[]) {
+  const result: SpyObjMemberTuple[] = [];
   if (Array.isArray(object)) {
-    for (let i = 0; i < object.length; i++) {
-      result.push([object[i]]);
-    }
+    object.forEach(i => result.push([i]));
   } else if (object instanceof Object) {
     for (const key in object) {
-      if (object.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(object, key)) {
         result.push([key, object[key]]);
       }
     }
@@ -158,34 +173,33 @@ function normalizeKeyValues(object) {
   return result;
 }
 
+export function normalizeMemberDef(def: SpyObjDef | string[]): SpyObjDef {
+  let retDef: SpyObjDef = {};
+
+  if (Array.isArray(def)) {
+    retDef.names = def;
+  } else {
+    retDef = def;
+  }
+
+  return retDef;
+}
+
 export abstract class BaseMock {
   protected spyObj: unknown;
 
-  constructor(baseName: string, methods: SpyObjMemberDef | string[], properties?: SpyObjMemberDef | string[]) {
+  constructor(baseName: string, methods: SpyObjDef | string[], properties?: SpyObjDef | string[]) {
     this.createSpyObj(baseName, methods, properties);
     Object.assign(this, this.spyObj);
   }
 
-  protected createSpyObj(
-    baseName: string,
-    methods: SpyObjMemberDef | string[],
-    properties?: SpyObjMemberDef | string[]
-  ) {
-    let methodsDef: SpyObjMemberDef = {};
-    let propertiesDef: SpyObjMemberDef = {};
+  protected createSpyObj(baseName: string, methods: SpyObjDef | string[], properties?: SpyObjDef | string[]): void {
+    let methodsDef: SpyObjDef = {};
+    let propertiesDef: SpyObjDef = {};
     let spyObj;
 
-    if (Array.isArray(methods)) {
-      methodsDef.names = methods;
-    } else {
-      methodsDef = methods;
-    }
-
-    if (Array.isArray(properties)) {
-      propertiesDef.names = properties;
-    } else {
-      propertiesDef = properties;
-    }
+    methodsDef = normalizeMemberDef(methods);
+    propertiesDef = normalizeMemberDef(properties);
 
     spyObj = createSpyObjViaJasmine(baseName, methodsDef, propertiesDef);
     spyObj = createSpyObjViaDef(spyObj, baseName, methodsDef, propertiesDef);

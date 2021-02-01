@@ -1,9 +1,9 @@
-import { BaseMock } from './../base.mock';
+import { BaseMock } from '../base.mock';
 
-const METHODS = ['subscribe', 'publish', 'unsubscribe'];
+export const METHODS = ['subscribe', 'publish', 'unsubscribe'];
 
 export class EventsMock extends BaseMock {
-    constructor() {
-        super('Events', METHODS);
-    }
+  constructor() {
+    super('Events', METHODS);
+  }
 }

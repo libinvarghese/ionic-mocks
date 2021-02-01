@@ -1,9 +1,13 @@
+import { SpyObjDef } from '../base.mock';
 import { ViewControllerMock } from './view-controller';
 
-const METHODS = ['present', 'dismissAll', 'setContent', 'setSpinner', 'setMessage'];
+export const METHODS: SpyObjDef = {
+  names: ['dismissAll', 'setContent', 'setSpinner', 'setMessage'],
+  nameAndResolves: { present: undefined },
+};
+
 export class ToastMock extends ViewControllerMock {
-    constructor() {
-        super('Toast', METHODS);
-        this.setReturn('present', Promise.resolve());
-    }
+  constructor() {
+    super('Toast', METHODS);
+  }
 }

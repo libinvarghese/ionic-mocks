@@ -1,12 +1,18 @@
 import { of } from 'rxjs';
-import { BaseMock } from '../base.mock';
+import { BaseMock, SpyObjDef } from '../base.mock';
 
-const METHODS = ['hideKeyboardAccessoryBar', 'show', 'close', 'disableScroll', 'onKeyboardShow', 'onKeyboardHide'];
+export const METHODS: SpyObjDef = {
+  names: ['hideKeyboardAccessoryBar', 'show', 'close', 'disableScroll'],
+  nameAndValues: {
+    // eslint-disable-next-line rxjs/finnish
+    onKeyboardShow: of(undefined),
+    // eslint-disable-next-line rxjs/finnish
+    onKeyboardHide: of(undefined),
+  },
+};
 
 export class KeyboardMock extends BaseMock {
-    constructor() {
-        super('Keyboard', METHODS);
-        this.setReturn('onKeyboardShow', of(undefined));
-        this.setReturn('onKeyboardHide', of(undefined));
-    }
+  constructor() {
+    super('Keyboard', METHODS);
+  }
 }
