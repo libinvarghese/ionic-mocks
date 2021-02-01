@@ -33,9 +33,6 @@
     "build": "tsc -p tsconfig.mock.json -d",
     "format:fix": "prettier --write './**/*.{js,ts,json,css,scss,html}'",
     "lint:format": "prettier -c './**/*.{js,ts,json,css,scss,html}'",
-    "tslint:jasmine": "tslint -c tslint.json -p ./spec/tsconfig.json 'spec/**/*.ts'",
-    "tslint:scripts": "tslint -c tslint.json -p ./scripts/tsconfig.json 'scripts/**/*.ts'",
-    "tslint:src": "tslint -c tslint.json -p ./tsconfig.json 'src/**/*.ts'",
     "lint:src": "eslint --ext .js,.ts,.json --format=unix .",
     "lint": "run-p lint:*",
     "version": "git add .",
@@ -87,12 +84,10 @@
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.3",
-    "rxjs-tslint": "^0.1.8",
     "semantic-release": "^17.3.7",
     "simple-git": "^2.31.0",
     "ts-node": "^9.1.1",
-    "tslint": "^5.20.1",
-    "tslint-ionic-rules": "0.0.21",
+    "tsutils": "^3.20.0",
     "typescript": "^4.1.3"
   },
   "release": {
