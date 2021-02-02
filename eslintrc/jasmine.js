@@ -23,7 +23,6 @@ module.exports = {
     'jasmine/named-spy': 'error',
     'jasmine/no-assign-spyon': 'error',
     'jasmine/no-describe-variables': 'error',
-    // Bug: https://github.com/tlvince/eslint-plugin-jasmine/issues/300
-    // 'jasmine/prefer-toBeUndefined': 'error',
+    'jasmine/prefer-toBeUndefined': 'error',
   },
 };
